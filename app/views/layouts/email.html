@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Satutempat</title>
+</head>
+<body style="margin: 0;">
+  <div id="container" style="margin:0 auto;width:600px;">
+    <div id="header" style="background-color:#333333;height:40px;padding:20px 0;text-align:center;">
+      <div style="font-size:26px;margin:10px;">
+        <%= link_to "PT. Top Food Indonesia", root_url, :style => "color:#ffffff;text-decoration:none;" %>
+      </div>
+    </div>
+
+    <div id="wrapper" class="wat-cf">
+      <div id="main" style="background:#ffffff;">
+        <div class="block" style="padding:20px 10px;margin:0 auto;width:580px;">
+          <%= yield %>
+        </div>
+        
+        <div id="footer" style="background-color:#333333;color:#fff;height:40px;margin:10px auto;padding:0 0 20px;width:600px;">
+          <div class="block" style="display:block;">
+            <p style="margin:0;padding:10px;">Copyright &copy; <%= Time.now.year %> PT. Top Food Indonesia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

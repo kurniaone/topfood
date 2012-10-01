@@ -1,0 +1,40 @@
+<%= render 'shared/master-tab.html.erb' %>
+<div class="content">
+  <h2>Master Position</h2>
+
+  <div class="inner">
+    <div class="link-button-container">
+      <%= link_to "New", new_unit_path, class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th class="last">&nbsp;</th>
+      </tr>
+      <% @master_positions.each do |mp| %>
+        <tr>
+          <td><%= mp.code %></td>
+          <td><%= mp.name %></td>
+          <td class="last">
+            <%= link_to 'Edit', edit_master_position_path(mp) %>
+            <%= link_to 'Remove', master_position_path(mp), method: :delete, confirm: 'Are you sure?' %>
+          </td>
+        </tr>
+      <% end unless @master_positions.blank? %>
+    </table>
+
+    <div class="actions-bar wat-cf">
+      <div class-"page-entries">
+        <%= page_entries_info @master_positions %>
+      </div>
+      <div class="pagination">
+        <%= will_paginate %>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  branch_id: 1
+  order_class: MyString
+  position_id: 1
+
+two:
+  branch_id: 1
+  order_class: MyString
+  position_id: 1

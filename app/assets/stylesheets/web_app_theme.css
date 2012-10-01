@@ -1,0 +1,118 @@
+/*
+ * This css will include all web-app-theme css you need
+ *
+ *= require web-app-theme/base
+ *= require web-app-theme/themes/default/style.css
+ *= require_self
+ */
+
+/* Write here your css for overriding the theme's rules */
+#header h1{ font-size: 30px; }
+#main{ width: 100%; }
+#main .block .content{ min-height: 400px; }
+a.login-forgot{ float: right; margin-top: 8px; }
+.login-remember-me{ margin-top: 8px; }
+
+.form.login{ margin-top: 10px; }
+.form.login .text_field{ width: 90%; }
+
+.form input.text_field, .form textarea.text_area{ padding: 5px; width: 50%; }
+.form textarea.text_area{ resize: none; }
+.form .navform a.link-button{ color: #111; }
+.form .description{ display: block; }
+
+.form.full .text_field, .form.full .text_area,
+.form.full .group .text_field, .form.full .group .text_area{ width: 90%; }
+.popup .form .group .text_field, .popup .form .group .text_area{ width: 95%; }
+
+.no-data{ text-align: center; }
+div.no-data{
+  border-bottom: 1px solid #ccc;
+  padding: 0 5px 9px;
+}
+
+.left{ float: left; }
+.right{ float: right; }
+.center{ text-align: center; }
+
+.hidden{ display: none; }
+.green, a.green, .green a{ color: green; }
+.red, a.red, .red a{ color: red; }
+
+.table th.center{ text-align: center; }
+.table th.right, .table td.right{ float: none; text-align: right; }
+.table th.last, .table td.last{ min-width: 50px; width: auto; }
+
+.link-button{
+  background: url("web-app-theme/themes/default/images/button-background.png") repeat scroll center top #EDEEED;
+  border: 1px solid #C3C4BA;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-family: "MuseoSans500",helvetica,arial,sans-serif;
+  font-weight: normal;
+  float: left;
+  line-height: 17px;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+input[type=submit].link-button{ padding: 8px 10px 6px; }
+.link-button.right{ float: right; }
+a.link-button{ margin-right: 10px; }
+
+ul.form-error{
+  color: #ecafaf;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 5px 0;
+}
+
+.login-remember-me{ margin-top: 10px; }
+.login-forgot{
+  float: right;
+  margin-top: 8px;
+}
+
+.flash .alert, .flash .message.alert{
+  background: url("warning.png") no-repeat scroll 10px center #F9C006;
+  border: 1px solid #BB9004;
+}
+
+#user-navigation ul li a.email-link{ text-decoration: underline; }
+#box.set-password-box{ width: 595px; }
+.set-password-box .login div.left{ width: 28%; }
+.set-password-box .login div.right{ width: 70%; }
+
+/* CUSTOM FORM */
+.order-form label.label, label{ display: inline-block; }
+.order-form label.label, p label.label{ min-width: 200px; }
+label.l-val{ color: #aaa; }
+label.green{ color: green; }
+/*.field_with_errors{ display: inline-block; }
+.field_with_errors input{ border: 1px solid red; }*/
+
+.form .text_field.very-short{ width: 50px; }
+.form .text_field.short, .form .text_area.short{ width: 200px; }
+.form .text_field.medium, .form .text_area.medium{ width: 400px; }
+.form .text_field.long, .form .text_area.long{ width: 100%; }
+.form .text_field[readonly=readonly]{ background: #f9f9f9; }
+.form .text_field.datepicker{ width: 100px; }
+
+.order-detail-input-row{ vertical-align: top; }
+
+/* CHOSEN */
+.chzn-container-single .chzn-single{ background: #fff; }
+.chzn-container-single .chzn-search{ overflow: hidden; }
+
+.table p{
+  margin: 0;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.page-info{ margin: 5px 0; }
+.detail-label{
+  display: inline-block;
+  font-weight: bold;
+  min-width: 150px;
+}

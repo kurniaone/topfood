@@ -1,0 +1,24 @@
+<p>Hello <%= @resource.email %>,</p>
+
+<p>Welcome to SatuTempat!</p>
+
+<p>
+You can now access SatuTempat's backend, enabling you to review your transactions reports anytime you please.
+First, you will need to create a password! To do so, please click on the link below:
+</p>
+
+<p><%= link_to 'Accept invitation', "#{MY_URL}/users/invitation/accept?invitation_token=#{@resource.invitation_token}" %></p>
+
+<p>
+If you do not wish to accept this invitation, please ignore this e-mail.
+Your account will not be created until you have accessed the link above and set your password.
+</p>
+
+<p>
+Thank you for using SatuTempat.
+If you have any questions please do not hesitate to contact our admin.
+</p>
+
+<p>
+SatuTempat Team
+</p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order_id: 1
+  description: MyText
+  quantity: 1.5
+  unit_id: 1
+  used_date: 2012-09-25
+
+two:
+  order_id: 1
+  description: MyText
+  quantity: 1.5
+  unit_id: 1
+  used_date: 2012-09-25

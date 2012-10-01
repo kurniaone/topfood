@@ -1,0 +1,40 @@
+<%= render 'shared/master-tab.html.erb' %>
+<div class="content">
+  <h2>Unit</h2>
+
+  <div class="inner">
+    <div class="link-button-container">
+      <%= link_to "New", new_unit_path, class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th class="last">&nbsp;</th>
+      </tr>
+      <% @units.each do |unit| %>
+        <tr>
+          <td><%= unit.code %></td>
+          <td><%= unit.name %></td>
+          <td class="last">
+            <%= link_to 'Edit', edit_unit_path(unit) %>
+            <%= link_to 'Remove', unit_path(unit), method: :delete, confirm: 'Are you sure?' %>
+          </td>
+        </tr>
+      <% end unless @units.blank? %>
+    </table>
+
+    <div class="actions-bar wat-cf">
+      <div class-"page-entries">
+        <%= page_entries_info @units %>
+      </div>
+      <div class="pagination">
+        <%= will_paginate %>
+      </div>
+    </div>
+
+  </div>
+</div>

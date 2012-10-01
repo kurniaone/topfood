@@ -1,0 +1,12 @@
+<div class="content">
+  <h2>Assign Store Manage for Branch <%= @branch.name %></h2>
+
+  <div class="inner">
+    <%= form_for 'sm', url: assign_sm_branches_path(@branch), html: { class: 'form' } do |f| %>
+      <div class="group">
+        <%= f.label :user, 'User', class: 'label' %>
+        <%= f.select :user_id, options_for_select([]), {}, class: 'selectbox' %>
+      </div>
+    <% end %>
+  </div>
+</div>

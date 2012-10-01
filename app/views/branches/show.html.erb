@@ -1,0 +1,29 @@
+<%= render :partial => 'branches/branch-tab.html' %>
+<div class="content">
+  <h2>Branch</h2>
+
+  <div class="inner">
+    <p>
+      <%= label_tag :name, 'Name', class: 'detail-label' %>
+      <span>: <%= @branch.name %></span>
+    </p>
+    <p>
+      <%= label_tag :phone, 'Phone', class: 'detail-label' %>
+      <span>: <%= @branch.phone %></span>
+    </p>
+    <p>
+      <%= label_tag :address, 'Address', class: 'detail-label' %>
+      <span>: <%= @branch.address %></span>
+    </p>
+    <p>
+      <%= label_tag :profile, 'Profile', class: 'detail-label' %>
+      <span>: <%= @branch.profile %></span>
+    </p>
+
+    <div class="link-button-container">
+      <%= link_to "Back", branches_path, class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>

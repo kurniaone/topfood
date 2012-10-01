@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order_id: 1
+  position_id: 1
+  department_id: 1
+  description: MyText
+  quantity: 1
+  gender: MyString
+  used_date: 2012-09-25
+
+two:
+  order_id: 1
+  position_id: 1
+  department_id: 1
+  description: MyText
+  quantity: 1
+  gender: MyString
+  used_date: 2012-09-25

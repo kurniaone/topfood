@@ -1,0 +1,50 @@
+<div class="content">
+  <h2>Branches</h2>
+
+  <div class="inner">
+    <div class="link-button-container">
+      <%= link_to "New", new_branch_path, class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Store Manager</th>
+        <th class="last">&nbsp;</th>
+      </tr>
+      <% @branches.each do |branch| %>
+        <tr>
+          <td><%= branch.name %></td>
+          <td><%= branch.phone %></td>
+          <td><%= branch.address %></td>
+          <td>
+            <% if branch.store_manager %>
+              <%= link_to branch.store_manager.name, '#' %>
+            <% else %>
+              <%= link_to "Assign Store Manager", sm_branches_path(branch) %>
+            <% end %>
+          </td>
+          <td class="last">
+            <%= link_to 'Show', branch_path(branch) %>
+            <%= link_to 'Edit', edit_branch_path(branch) %>
+            <%= link_to('Remove', branch_path(branch), method: :delete, confirm: 'Are you sure?') unless branch.center %>
+          </td>
+        </tr>
+      <% end unless @branches.blank? %>
+    </table>
+
+    <div class="actions-bar wat-cf">
+      <div class-"page-entries">
+        <%= page_entries_info @branches %>
+      </div>
+      <div class="pagination">
+        <%= will_paginate %>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  center: false
+  name: MyString
+  address: MyString
+  phone: MyString
+  profile: MyString
+
+two:
+  center: false
+  name: MyString
+  address: MyString
+  phone: MyString
+  profile: MyString

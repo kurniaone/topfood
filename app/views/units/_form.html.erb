@@ -1,0 +1,17 @@
+<%= form_for @unit, html: { class: 'form' } do |f| %>
+  <%= error_messages(@unit).html_safe %>
+
+  <div class="group">
+    <%= f.label :code, 'Code', class: 'label' %>
+    <%= f.text_field :code, class: 'text_field' %>
+  </div>
+  <div class="group">
+    <%= f.label :name, 'Name', class: 'label' %>
+    <%= f.text_field :name, class: 'text_field' %>
+  </div>
+
+  <div class="actions-bar wat-cf">
+    <%= f.submit "Save", class: 'link-button' %>
+    <%= link_to 'Cancel', units_path, class: 'link-button' %>
+  </div>
+<% end %>

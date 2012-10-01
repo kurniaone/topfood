@@ -1,0 +1,13 @@
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <li class="<%= 'active' if controller_name == 'departments' %>">
+      <%= link_to 'Departments', '#' %>
+    </li>
+    <li class="first <%= 'active' if controller_name == 'positions' %>">
+      <%= link_to 'Positions', '#' %>
+    </li>
+    <li class="<%= 'active' if controller_name == 'departments' %>">
+      <%= link_to 'Users', '#' %>
+    </li>
+  </ul>
+</div>

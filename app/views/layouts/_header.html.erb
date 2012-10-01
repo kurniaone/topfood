@@ -1,0 +1,35 @@
+<div id="header">
+  <h1><%= link_to "PT. Top Food Indonesia", root_path %></h1>
+
+  <% if current_user %>
+    <div id="user-navigation">
+      <ul class="wat-cf">
+        <li>Welcome "<%= current_user.name %>"</li>
+        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id="main-navigation">
+    <ul class="wat-cf">
+      <li class="<%= 'active' if controller_name == '' %>">
+        <%= link_to "Work Orders", '#' %>
+      </li>
+      <li class="<%= 'active' if controller_name == 'purchase_orders' %>">
+        <%= link_to "Purchase Orders", '#' %>
+      </li>
+      <li class="<%= 'active' if controller_name == '' %>">
+        <%= link_to "Employee Orders", '#' %>
+      </li>
+
+      <% if superadmin %>
+        <li class="<%= 'active' if controller_name == 'branches' %>">
+          <%= link_to "Branchs", branches_path %>
+        </li>
+        <li class="<%= 'active' if master_data_controllers.include?(controller_name) %>">
+          <%= link_to "Master Data", master_departments_path %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
