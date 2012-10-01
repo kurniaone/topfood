@@ -3,7 +3,7 @@ require "bundler/capistrano"
 default_run_options[:pty] = true
 
 set :application, "Api77"
-set :repository, "git@github.com:ronishak/satutempat.git"
+set :repository, "git@github.com:kurniaone/topfood.git"
 set :scm, :git
 set :user, "api77"
 set :deploy_via, :remote_cache
@@ -15,8 +15,8 @@ set :default_environment, {
   'PATH' => "/home/api77/.rbenv/shims:/home/api77/.rbenv/bin:$PATH"
 }
 
-task :staging do
-  set :domain, "dev-api77.kuyainside.com"
+task :dev do
+  set :domain, "66.212.17.116"
   set :branch, "master"
   set :rails_env, "development"
   set :migrate_target, :latest
@@ -26,7 +26,7 @@ task :staging do
 end
 
 task :production do
-  set :domain, "api77.kuyainside.com"
+  set :domain, "66.212.17.116"
   set :branch, "master"
   set :rails_env, "production"
   set :migrate_target, :latest
