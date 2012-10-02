@@ -5,14 +5,14 @@ default_run_options[:pty] = true
 set :application, "Api77"
 set :repository, "git@github.com:kurniaone/topfood.git"
 set :scm, :git
-set :user, "api77"
+set :user, "deploy"
 set :deploy_via, :remote_cache
-set :deploy_to, "/home/api77/rails-app"
+set :deploy_to, "/home/deploy/rails-app/topfood"
 set :keep_releases, 5
 set :use_sudo, false
 ssh_options[:forward_agent] = true
 set :default_environment, {
-  'PATH' => "/home/api77/.rbenv/shims:/home/api77/.rbenv/bin:$PATH"
+  'PATH' => "/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin:$PATH"
 }
 
 task :dev do
@@ -39,6 +39,7 @@ task :production do
   # set :whenever_environment, 'production'
   # require "whenever/capistrano"
 
+  after 'deploy:update', 'assets:precompile'
 end
 
 
@@ -68,7 +69,6 @@ end
 
 after "deploy:finalize_update", "symlinks:database_yml"
 after 'deploy:update', 'deploy:migrate'
-# after 'deploy:update', 'assets:precompile'
 after "deploy:update", "deploy:cleanup"
 
 # Bluepill to monitor

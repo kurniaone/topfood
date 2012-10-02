@@ -19,7 +19,7 @@ group :assets do
 end
 
 gem 'capistrano'
-gem 'passenger'
+gem 'unicorn'
 
 gem 'jquery-rails'
 gem 'facebox-rails'
