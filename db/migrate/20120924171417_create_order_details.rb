@@ -7,6 +7,7 @@ class CreateOrderDetails < ActiveRecord::Migration
       t.integer :unit_id
       t.date :used_date
 
+      t.boolean :removed, default: false
       t.timestamps
     end
   end

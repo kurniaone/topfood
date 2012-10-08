@@ -1,13 +1,13 @@
 class CreatePositions < ActiveRecord::Migration
   def change
     create_table :positions do |t|
-      t.integer :branch_id
-      t.integer :department_id
+      t.string :code
       t.string :name
       t.text :description
-      t.integer :level
+      t.float :level
       t.integer :parent_id
 
+      t.boolean :removed, default: false
       t.timestamps
     end
   end

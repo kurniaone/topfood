@@ -13,6 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer :branch_id
       t.integer :department_id
       t.integer :position_id
+      t.integer :management_id
 
       t.boolean :su, default: false
       t.boolean :admin, default: false
@@ -45,7 +46,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       # t.string :authentication_token
 
-
+      t.boolean :removed, default: false
       t.timestamps
     end
 

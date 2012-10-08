@@ -7,6 +7,7 @@ class CreateBranches < ActiveRecord::Migration
       t.string :phone
       t.string :profile
 
+      t.boolean :removed, default: false
       t.timestamps
     end
   end

@@ -9,6 +9,7 @@ class CreateEmployeeDetails < ActiveRecord::Migration
       t.string :gender
       t.date :used_date
 
+      t.boolean :removed, default: false
       t.timestamps
     end
   end

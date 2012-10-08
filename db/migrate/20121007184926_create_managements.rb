@@ -1,9 +1,11 @@
-class CreateDepartments < ActiveRecord::Migration
+class CreateManagements < ActiveRecord::Migration
   def change
-    create_table :departments do |t|
+    create_table :managements do |t|
       t.string :code
       t.string :name
       t.text :description
+      t.float :level
+      t.integer :parent_id
 
       t.boolean :removed, default: false
       t.timestamps
