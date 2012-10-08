@@ -21,13 +21,7 @@
           <td><%= branch.name %></td>
           <td><%= branch.phone %></td>
           <td><%= branch.address %></td>
-          <td>
-            <% if branch.store_manager %>
-              <%= link_to branch.store_manager.name, '#' %>
-            <% else %>
-              <%= link_to "Assign Store Manager", sm_branches_path(branch) %>
-            <% end %>
-          </td>
+          <td></td>
           <td class="last">
             <%= link_to 'Show', branch_path(branch) %>
             <%= link_to 'Edit', edit_branch_path(branch) %>
