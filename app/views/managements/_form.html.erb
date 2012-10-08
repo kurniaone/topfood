@@ -1,5 +1,5 @@
-<%= form_for @master_department, html: { class: 'form' } do |f| %>
-  <%= error_messages(@master_department).html_safe %>
+<%= form_for @management, html: { class: 'form' } do |f| %>
+  <%= error_messages(@management).html_safe %>
 
   <div class="group">
     <%= f.label :code, 'Code', class: 'label' %>
@@ -16,6 +16,6 @@
 
   <div class="actions-bar wat-cf">
     <%= f.submit "Save", class: 'link-button' %>
-    <%= link_to 'Cancel', master_departments_path, class: 'link-button' %>
+    <%= link_to 'Cancel', managements_path, class: 'link-button' %>
   </div>
 <% end %>

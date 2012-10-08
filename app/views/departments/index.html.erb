@@ -1,10 +1,10 @@
 <%= render 'shared/master-tab.html.erb' %>
 <div class="content">
-  <h2>Master Position</h2>
+  <h2>Department</h2>
 
   <div class="inner">
     <div class="link-button-container">
-      <%= link_to "New", new_unit_path, class: 'link-button' %>
+      <%= link_to "New", new_department_path, class: 'link-button' %>
 
       <div class="clear"></div>
     </div>
@@ -15,21 +15,21 @@
         <th>Name</th>
         <th class="last">&nbsp;</th>
       </tr>
-      <% @master_positions.each do |mp| %>
+      <% @departments.each do |dept| %>
         <tr>
-          <td><%= mp.code %></td>
-          <td><%= mp.name %></td>
+          <td><%= dept.code %></td>
+          <td><%= dept.name %></td>
           <td class="last">
-            <%= link_to 'Edit', edit_master_position_path(mp) %>
-            <%= link_to 'Remove', master_position_path(mp), method: :delete, confirm: 'Are you sure?' %>
+            <%= link_to 'Edit', edit_department_path(dept) %>
+            <%= link_to 'Remove', department_path(dept), method: :delete, confirm: 'Are you sure?' %>
           </td>
         </tr>
-      <% end unless @master_positions.blank? %>
+      <% end unless @departments.blank? %>
     </table>
 
     <div class="actions-bar wat-cf">
       <div class-"page-entries">
-        <%= page_entries_info @master_positions %>
+        <%= page_entries_info @departments %>
       </div>
       <div class="pagination">
         <%= will_paginate %>

@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :failed_attempts,
-    :name, :phone, :address, :branch_id, :department_id, :position_id, :su, :admin
+    :name, :phone, :address, :branch_id, :department_id, :position_id, :management_id, :su, :admin
 
+  belongs_to :management
+  belongs_to :position
   has_many :orders, foreign_key: 'created_by'
 
   def show_captcha?

@@ -1,0 +1,39 @@
+<div class="content">
+  <h2>Management</h2>
+
+  <div class="inner">
+    <div class="link-button-container">
+      <%= link_to "New", new_management_path, class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th class="last">&nbsp;</th>
+      </tr>
+      <% @managements.each do |dept| %>
+        <tr>
+          <td><%= dept.code %></td>
+          <td><%= dept.name %></td>
+          <td class="last">
+            <%= link_to 'Edit', edit_management_path(dept) %>
+            <%= link_to 'Remove', management_path(dept), method: :delete, confirm: 'Are you sure?' %>
+          </td>
+        </tr>
+      <% end unless @managements.blank? %>
+    </table>
+
+    <div class="actions-bar wat-cf">
+      <div class-"page-entries">
+        <%= page_entries_info @managements %>
+      </div>
+      <div class="pagination">
+        <%= will_paginate %>
+      </div>
+    </div>
+
+  </div>
+</div>

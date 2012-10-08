@@ -1,10 +1,10 @@
 <div class="secondary-navigation">
   <ul class="wat-cf">
-    <li class="<%= 'active' if controller_name == 'master_departments' %>">
-      <%= link_to 'Master Departments', master_departments_path %>
+    <li class="<%= 'active' if controller_name == 'departments' %>">
+      <%= link_to 'Departments', departments_path %>
     </li>
-    <li class="first <%= 'active' if controller_name == 'master_positions' %>">
-      <%= link_to 'Master Positions', master_positions_path %>
+    <li class="<%= 'active' if controller_name == 'positions' %>">
+      <%= link_to 'Positions', positions_path %>
     </li>
     <li class="<%= 'active' if controller_name == 'units' %>">
       <%= link_to 'Unit', units_path %>

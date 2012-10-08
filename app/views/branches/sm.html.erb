@@ -7,6 +7,12 @@
         <%= f.label :user, 'User', class: 'label' %>
         <%= f.select :user_id, options_for_select([]), {}, class: 'selectbox' %>
       </div>
+
+
+      <div class="actions-bar wat-cf">
+        <%= f.submit "Save", class: 'link-button' %>
+        <%= link_to 'Back', (:back || branches_path), class: 'link-button' %>
+      </div>
     <% end %>
   </div>
 </div>

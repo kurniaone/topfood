@@ -13,21 +13,21 @@
   <div id="main-navigation">
     <ul class="wat-cf">
       <li class="<%= 'active' if controller_name == '' %>">
-        <%= link_to "Work Orders", '#' %>
-      </li>
-      <li class="<%= 'active' if controller_name == 'purchase_orders' %>">
-        <%= link_to "Purchase Orders", '#' %>
-      </li>
-      <li class="<%= 'active' if controller_name == '' %>">
-        <%= link_to "Employee Orders", '#' %>
+        <%= link_to "Orders", '#' %>
       </li>
 
       <% if superadmin %>
         <li class="<%= 'active' if controller_name == 'branches' %>">
           <%= link_to "Branchs", branches_path %>
         </li>
+        <li class="<%= 'active' if controller_name == 'settings' %>">
+          <%= link_to "Order Setting", settings_path('purchase') %>
+        </li>
+        <li class="<%= 'active' if controller_name == 'managements' %>">
+          <%= link_to "Managements", managements_path %>
+        </li>
         <li class="<%= 'active' if master_data_controllers.include?(controller_name) %>">
-          <%= link_to "Master Data", master_departments_path %>
+          <%= link_to "Master Data", departments_path %>
         </li>
       <% end %>
     </ul>

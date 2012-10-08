@@ -89,6 +89,20 @@ function add_fields(link, association, content) {
   });
 }
 
+// remove approval
+function remove_approvals(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).parent().hide();
+}
+
+// add order approval
+function add_approvals(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $('div#approval-list').append(content.replace(regexp, new_id));
+}
+
+
 $(function(){
   $("input.number").keydown(function(event){
     // Allow: backspace, delete, tab and escape

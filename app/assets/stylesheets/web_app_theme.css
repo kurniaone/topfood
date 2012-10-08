@@ -43,6 +43,7 @@ div.no-data{
 .table th.right, .table td.right{ float: none; text-align: right; }
 .table th.last, .table td.last{ min-width: 50px; width: auto; }
 
+.link-button-container{ margin: 0 0 10px 0; }
 .link-button{
   background: url("web-app-theme/themes/default/images/button-background.png") repeat scroll center top #EDEEED;
   border: 1px solid #C3C4BA;
@@ -88,6 +89,7 @@ ul.form-error{
 .order-form label.label, p label.label{ min-width: 200px; }
 label.l-val{ color: #aaa; }
 label.green{ color: green; }
+label.inline-label{ min-width: 120px; }
 /*.field_with_errors{ display: inline-block; }
 .field_with_errors input{ border: 1px solid red; }*/
 
@@ -97,8 +99,15 @@ label.green{ color: green; }
 .form .text_field.long, .form .text_area.long{ width: 100%; }
 .form .text_field[readonly=readonly]{ background: #f9f9f9; }
 .form .text_field.datepicker{ width: 100px; }
-
 .order-detail-input-row{ vertical-align: top; }
+
+.approval-group{ margin-bottom: 5px; }
+a.add-approval{
+  display: inline-block;
+  margin: 10px 0 0 125px;
+}
+.remove-approval{ margin: 0 0 0 10px; }
+.selectbox{ min-width: 150px; }
 
 /* CHOSEN */
 .chzn-container-single .chzn-single{ background: #fff; }

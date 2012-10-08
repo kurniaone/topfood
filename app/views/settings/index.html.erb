@@ -1,0 +1,26 @@
+<%= render 'shared/settings-tab.html.erb' %>
+<div class="content">
+  <h2><%= "#{@type.titleize} Setting "%></h2>
+
+  <div class="inner">
+    <%= form_for @setting, :url => update_setting_path(@p), method: :put do |f| %>
+      <div id="approval-list">
+        <%= f.fields_for :approval_managements do |am| %>
+          <% pidx = am.object_name.gsub(/[^0-9]+/,'').to_i %>
+          <div class="approval-group">
+            <%= am.label :management_id, "Approval", class: 'label inline-label' %>
+            <%= am.select :management_id, options_for_select(management_options, am.object.management_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
+            <%= link_to_remove_approvals("X", am) unless pidx == 0 %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to_add_approvals "Add Another Level", f, :approval_managements %>
+
+
+      <div class="actions-bar wat-cf">
+        <%= f.submit "Save", class: 'link-button' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

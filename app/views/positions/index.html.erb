@@ -1,35 +1,35 @@
 <%= render 'shared/master-tab.html.erb' %>
 <div class="content">
-  <h2>Master Department</h2>
+  <h2>Position</h2>
 
   <div class="inner">
     <div class="link-button-container">
-      <%= link_to "New", new_unit_path, class: 'link-button' %>
+      <%= link_to "New", new_position_path, class: 'link-button' %>
 
       <div class="clear"></div>
     </div>
 
     <table class="table">
       <tr>
-        <th>Code</th>
+        <th>Department</th>
         <th>Name</th>
         <th class="last">&nbsp;</th>
       </tr>
-      <% @master_departments.each do |dept| %>
+      <% @positions.each do |p| %>
         <tr>
-          <td><%= dept.code %></td>
-          <td><%= dept.name %></td>
+          <td><%= p.department.try(:name) %></td>
+          <td><%= p.name %></td>
           <td class="last">
-            <%= link_to 'Edit', edit_master_department_path(dept) %>
-            <%= link_to 'Remove', master_department_path(dept), method: :delete, confirm: 'Are you sure?' %>
+            <%= link_to 'Edit', edit_position_path(p) %>
+            <%= link_to 'Remove', position_path(p), method: :delete, confirm: 'Are you sure?' %>
           </td>
         </tr>
-      <% end unless @master_departments.blank? %>
+      <% end unless @positions.blank? %>
     </table>
 
     <div class="actions-bar wat-cf">
       <div class-"page-entries">
-        <%= page_entries_info @master_departments %>
+        <%= page_entries_info @positions %>
       </div>
       <div class="pagination">
         <%= will_paginate %>
