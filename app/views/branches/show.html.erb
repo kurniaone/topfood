@@ -1,4 +1,4 @@
-<%= render :partial => 'branches/branch-tab.html' %>
+<%#= render :partial => 'branches/branch-tab.html' %>
 <div class="content">
   <h2>Branch</h2>
 
@@ -21,11 +21,6 @@
     </p>
     <p>
       <%= label_tag :store_manager, 'Store Manager', class: 'detail-label' %>
-      <% if @branch.store_manager %>
-        <span>: <%= @branch.store_manager.try(:name) %></span>
-      <% else %>
-        : <%= link_to "Assign Store Manager", sm_branches_path(@branch) %>
-      <% end %>
     </p>
 
     <div class="link-button-container">
