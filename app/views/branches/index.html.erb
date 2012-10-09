@@ -21,11 +21,13 @@
           <td><%= branch.name %></td>
           <td><%= branch.phone %></td>
           <td><%= branch.address %></td>
-          <td></td>
+          <td><%= branch.store_manager.try(:name) %></td>
           <td class="last">
             <%= link_to 'Show', branch_path(branch) %>
-            <%= link_to 'Edit', edit_branch_path(branch) %>
-            <%= link_to('Remove', branch_path(branch), method: :delete, confirm: 'Are you sure?') unless branch.center %>
+            <% unless branch.center %>
+              <%= link_to 'Edit', edit_branch_path(branch) %>
+              <%= link_to('Remove', branch_path(branch), method: :delete, confirm: 'Are you sure?') unless branch.center %>
+            <% end %>
           </td>
         </tr>
       <% end unless @branches.blank? %>

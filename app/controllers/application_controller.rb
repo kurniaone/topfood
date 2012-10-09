@@ -3,13 +3,18 @@ class ApplicationController < ActionController::Base
   respond_to :js, :html, :json
 
   before_filter :authenticate_user!
-  helper_method :superadmin, :master_data_controllers, :department_options, :management_options
+  helper_method :superadmin, :master_data_controllers,
+    :department_options, :management_options, :branch_options
 
 
   protected
 
     def superadmin
       current_user && current_user.su
+    end
+
+    def master_data_controllers
+      ['positions', 'departments', 'units', '']
     end
 
     def department_options
@@ -20,8 +25,8 @@ class ApplicationController < ActionController::Base
       Management.all.map{|d| [d.name, d.id] }
     end
 
-    def master_data_controllers
-      ['positions', 'departments', 'units', '']
+    def branch_options
+      Branch.not_center.map{|d| [d.name, d.id] }
     end
 
 end

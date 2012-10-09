@@ -1,0 +1,53 @@
+<%= form_for @user, html: { class: 'form' } do |f| %>
+  <%= error_messages(@user).html_safe %>
+
+  <div class="group">
+    <%= f.label :name, 'Name', class: 'label' %>
+    <%= f.text_field :name, class: 'text_field' %>
+  </div>
+  <div class="group">
+    <%= f.label :email, 'Email', class: 'label' %>
+    <%= f.email_field :email, class: 'text_field' %>
+  </div>
+
+  <div class="group">
+    <%= f.label :management_id, 'Position', class: 'label' %>
+    <%= f.select :management_id, options_for_select(management_options, @user.management_id), {}, class: 'selectbox' %>
+  </div>
+  <div class="group" id="branch-selector">
+    <%= f.label :branch_id, 'Branch', class: 'label' %>
+    <%= f.select :branch_id, options_for_select(branch_options, @user.branch_id), {include_blank: 'Choose here ...'}, class: 'selectbox' %>
+  </div>
+
+  <div class="group">
+    <%= f.label :password, 'Password', class: 'label' %>
+    <%= f.password_field :password, class: 'text_field' %>
+  </div>
+  <div class="group">
+    <%= f.label :password_confirmation, 'Confirm Password', class: 'label' %>
+    <%= f.password_field :password_confirmation, class: 'text_field' %>
+  </div>
+
+  <div class="actions-bar wat-cf">
+    <%= f.submit "Save", class: 'link-button' %>
+    <%= link_to 'Cancel', users_path, class: 'link-button' %>
+  </div>
+<% end %>
+
+<%= content_for :js do %>
+<script type="text/javascript">
+  $selected = $('#user_management_id option:selected').text();
+  show_hide_branch($selected);
+  $('#user_management_id').change(function(){
+    show_hide_branch($('#user_management_id option:selected').text());
+  });
+
+  function show_hide_branch(selected){
+    if(selected == 'Store Manager'){
+      $('#branch-selector').show();
+    }else{
+      $('#branch-selector').hide();
+    }
+  }
+</script>
+<% end %>
