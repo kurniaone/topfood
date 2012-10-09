@@ -34,7 +34,7 @@ class BranchesController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = @branch.destroy ? 'Branch removed' : 'Failed remove master position'
+    flash[:notice] = @branch.destroy ? 'Branch removed' : 'Failed remove branch'
     respond_with @branch
   end
 

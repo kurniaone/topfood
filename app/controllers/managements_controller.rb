@@ -17,7 +17,7 @@ class ManagementsController < ApplicationController
 
   def create
     @management = Management.new(params[:management])
-    flash[:notice] = 'Position saved' if @management.save
+    flash[:notice] = 'Management saved' if @management.save
     respond_with @management, location: managements_path
   end
 
@@ -26,12 +26,12 @@ class ManagementsController < ApplicationController
   end
 
   def update
-    flash[:notice] = 'Position updated' if @management.update_attributes(params[:management])
+    flash[:notice] = 'Management updated' if @management.update_attributes(params[:management])
     respond_with @management, location: managements_path
   end
 
   def destroy
-    flash[:notice] = @management.destroy ? 'Position removed' : 'Failed remove position'
+    flash[:notice] = @management.destroy ? 'Management removed' : 'Failed remove management'
     respond_with @management
   end
 

@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = @user.destroy ? 'User removed' : 'Failed remove master position'
+    flash[:notice] = @user.destroy ? 'User removed' : 'Failed remove user'
     respond_with @user
   end
 

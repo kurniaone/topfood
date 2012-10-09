@@ -17,7 +17,7 @@ class DepartmentsController < ApplicationController
 
   def create
     @department = Department.new(params[:department])
-    flash[:notice] = 'Position saved' if @department.save
+    flash[:notice] = 'Department saved' if @department.save
     respond_with @department, location: departments_path
   end
 
@@ -26,12 +26,12 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    flash[:notice] = 'Position updated' if @department.update_attributes(params[:department])
+    flash[:notice] = 'Department updated' if @department.update_attributes(params[:department])
     respond_with @department, location: departments_path
   end
 
   def destroy
-    flash[:notice] = @department.destroy ? 'Position removed' : 'Failed remove position'
+    flash[:notice] = @department.destroy ? 'Department removed' : 'Failed remove department'
     respond_with @department
   end
 

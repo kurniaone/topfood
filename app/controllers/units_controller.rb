@@ -30,7 +30,7 @@ class UnitsController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = @unit.destroy ? 'Unit removed' : 'Failed remove master position'
+    flash[:notice] = @unit.destroy ? 'Unit removed' : 'Failed remove unit'
     respond_with @unit
   end
 
