@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
 
   scope :not_admin, where("admin = ? AND su = ?", false, false)
 
+  before_save :remove_branch_id, if: proc{|u| u.management.try(:code).try(:downcase) != 'sm'  }
+
+  def remove_branch_id
+    self.branch_id = nil
+  end
+
   def show_captcha?
     u = User.find_by_email(email)
     u && u.failed_attempts >= 3
