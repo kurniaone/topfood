@@ -5,7 +5,7 @@ class PositionsController < ApplicationController
   respond_to :html
 
   def index
-    @positions = Position.paginate(:page => params[:page], :order => 'level ASC')
+    @positions = Position.paginate(:page => params[:page])
     respond_with @positions
   end
 
