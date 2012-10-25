@@ -11,15 +11,6 @@
   </div>
 
   <div class="group">
-    <%= f.label :management_id, 'Position', class: 'label' %>
-    <%= f.select :management_id, options_for_select(management_options, @user.management_id), {}, class: 'selectbox' %>
-  </div>
-  <div class="group" id="branch-selector">
-    <%= f.label :branch_id, 'Branch', class: 'label' %>
-    <%= f.select :branch_id, options_for_select(branch_options, @user.branch_id), {include_blank: 'Choose here ...'}, class: 'selectbox' %>
-  </div>
-
-  <div class="group">
     <%= f.label :password, 'Password', class: 'label' %>
     <%= f.password_field :password, class: 'text_field' %>
   </div>
@@ -28,26 +19,88 @@
     <%= f.password_field :password_confirmation, class: 'text_field' %>
   </div>
 
+  <div class="group">
+    <%= f.label :role_id, 'Position', class: 'label' %>
+    <%= f.select :role_id, options_for_select(role_options, @user.role_id), {}, class: 'selectbox' %>
+  </div>
+
+  <div class="branch-group">
+    <div id="user_branches">
+      <h4>Branch: </h4>
+      <%= f.fields_for :user_branches do |ub| %>
+        <% pidx = ub.object_name.gsub(/[^0-9]+/,'').to_i %>
+        <div class="group">
+          <%= ub.label :branch_id, '+ ' %>
+          <%= ub.select :branch_id, options_for_select(branch_options, ub.try(:object).try(:branch_id)), {include_blank: 'Choose here ...'},
+            class: 'selectbox user_branch' %>
+          <%= ub.hidden_field :role_id, class: 'ub-role-id' %>
+          <%= link_to_remove_fields("X", ub) unless pidx == 0 %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to_add_fields("Add Branch", f, :user_branches) %>
+  </div>
+
+
   <div class="actions-bar wat-cf">
     <%= f.submit "Save", class: 'link-button' %>
     <%= link_to 'Cancel', users_path, class: 'link-button' %>
   </div>
 <% end %>
 
+<%= content_for :css do %>
+<style type="text/css">
+  .branch-group{ margin: 0 20px 20px; }
+  #user_branches{ display: none; }
+  .add-fields{ display: none; }
+</style>
+<% end %>
+
 <%= content_for :js do %>
 <script type="text/javascript">
-  $selected = $('#user_management_id option:selected').text();
-  show_hide_branch($selected);
-  $('#user_management_id').change(function(){
-    show_hide_branch($('#user_management_id option:selected').text());
+  $selected = $('#user_role_id option:selected').text();
+  $value = $('#user_role_id option:selected').val();
+  manage_branch($selected, $value);
+  $('#user_role_id').change(function(){
+    selected = $('#user_role_id option:selected').text();
+    value = $('#user_role_id option:selected').val();
+    manage_branch(selected, value);
   });
 
-  function show_hide_branch(selected){
-    if(selected == 'Store Manager'){
-      $('#branch-selector').show();
-    }else{
-      $('#branch-selector').hide();
+  $('.user_branch').change(function(){
+    tv = $(this).val();
+    dup = 0;
+    valid = true;
+    $.each($('.user_branch'), function(i){
+      if($($('.user_branch')[i]).val() == tv) dup += 1;
+    });
+
+    if(dup >= 2){
+      alert('This Branch is already selected');
+      $(this).val('');
     }
+  });
+
+  function manage_branch(selected, value){
+    if(selected == 'Store Manager' || selected == 'Team Leader'){
+      $('#user_branches').show();
+    }else{
+      $('#user_branches').hide();
+    }
+
+    $('.add-fields').toggle(selected == 'Team Leader');
+    $('#user_branches .group .ub-role-id').val(value);
+
+    if(selected == 'Store Manager'){
+      $('#user_branches .group').hide();
+      $('#user_branches .group .remove-fields').val('true');
+
+      $('#user_branches .group:first').show();
+      $('#user_branches .group:first .remove-fields').val('false');
+    }
+
   }
+
 </script>
 <% end %>

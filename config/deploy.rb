@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'capistrano-unicorn'
 
 default_run_options[:pty] = true
 
@@ -68,7 +69,7 @@ namespace :assets do
 end
 
 after "deploy:finalize_update", "symlinks:database_yml"
-after 'deploy:update', 'deploy:migrate'
+# after 'deploy:update', 'deploy:migrate'
 after "deploy:update", "deploy:cleanup"
 
 # Bluepill to monitor

@@ -1,0 +1,5 @@
+<div class="approval-group">
+  <%= f.label :role_id, "Approval", class: 'label inline-label' %>
+  <%= f.select :role_id, options_for_select(role_options, f.object.role_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
+  <%= link_to_remove_fields("X", f) %>
+</div>

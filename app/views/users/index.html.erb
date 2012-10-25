@@ -16,16 +16,19 @@
         <th>Branch</th>
         <th class="last">&nbsp;</th>
       </tr>
-      <% @users.each do |dept| %>
+      <% @users.each do |user| %>
         <tr>
-          <td><%= dept.name %></td>
-          <td><%= dept.email %></td>
-          <td><%= dept.management.try(:name) %></td>
-          <td><%= dept.branch.try(:name) %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role.try(:name) %></td>
+          <td>
+            <%= user.branch.try(:name) if user.role?('sm') %>
+            <%= pluralize(user.branches.try(:count), 'branch') if user.role?('tl') %>
+          </td>
           <td class="last">
-            <%#= link_to 'Show', user_path(dept) %>
-            <%= link_to 'Edit', edit_user_path(dept) %>
-            <%= link_to 'Remove', user_path(dept), method: :delete, confirm: 'Are you sure?' %>
+            <%= link_to 'Show', user_path(user) %>
+            <%= link_to 'Edit', edit_user_path(user) %>
+            <%= link_to 'Remove', user_path(user), method: :delete, confirm: 'Are you sure?' %>
           </td>
         </tr>
       <% end unless @users.blank? %>

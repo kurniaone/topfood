@@ -3,18 +3,40 @@
   <h2><%= "#{@type.titleize} Setting "%></h2>
 
   <div class="inner">
-    <%= form_for @setting, :url => update_setting_path(@p), method: :put do |f| %>
-      <div id="approval-list">
-        <%= f.fields_for :approval_managements do |am| %>
-          <% pidx = am.object_name.gsub(/[^0-9]+/,'').to_i %>
+    <h4>Setting for Center:</h4>
+    <%= form_for @centersetting, as: 'center', :url => update_setting_path(@p), method: :put, html: {class: 'approval-form'} do |f| %>
+      <div id="approval-list-center">
+        <%= f.fields_for :approval_roles do |app| %>
+          <% pidx = app.object_name.gsub(/[^0-9]+/,'').to_i %>
           <div class="approval-group">
-            <%= am.label :management_id, "Approval", class: 'label inline-label' %>
-            <%= am.select :management_id, options_for_select(management_options, am.object.management_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
-            <%= link_to_remove_approvals("X", am) unless pidx == 0 %>
+            <%= app.label :role_id, "Approval", class: 'label inline-label' %>
+            <%= app.select :role_id, options_for_select(role_options, app.object.role_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
+            <%= link_to_remove_fields("X", app) unless pidx == 0 %>
           </div>
         <% end %>
       </div>
-      <%= link_to_add_approvals "Add Another Level", f, :approval_managements %>
+      <%= link_to_add_fields "Add Another Level", f, :approval_roles, 'approval-list-center' %>
+
+
+      <div class="actions-bar wat-cf">
+        <%= f.submit "Save", class: 'link-button' %>
+      </div>
+    <% end %>
+
+
+    <h4>Setting fo Branch:</h4>
+    <%= form_for @branchsetting, as: 'branch', :url => update_setting_path(@p), method: :put, html: {class: 'approval-form'} do |f| %>
+      <div id="approval-list-branch">
+        <%= f.fields_for :approval_roles do |app| %>
+          <% pidx = app.object_name.gsub(/[^0-9]+/,'').to_i %>
+          <div class="approval-group">
+            <%= app.label :role_id, "Approval", class: 'label inline-label' %>
+            <%= app.select :role_id, options_for_select(role_options, app.object.role_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
+            <%= link_to_remove_fields("X", app) unless pidx == 0 %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to_add_fields "Add Another Level", f, :approval_roles, 'approval-list-branch' %>
 
 
       <div class="actions-bar wat-cf">
@@ -24,3 +46,10 @@
 
   </div>
 </div>
+
+<%= content_for :css do %>
+<style type="text/css">
+  .approval-form{ margin: 0 0 40px 0; }
+  .add-fields{ margin: 10px 0 20px 125px; }
+</style>
+<% end %>

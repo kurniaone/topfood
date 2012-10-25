@@ -1,0 +1,7 @@
+<div class="group">
+  <%= f.label :branch_id, '+ ' %>
+  <%= f.select :branch_id, options_for_select(branch_options, f.try(:object).try(:branch_id)), {include_blank: 'Choose here ...'},
+    class: 'selectbox user_branch' %>
+  <%= f.hidden_field :role_id, class: 'ub-role-id' %>
+  <%= link_to_remove_fields("X", f) %>
+</div>

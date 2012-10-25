@@ -1,0 +1,45 @@
+<div class="content">
+  <h2>User</h2>
+
+  <div class="inner">
+    <p>
+      <%= label_tag :name, 'Name', class: 'detail-label' %>
+      <span>: <%= @user.name %></span>
+    </p>
+    <p>
+      <%= label_tag :email, 'Email', class: 'detail-label' %>
+      <span>: <%= @user.email %></span>
+    </p>
+    <p>
+      <%= label_tag :position, 'Position', class: 'detail-label' %>
+      <span>: <%= @user.role.try(:name) %></span>
+    </p>
+
+    <p>
+      <%# Store Manager %>
+      <% if @user.role?('sm') %>
+        <%= label_tag :branch, 'Branch', class: 'detail-label' %>
+        <span>: <%= @user.branch.try(:name) %></span>
+      <% end %>
+
+      <%# Team Leader %>
+      <% if @user.role?('tl') %>
+        <%= label_tag :branch, 'Branch', class: 'detail-label' %>
+        <span>:</span>
+        <ul>
+          <% @user.branches.each do |branch| %>
+            <li><%= branch.name %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </p>
+
+    <div class="link-button-container">
+      <%= link_to "Lists", users_path, class: 'link-button' %>
+      <%= link_to "New", new_user_path, class: 'link-button' %>
+      <%= link_to "Edit", edit_user_path(@user), class: 'link-button' %>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>

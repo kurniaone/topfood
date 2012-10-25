@@ -12,25 +12,35 @@
 
   <div id="main-navigation">
     <ul class="wat-cf">
-      <li class="<%= 'active' if controller_name == '' %>">
-        <%= link_to "Orders", '#' %>
-      </li>
-
       <% if superadmin %>
+        <li class="<%= 'active' if controller_name.include?('orders') %>">
+          <%= link_to "Orders", purchase_orders_path %>
+        </li>
         <li class="<%= 'active' if controller_name == 'branches' %>">
-          <%= link_to "Branchs", branches_path %>
+          <%= link_to "Branches", branches_path %>
         </li>
         <li class="<%= 'active' if controller_name == 'settings' %>">
           <%= link_to "Order Setting", settings_path('purchase') %>
         </li>
-        <li class="<%= 'active' if controller_name == 'managements' %>">
-          <%= link_to "Managements", managements_path %>
+        <li class="<%= 'active' if controller_name == 'roles' %>">
+          <%= link_to "Roles", roles_path %>
         </li>
         <li class="<%= 'active' if controller_name == 'users' %>">
           <%= link_to "Users", users_path %>
         </li>
         <li class="<%= 'active' if master_data_controllers.include?(controller_name) %>">
           <%= link_to "Master Data", departments_path %>
+        </li>
+
+      <% else %>
+        <li class="<%= 'active' if controller_name == 'purchase_orders' %>">
+          <%= link_to "Purchase Orders", purchase_orders_path %>
+        </li>
+        <li class="<%= 'active' if controller_name == 'work_orders' %>">
+          <%= link_to "Work Orders", work_orders_path %>
+        </li>
+        <li class="<%= 'active' if controller_name == 'employee_orders' %>">
+          <%= link_to "Employee Orders", employee_orders_path %>
         </li>
       <% end %>
     </ul>

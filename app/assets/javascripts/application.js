@@ -71,35 +71,32 @@ function toggle_on_change(elm){
   }
 }
 
-// remove order detail
+// remove fields
 function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).parent().parent().hide();
-}
-
-// add order details row
-function add_fields(link, association, content) {
-  var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g")
-  $('table.'+association).append(content.replace(regexp, new_id));
-  if ($.fn.chosen) $('.chzn-select').chosen();
-  $('#purchase_order_order_details_attributes_'+new_id+'_used_date').datepicker({
-      dateFormat: 'dd-mm-yy',
-      minDate: new Date
-  });
-}
-
-// remove approval
-function remove_approvals(link) {
   $(link).prev("input[type=hidden]").val("1");
   $(link).parent().hide();
 }
 
-// add order approval
-function add_approvals(link, association, content) {
+// add fields
+function add_fields(link, association, content, el_id = '') {
+  if(el_id == '') el_id = association;
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
-  $('div#approval-list').append(content.replace(regexp, new_id));
+  $('#'+el_id).append(content.replace(regexp, new_id));
+}
+
+// remove items
+function remove_items(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).parent().parent().hide();
+}
+
+// add items
+function add_items(link, association, content, el_id = '') {
+  if(el_id == '') el_id = association;
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $('.table#'+association).append(content.replace(regexp, new_id));
 }
 
 

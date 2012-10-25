@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :order_number
       t.integer :created_by
       t.integer :branch_id
+      t.date :order_date
 
       t.boolean :removed, default: false
       t.timestamps

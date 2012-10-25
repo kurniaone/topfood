@@ -5,13 +5,21 @@ class SettingsController < ApplicationController
   respond_to :html
 
   def index
-    @setting.approval_managements.build if @setting.approval_managements.blank?
+    @centersetting.approval_roles.build if @centersetting.approval_roles.blank?
+    @branchsetting.approval_roles.build if @branchsetting.approval_roles.blank?
   end
 
   def update
-    flash[:notice] = @setting.update_attributes(params[:approval_setting]) ? "Setting saved" :
-      "Failed save setting"
-    redirect_to settings_path(@p)
+    valid = (params[:center] && @centersetting.update_attributes(params[:center])) ||
+      (params[:branch] && @branchsetting.update_attributes(params[:branch]))
+    flash[:notice] = valid ? "Setting saved" : "Failed save setting"
+    if valid
+      redirect_to settings_path(@p)
+    else
+      render :index
+    end
+
+
   end
 
   protected
@@ -24,6 +32,7 @@ class SettingsController < ApplicationController
     end
 
     def find_setting
-      @setting = ApprovalSetting.find_by_order_class(@type)
+      @centersetting = ApprovalSetting.find_by_order_class_and_center(@type, true)
+      @branchsetting = ApprovalSetting.find_by_order_class_and_center(@type, false)
     end
 end

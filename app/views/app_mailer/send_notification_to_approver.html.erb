@@ -1,0 +1,36 @@
+<p>
+  Dear <%= @approver.name %>,
+</p>
+
+<p>
+  <%= @order.user.name %> created a new <%= @order.type %> on topfood system.<br />
+</p>
+<p>
+  <b>Order Number:</b> <%= @order.order_number %><br />
+  <b>Created At:</b> <%= @order.order_date %><br />
+  <b>Ordered By:</b> <%= @order.user.name %><br />
+  <b>Branch:</b> <%= @order.branch.name %><br />
+
+  <b>Details:</b><br />
+  <ul>
+    <% @order.order_details.each do |detail| %>
+      <li>
+        <%= detail.description %>
+        QTY: <%= detail.quantity %> <%= detail.unit.name %>
+        Used Date: <%= detail.used_date %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<p>
+  Click the following link to check it.
+</p>
+<p>
+  <%= link_to @order.order_number, @url %>
+</p>
+
+<p>
+  Regards,
+  Topfood System
+</p>

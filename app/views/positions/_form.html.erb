@@ -2,12 +2,8 @@
   <%= error_messages(@position).html_safe %>
 
   <div class="group">
-    <%= f.label :department_id, 'Department', class: 'label' %>
-    <%= f.select :department_id, options_for_select(department_options, @position.department_id), {}, :class => 'selectbox' %>
-  </div>
-  <div class="group">
-    <%= f.label :level, 'Level', class: 'label' %>
-    <%= f.text_field :level, class: 'text_field' %>
+    <%= f.label :code, 'Code', class: 'label' %>
+    <%= f.text_field :code, class: 'text_field' %>
   </div>
   <div class="group">
     <%= f.label :name, 'Name', class: 'label' %>

@@ -4,8 +4,6 @@ class CreatePositions < ActiveRecord::Migration
       t.string :code
       t.string :name
       t.text :description
-      t.float :level
-      t.integer :parent_id
 
       t.boolean :removed, default: false
       t.timestamps

@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.user_branches.build
     respond_with @user do |format|
       format.js { render layout: false }
     end
@@ -18,10 +19,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     flash[:notice] = 'User saved' if @user.save
-    respond_with @user, location: users_path
+    respond_with @user
   end
 
   def edit
+    @user.user_branches.build if @user.user_branches.blank?
     respond_with @user
   end
 
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
     end
 
     flash[:notice] = 'User updated' if @user.valid?
-    respond_with @user, location: users_path
+    respond_with @user
   end
 
   def destroy

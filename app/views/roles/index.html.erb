@@ -1,9 +1,9 @@
 <div class="content">
-  <h2>Management</h2>
+  <h2>Role</h2>
 
   <div class="inner">
     <div class="link-button-container">
-      <%= link_to "New", new_management_path, class: 'link-button' %>
+      <%= link_to "New", new_role_path, class: 'link-button' %>
 
       <div class="clear"></div>
     </div>
@@ -14,21 +14,21 @@
         <th>Name</th>
         <th class="last">&nbsp;</th>
       </tr>
-      <% @managements.each do |dept| %>
+      <% @roles.each do |dept| %>
         <tr>
           <td><%= dept.code %></td>
           <td><%= dept.name %></td>
           <td class="last">
-            <%= link_to 'Edit', edit_management_path(dept) %>
-            <%= link_to 'Remove', management_path(dept), method: :delete, confirm: 'Are you sure?' %>
+            <%= link_to 'Edit', edit_role_path(dept) %>
+            <%= link_to 'Remove', role_path(dept), method: :delete, confirm: 'Are you sure?' %>
           </td>
         </tr>
-      <% end unless @managements.blank? %>
+      <% end unless @roles.blank? %>
     </table>
 
     <div class="actions-bar wat-cf">
       <div class-"page-entries">
-        <%= page_entries_info @managements %>
+        <%= page_entries_info @roles %>
       </div>
       <div class="pagination">
         <%= will_paginate %>

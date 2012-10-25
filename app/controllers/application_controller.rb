@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   helper_method :superadmin, :master_data_controllers,
-    :department_options, :management_options, :branch_options
+    :department_options, :role_options, :branch_options, :unit_options
 
 
   protected
@@ -21,12 +21,16 @@ class ApplicationController < ActionController::Base
       Department.all.map{|d| [d.name, d.id] }
     end
 
-    def management_options
-      Management.all.map{|d| [d.name, d.id] }
+    def role_options
+      Role.all.map{|d| [d.name, d.id] }
     end
 
     def branch_options
       Branch.not_center.map{|d| [d.name, d.id] }
+    end
+
+    def unit_options
+      Unit.all.map{|d| [d.name, d.id] }
     end
 
 end

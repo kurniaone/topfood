@@ -1,5 +1,0 @@
-<div class="approval-group">
-  <%= f.label :management_id, "Approval", class: 'label inline-label' %>
-  <%= f.select :management_id, options_for_select(management_options, f.object.management_id), {include_blank: 'Choose Here ...'}, class: 'selectbox' %>
-  <%= link_to_remove_approvals("X", f) %>
-</div>

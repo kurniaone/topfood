@@ -21,6 +21,19 @@
     </p>
     <p>
       <%= label_tag :store_manager, 'Store Manager', class: 'detail-label' %>
+      <span>: <%= @branch.store_manager.try(:name) %></span>
+    </p>
+    <p>
+      <%= label_tag :team_leader, 'Team Leader', class: 'detail-label' %>
+      <span>: <%= @branch.user('tl').try(:name) %></span>
+    </p>
+    <p>
+      <%= label_tag :manager, 'Manager', class: 'detail-label' %>
+      <span>: <%= @branch.user('mng').try(:name) %></span>
+    </p>
+    <p>
+      <%= label_tag :general_manager, 'General Manager', class: 'detail-label' %>
+      <span>: <%= @branch.user('gm').try(:name) %></span>
     </p>
 
     <div class="link-button-container">

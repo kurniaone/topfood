@@ -74,6 +74,7 @@ ul.form-error{
   margin-top: 8px;
 }
 
+.flash{ cursor: pointer; }
 .flash .alert, .flash .message.alert{
   background: url("warning.png") no-repeat scroll 10px center #F9C006;
   border: 1px solid #BB9004;
@@ -99,7 +100,7 @@ label.inline-label{ min-width: 120px; }
 .form .text_field.long, .form .text_area.long{ width: 100%; }
 .form .text_field[readonly=readonly]{ background: #f9f9f9; }
 .form .text_field.datepicker{ width: 100px; }
-.order-detail-input-row{ vertical-align: top; }
+.order-detail-input-fields{ vertical-align: top; }
 
 .approval-group{ margin-bottom: 5px; }
 a.add-approval{
@@ -110,6 +111,7 @@ a.add-approval{
 .selectbox{ min-width: 150px; }
 
 /* CHOSEN */
+.chzn-container-single{ min-width: 100px; }
 .chzn-container-single .chzn-single{ background: #fff; }
 .chzn-container-single .chzn-search{ overflow: hidden; }
 
@@ -125,3 +127,8 @@ a.add-approval{
   font-weight: bold;
   min-width: 150px;
 }
+
+
+.remove-fields{ margin: 0 0 0 10px; }
+.field_with_errors{ display: inline-block; }
+.field_with_errors input, .field_with_errors select{ border-color: red };
