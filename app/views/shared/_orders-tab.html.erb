@@ -1,0 +1,13 @@
+<div class="secondary-navigation">
+  <ul class="wat-cf">
+    <li class="<%= 'active' if controller_name == 'purchase_orders' %>">
+      <%= link_to 'Purchase Orders', purchase_orders_path %>
+    </li>
+    <li class="<%= 'active' if controller_name == 'work_orders' %>">
+      <%= link_to 'Work Order', work_orders_path %>
+    </li>
+    <li class="<%= 'active' if controller_name == 'employee_orders' %>">
+      <%= link_to 'Employee Orders', employee_orders_path %>
+    </li>
+  </ul>
+</div>

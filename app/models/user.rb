@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   end
   alias :is :role?
 
+  def su?
+    su == true
+  end
+
   # get branch for store-manager
   def branch
     branches.try(:first)

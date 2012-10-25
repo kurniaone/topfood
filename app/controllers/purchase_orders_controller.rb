@@ -8,6 +8,8 @@ class PurchaseOrdersController < ApplicationController
       @orders = PurchaseOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
     elsif current_user.role?('tl')
       @orders = PurchaseOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
+    else
+      @orders = PurchaseOrder.order('created_at DESC').paginate(:page => params[:page])
     end
     respond_with @orders
   end

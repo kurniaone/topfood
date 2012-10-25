@@ -16,11 +16,13 @@
     <%= f.label current_user.name, :class => 'label' %>
     <%= f.hidden_field :created_by, :value => current_user.id %>
   </div>
-  <div class="group">
-    <%= f.label :branch_id, 'Branch', :class => 'label' %>
-    <%= f.label current_user.branch.name, :class => 'label' %>
-    <%= f.hidden_field :branch_id, :value => current_user.branch.try(:id) %>
-  </div>
+  <% if current_user.role?('sm') %>
+    <div class="group">
+      <%= f.label :branch_id, 'Branch', :class => 'label' %>
+      <%= f.label current_user.branch.name, :class => 'label' %>
+      <%= f.hidden_field :branch_id, :value => current_user.branch.try(:id) %>
+    </div>
+  <% end %>
 
   <table class="table" id="order_details">
     <tr>
