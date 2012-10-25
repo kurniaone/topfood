@@ -3,7 +3,7 @@
   <h2><%= "#{@type.titleize} Setting "%></h2>
 
   <div class="inner">
-    <h4>Setting for Center:</h4>
+    <h4>Setting for HeadQuarter (Pusat):</h4>
     <%= form_for @centersetting, as: 'center', :url => update_setting_path(@p), method: :put, html: {class: 'approval-form'} do |f| %>
       <div id="approval-list-center">
         <%= f.fields_for :approval_roles do |app| %>
