@@ -5,6 +5,7 @@ gem 'mysql2', "~> 0.3.10"
 
 group :development do
   gem 'mongrel', '>= 1.2.0.pre2'
+  gem 'capistrano-unicorn', :require => false
 end
 
 group :assets do
@@ -30,4 +31,4 @@ gem 'will_paginate'
 gem 'recaptcha', :require => 'recaptcha/rails'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'

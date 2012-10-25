@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 /test/**/*
+
+/app/assets/javascripts/*.coffee
+/app/assets/stylesheets/*.scss
