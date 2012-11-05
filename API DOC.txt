@@ -1,0 +1,477 @@
+# UNITS #
+---------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/units.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "units": [
+      {
+        "code": "kg",
+        "name": "Kilo Gram",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "g",
+        "name": "Gram",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "m",
+        "name": "Meter",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/units.json?key=1234
+  Params:
+    {"unit": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  Params:
+    {"unit": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+
+# DEPARTMENTS #
+---------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/departments.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "departments": [{
+        "code": "hrd",
+        "name": "HRD",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "pch",
+        "name": "Purchasing",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "ga",
+        "name": "General Affair",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/departments.json?key=1234
+  Params:
+    {"department": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  Params:
+    {"department": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+# POSITIONS #
+-------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/positions.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "positions": [{
+        "code": "SM",
+        "name": "Store Manager",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "KA",
+        "name": "Kepala Bagian",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "KASUB",
+        "name": "Kepala Sub Bagian",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+
+      }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/positions.json?key=1234
+  Params:
+    {"position": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  Params:
+    {"position": {"code":"CODE", "name":"NAME"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+# ROLES #
+-------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/roles.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "roles": [{
+        "code": "GM",
+        "name": "General Manager",
+        "description": "",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+
+        "code": "MNG",
+        "name": "Manager",
+        "description": "",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      },
+      {
+        "code": "AM",
+        "name": "Assistant Manager",
+        "description": "",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-10-21T16:32:49Z"
+      }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "description": "",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/roles.json?key=1234
+  Params:
+    {"role": {"code":"CODE", "name":"NAME", "description":"DESCRIPTION"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "description": "",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  Params:
+    {"role": {"code":"CODE", "name":"NAME", "description":"DESCRIPTION"}}
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "description": "",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  Result:
+  {
+    "code": "CODE",
+    "name": "NAME",
+    "description": "",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-10-21T16:32:49Z"
+  }
+
+
+
+
+# Users #
+-------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/users.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "users": [{
+        "id": 2,
+        "email": "sm@topfood.com",
+        "name": "Store Manager",
+        "phone": "123456",
+        "address": "Top Food Indonesia",
+        "role": "Store Manager",
+        "created_at": "2012-10-21T16:32:49Z",
+        "updated_at": "2012-11-04T17:01:26Z"
+      }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 1
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/users/ID.json?key=1234
+  Result:
+  {
+    "id": 2,
+    "email": "sm@topfood.com",
+    "name": "Store Manager",
+    "phone": "123456",
+    "address": "Top Food Indonesia",
+    "role": "Store Manager",
+    "created_at": "2012-10-21T16:32:49Z",
+    "updated_at": "2012-11-04T17:01:26Z"
+  }
+
+
+# BRANCHES #
+-------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/branches.json?key=1234
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "branches": [{
+        "id": 1,
+        "name": "PT Toop Food Indonesia (Pusat)",
+        "phone": "123456",
+        "address": "",
+        "profile": null,
+        "center": true,
+        "created_at": "2012-10-21T16:32:48Z",
+        "updated_at": "2012-10-21T16:32:48Z"
+      },
+      {
+        "id": 2,
+        "name": "ET Asia Afrika",
+        "phone": "12345678",
+        "address": "",
+        "profile": "",
+        "center": null,
+        "created_at": "2012-10-21T16:35:18Z",
+        "updated_at": "2012-10-21T16:35:18Z"
+      },
+      {
+        "id": 3,
+        "name": "ET Sudirman",
+        "phone": "12345678",
+        "address": "",
+        "profile": "",
+        "center": null,
+        "created_at": "2012-10-21T16:35:42Z",
+        "updated_at": "2012-10-21T16:35:42Z"
+      }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  Result:
+  {
+    "id": X,
+    "name": "",
+    "phone": "",
+    "address": "",
+    "profile": "",
+    "center": null,
+    "created_at": "2012-10-21T16:35:42Z",
+    "updated_at": "2012-10-21T16:35:42Z"
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/branches.json?key=1234
+  Params:
+    {"branch": {"name":"NAME", "phone":"PHONE", "address":"ADDRESS", "profile":"PROFILE"}}
+  Result:
+  {
+    "id": X,
+    "name": "",
+    "phone": "",
+    "address": "",
+    "profile": "",
+    "center": null,
+    "created_at": "2012-10-21T16:35:42Z",
+    "updated_at": "2012-10-21T16:35:42Z"
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  Params:
+    {"branch": {"name":"NAME", "phone":"PHONE", "address":"ADDRESS", "profile":"PROFILE"}}
+  Result:
+  {
+    "id": X,
+    "name": "",
+    "phone": "",
+    "address": "",
+    "profile": "",
+    "center": null,
+    "created_at": "2012-10-21T16:35:42Z",
+    "updated_at": "2012-10-21T16:35:42Z"
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  Result:
+  {
+    "id": X,
+    "name": "",
+    "phone": "",
+    "address": "",
+    "profile": "",
+    "center": null,
+    "created_at": "2012-10-21T16:35:42Z",
+    "updated_at": "2012-10-21T16:35:42Z"
+  }
+
+
+

@@ -3,4 +3,5 @@ class Unit < ActiveRecord::Base
 
   attr_accessible :code, :name
   validates :code, :name, presence: true
+  validates :code, uniqueness: true
 end

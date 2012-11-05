@@ -26,4 +26,21 @@ Topfood::Application.routes.draw do
   resources :employee_orders
 
   root :to => 'home#index'
+
+
+  # API ROUTES
+  namespace :api do
+    resources :units
+    resources :users, only: [:index, :show]
+    resources :departments
+    resources :positions
+    resources :roles
+    resources :branches
+
+    resources :settings
+
+    resources :purchase_orders
+    resources :work_orders
+    resources :employee_orders
+  end
 end
