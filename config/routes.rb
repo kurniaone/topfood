@@ -30,6 +30,10 @@ Topfood::Application.routes.draw do
 
   # API ROUTES
   namespace :api do
+    put "purchase_orders/:id/approve" => "purchase_orders#approve", as: "approve_api_purchase_orders"
+    put "work_orders/:id/approve"     => "work_orders#approve",     as: "approve_api_work_orders"
+    put "employee_orders/:id/approve" => "employee_orders#approve", as: "approve_api_employee_orders"
+
     resources :units
     resources :users, only: [:index, :show]
     resources :departments
@@ -37,10 +41,20 @@ Topfood::Application.routes.draw do
     resources :roles
     resources :branches
 
-    resources :settings
-
-    resources :purchase_orders
-    resources :work_orders
-    resources :employee_orders
+    resources :purchase_orders do
+      collection do
+        :approve
+      end
+    end
+    resources :work_orders do
+      collection do
+        :approve
+      end
+    end
+    resources :employee_orders do
+      collection do
+        :approve
+      end
+    end
   end
 end

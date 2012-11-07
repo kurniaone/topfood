@@ -11,20 +11,20 @@
       {
         "code": "kg",
         "name": "Kilo Gram",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "g",
         "name": "Gram",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "m",
         "name": "Meter",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
     ],
     "current_page": 1,
@@ -38,8 +38,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Create:
@@ -50,8 +50,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Update:
@@ -62,8 +62,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -73,8 +73,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -91,20 +91,20 @@
     "departments": [{
         "code": "hrd",
         "name": "HRD",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "pch",
         "name": "Purchasing",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "ga",
         "name": "General Affair",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       }
     ],
     "current_page": 1,
@@ -118,8 +118,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Create:
@@ -130,8 +130,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Update:
@@ -142,8 +142,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -153,8 +153,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -170,20 +170,20 @@
     "positions": [{
         "code": "SM",
         "name": "Store Manager",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "KA",
         "name": "Kepala Bagian",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "KASUB",
         "name": "Kepala Sub Bagian",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
 
       }
     ],
@@ -198,8 +198,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Create:
@@ -210,8 +210,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Update:
@@ -222,8 +222,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -233,8 +233,8 @@
   {
     "code": "CODE",
     "name": "NAME",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -251,23 +251,23 @@
         "code": "GM",
         "name": "General Manager",
         "description": "",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
 
         "code": "MNG",
         "name": "Manager",
         "description": "",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "code": "AM",
         "name": "Assistant Manager",
         "description": "",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-10-21T16:32:49Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       }
     ],
     "current_page": 1,
@@ -282,8 +282,8 @@
     "code": "CODE",
     "name": "NAME",
     "description": "",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Create:
@@ -295,8 +295,8 @@
     "code": "CODE",
     "name": "NAME",
     "description": "",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Update:
@@ -308,8 +308,8 @@
     "code": "CODE",
     "name": "NAME",
     "description": "",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -320,8 +320,8 @@
     "code": "CODE",
     "name": "NAME",
     "description": "",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-10-21T16:32:49Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -343,8 +343,8 @@
         "phone": "123456",
         "address": "Top Food Indonesia",
         "role": "Store Manager",
-        "created_at": "2012-10-21T16:32:49Z",
-        "updated_at": "2012-11-04T17:01:26Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       }
     ],
     "current_page": 1,
@@ -362,8 +362,8 @@
     "phone": "123456",
     "address": "Top Food Indonesia",
     "role": "Store Manager",
-    "created_at": "2012-10-21T16:32:49Z",
-    "updated_at": "2012-11-04T17:01:26Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -383,8 +383,8 @@
         "address": "",
         "profile": null,
         "center": true,
-        "created_at": "2012-10-21T16:32:48Z",
-        "updated_at": "2012-10-21T16:32:48Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "id": 2,
@@ -393,8 +393,8 @@
         "address": "",
         "profile": "",
         "center": null,
-        "created_at": "2012-10-21T16:35:18Z",
-        "updated_at": "2012-10-21T16:35:18Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       },
       {
         "id": 3,
@@ -403,8 +403,8 @@
         "address": "",
         "profile": "",
         "center": null,
-        "created_at": "2012-10-21T16:35:42Z",
-        "updated_at": "2012-10-21T16:35:42Z"
+        "created_at": "2012-10-21 16:32:49",
+        "updated_at": "2012-10-21 16:32:49"
       }
     ],
     "current_page": 1,
@@ -422,8 +422,8 @@
     "address": "",
     "profile": "",
     "center": null,
-    "created_at": "2012-10-21T16:35:42Z",
-    "updated_at": "2012-10-21T16:35:42Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Create:
@@ -438,8 +438,8 @@
     "address": "",
     "profile": "",
     "center": null,
-    "created_at": "2012-10-21T16:35:42Z",
-    "updated_at": "2012-10-21T16:35:42Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
   # Update:
@@ -454,8 +454,8 @@
     "address": "",
     "profile": "",
     "center": null,
-    "created_at": "2012-10-21T16:35:42Z",
-    "updated_at": "2012-10-21T16:35:42Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
   }
 
 
@@ -469,8 +469,464 @@
     "address": "",
     "profile": "",
     "center": null,
-    "created_at": "2012-10-21T16:35:42Z",
-    "updated_at": "2012-10-21T16:35:42Z"
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49"
+  }
+
+
+
+
+# PURCHASE ORDERS #
+-------------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/purchase_orders.json?key=1234&as=USEREMAIL
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "orders": [{
+      "order_number": "PO1350845093",
+      "order_date": "2012-10-22",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "kabel",
+          "quantity": 1,
+          "unit": "roll",
+          "used_date": "2012-10-31"
+        }
+      ],
+      "approvals": [ ]
+    },
+    {
+      "order_number": "PO1351123204",
+      "order_date": "2012-10-25",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "meja+kursi",
+          "quantity": 2,
+          "unit": "set",
+          "used_date": "2012-10-31"
+        },
+        {
+          "id": X,
+          "description": "Lap",
+          "quantity": 10,
+          "unit": "pieces",
+          "used_date": "2012-10-28"
+        }
+      ],
+      "approvals": [ ]
+    },
+    {
+      "order_number": "PO1351123291",
+      "order_date": "2012-10-25",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "panci",
+          "quantity": 1,
+          "unit": "pieces",
+          "used_date": "2012-10-30"
+        }
+      ],
+      "approvals": [ ]
+    }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/purchase_orders/ID.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/purchase_orders.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_number": "XXX",
+      "order_date": "06-11-2012",
+
+      "order_details_attributes": [
+        {
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        },
+        {
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_date": "06-11-2012",
+
+      "order_details_attributes": [
+        {
+          "id": X,
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        },
+        {
+          "id": X,
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Approve
+  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  Params:
+    {"approved": "true"|"false"} --> optional value: 1 | 0
+
+  Result:
+  {
+    "user_name": "USER-NAME",
+    "email": "USER-EMAIL",
+    "approved": "true" | "false",
+    "at": "TIME"
+  }
+
+
+
+
+# WORK ORDERS #
+-------------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/work_orders.json?key=1234&as=USEREMAIL
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "orders": [{
+      "order_number": "PO1350845093",
+      "order_date": "2012-10-22",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "kabel",
+          "quantity": 1,
+          "unit": "roll",
+          "used_date": "2012-10-31"
+        }
+      ],
+      "approvals": [ ]
+    },
+    {
+      "order_number": "PO1351123204",
+      "order_date": "2012-10-25",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "meja+kursi",
+          "quantity": 2,
+          "unit": "set",
+          "used_date": "2012-10-31"
+        },
+        {
+          "id": X,
+          "description": "Lap",
+          "quantity": 10,
+          "unit": "pieces",
+          "used_date": "2012-10-28"
+        }
+      ],
+      "approvals": [ ]
+    },
+    {
+      "order_number": "PO1351123291",
+      "order_date": "2012-10-25",
+      "status": "Waiting \"Team Leader\" approval",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-10-21 16:32:49",
+      "updated_at": "2012-10-21 16:32:49",
+      "items": [
+        {
+          "id": X,
+          "description": "panci",
+          "quantity": 1,
+          "unit": "pieces",
+          "used_date": "2012-10-30"
+        }
+      ],
+      "approvals": [ ]
+    }
+    ],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/work_orders/ID.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/work_orders.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_number": "XXX",
+      "order_date": "06-11-2012",
+
+      "order_details_attributes": [
+        {
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        },
+        {
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_date": "06-11-2012",
+
+      "order_details_attributes": [
+        {
+          "id": X,
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        },
+        {
+          "id": X,
+          "description": "DESC",
+          "quantity": "1",
+          "unit_code": "l",
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "order_number": "ORDERNUMBER",
+    "order_date": "xxxx-xx-xx",
+    "status": "Waiting \"Team Leader\" approval",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-10-21 16:32:49",
+    "updated_at": "2012-10-21 16:32:49",
+    "items": [
+      {
+        "id": X,
+        "description": "DESC",
+        "quantity": 1,
+        "unit": "pieces",
+        "used_date": "xxxx-xx-xx"
+      }
+    ],
+    "approvals": [ ]
+  }
+
+  # Approve
+  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  Params:
+    {"approved": "true"|"false"} --> optional value: 1 | 0
+
+  Result:
+  {
+    "user_name": "USER-NAME",
+    "email": "USER-EMAIL",
+    "approved": "true" | "false",
+    "at": "TIME"
   }
 
 

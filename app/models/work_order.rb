@@ -4,6 +4,6 @@ class WorkOrder < Order
 
   attr_accessible :order_details_attributes
   accepts_nested_attributes_for :order_details, :reject_if => proc{|od|
-    od['description'].blank? || od['quantity'].blank? || od['unit_id'].blank? || od['used_date'].blank?
+    od['description'].blank? || od['used_date'].blank?
   }, :allow_destroy => true
 end

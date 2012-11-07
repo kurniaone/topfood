@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   end
   alias :is :role?
 
+  def role_name
+    role.try(:name)
+  end
+
   def su?
     su == true
   end
@@ -43,5 +47,8 @@ class User < ActiveRecord::Base
     branches.try(:first)
   end
 
+  def branch_ids
+    branches.map(&:id)
+  end
 
 end

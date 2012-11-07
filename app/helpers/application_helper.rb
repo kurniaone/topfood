@@ -22,8 +22,8 @@ module ApplicationHelper
 
   # @author Wawan Kurniawan <wawan@domikado.com>
   # DateTime format
-  def date_time_format(date_time)
-    date_time.strftime("%d %b %Y %H:%M:%S") if date_time
+  def date_time_format(date_time, format="%d %b %Y %H:%M:%S")
+    date_time.strftime(format) if date_time
   end
 
   # @author Wawan Kurniawan <wawan@domikado.com>

@@ -4,5 +4,6 @@ class OrderDetail < ActiveRecord::Base
   belongs_to :purchase_order, foreign_key: 'order_id'
   belongs_to :work_order, foreign_key: 'order_id'
 
-  validates :description, :quantity, :unit_id, :used_date, presence: true
+  validates :description, :quantity, :used_date, presence: true
+  validates :unit_id, presence: true, if: proc{|od| od.purchase_order.class == PurchaseOrder }
 end
