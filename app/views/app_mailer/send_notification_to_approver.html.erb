@@ -3,7 +3,7 @@
 </p>
 
 <p>
-  <%= @order.user.name %> created a new <%= @order.type %> on topfood system.<br />
+  New order was created on topfood system and need your approval.<br />
 </p>
 <p>
   <b>Order Number:</b> <%= @order.order_number %><br />
@@ -12,22 +12,37 @@
   <b>Branch:</b> <%= @order.branch.name %><br />
 
   <b>Details:</b><br />
-  <ul>
-    <% @order.order_details.each do |detail| %>
-      <li>
-        <%= detail.description %>
-        QTY: <%= detail.quantity %> <%= detail.unit.name %>
-        Used Date: <%= detail.used_date %>
-      </li>
-    <% end %>
-  </ul>
+  <% if @order.class == EmployeeOrder %>
+    <ul>
+      <% @order.employee_details.each do |detail| %>
+        <li>
+          <%= detail.description %>
+          Department: <%= detail.department.try(:name) %><br />
+          Position: <%= detail.position.try(:name) %><br />
+          Quantity: <%= detail.quantity %><br />
+          Gender: <%= detail.gender %><br />
+          Used Date: <%= detail.used_date %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <ul>
+      <% @order.order_details.each do |detail| %>
+        <li>
+          <%= detail.description %><br />
+          QTY: <%= detail.quantity %> <%= detail.unit.name %><br />
+          Used Date: <%= detail.used_date %><br />
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </p>
 
 <p>
   Click the following link to check it.
 </p>
 <p>
-  <%= link_to @order.order_number, @url %>
+  <%= link_to "Click", @url %>
 </p>
 
 <p>

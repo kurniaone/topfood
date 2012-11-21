@@ -23,11 +23,11 @@
           <th>Order Date</th>
           <th class="center">Items</th>
           <th>Status</th>
-          <%= '<th>Branch</th>'.html_safe if current_user.role?('tl') %>
+          <%= '<th>Branch</th>'.html_safe unless current_user.role?('sm') %>
           <th class="last right">Action</th>
         </tr>
         <% @orders.each do |order| %>
-          <tr class="<% cycle('odd', 'even') %> <%= (order.approved ? 'green' : 'grey') %>">
+          <tr class="<% cycle('odd', 'even') %> <%= 'green' if order.approved %> <%= 'grey' if order.rejected %>">
             <td>
               <%= check_box_tag 'selection[]', order.id, false, :id => "selection-#{order.id}", :class => 'checkbox s-toggle' %>
             </td>
@@ -35,19 +35,14 @@
             <td><%= date_format(order.order_date) %></td>
             <td class="center"><%= order.order_details.count %></td>
             <td><%= order.order_status.try(:titleize) %></td>
-            <%= "<td>#{order.branch.name}</td>".html_safe if current_user.role?('tl') %>
+            <%= "<td>#{order.branch.name}</td>".html_safe unless current_user.role?('sm') %>
 
             <td class="last right">
               <%= link_to "Show", work_order_path(order) %>
 
               <% if order.no_approval && current_user.role?('sm') %>
                 <%= link_to "Edit", edit_work_order_path(order) %>
-                <%= link_to("Remove", work_order_path(order), :method => :delete) %>
-              <% end %>
-
-              <% if current_user.role?('tl') %>
-                <%= link_to "Approve", '#', :class => 'green' %>
-                <%= link_to "Reject", '#', :class => 'red' %>
+                <%= link_to "Remove", work_order_path(order), :method => :delete, confirm: 'Are you sure?' %>
               <% end %>
             </td>
           </tr>

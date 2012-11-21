@@ -25,13 +25,13 @@ class WorkOrdersController < ApplicationController
   def create
     @order = WorkOrder.new(params[:order])
     if @order.save
-      # @order.send_email_to_approver(work_order_url(@order))
+      @order.send_email_to_approver(work_order_url(@order))
       flash[:notice] = 'WorkOrder saved'
     else
       prepare_data
     end
 
-    respond_with @order, location: work_orders_path
+    respond_with @order
   end
 
   def edit
@@ -46,6 +46,17 @@ class WorkOrdersController < ApplicationController
   def destroy
     flash[:notice] = @order.destroy ? 'WorkOrder removed' : 'Failed remove order'
     respond_with @order
+  end
+
+  def approve
+    approval = Approval.find_by_id(params[:id])
+    @order = approval.order
+
+    approval.update_attributes(approved: approved?)
+    @order.send_email_to_approver(purchase_order_url(@order)) if approved?
+    flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
+
+    redirect_to @order
   end
 
   protected

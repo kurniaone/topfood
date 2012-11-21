@@ -6,8 +6,8 @@ class CreateApprovals < ActiveRecord::Migration
       t.string   :user_name
       t.integer  :role_id
       t.string   :role_name
-      t.boolean  :approved
-      t.datetime :do_at
+      t.boolean  :approved, null: true
+      t.datetime :do_at, null: true
 
       t.timestamps
     end

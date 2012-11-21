@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   helper_method :superadmin, :master_data_controllers,
-    :department_options, :role_options, :branch_options, :unit_options
+    :department_options, :role_options, :branch_options, :unit_options, :gender_options
 
 
   protected
@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
       Department.all.map{|d| [d.name, d.id] }
     end
 
+    def position_options
+      Position.all.map{|d| [d.name, d.id] }
+    end
+
     def role_options
       Role.all.map{|d| [d.name, d.id] }
     end
@@ -33,4 +37,11 @@ class ApplicationController < ActionController::Base
       Unit.all.map{|d| [d.name, d.id] }
     end
 
+    def gender_options(l = 'en')
+      l == 'id' ? [["Laki-laki", "M"], ["Perempuan", "F"]] : [["Male", "M"], ["Female", "F"]]
+    end
+
+    def approved?
+      params[:approved] == "1"
+    end
 end

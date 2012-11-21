@@ -3,5 +3,103 @@
   <h2>Employee Orders</h2>
 
   <div class="inner">
+    <div class="link-button-container">
+      <%= link_to "New Employee Order", new_employee_order_path, :class => 'link-button' %>
+
+      <div class="page-info right">
+        <%= page_entries_info @orders %>
+      </div>
+      <div class="clear"></div>
+
+    </div>
+
+    <%= form_for 'order', :url => '#', :html => {:class => 'form toggle-form' } do |f| %>
+      <table class="table">
+        <tr>
+          <th class="first">
+            <%= check_box_tag 'select-all', '', false, :class => "checkbox toggle-all" %>
+          </th>
+          <th>Order Number</th>
+          <th>Order Date</th>
+          <th class="center">Items</th>
+          <th>Status</th>
+          <%= '<th>Branch</th>'.html_safe unless current_user.role?('sm') %>
+          <th class="last right">Action</th>
+        </tr>
+        <% @orders.each do |order| %>
+          <tr class="<% cycle('odd', 'even') %> <%= 'green' if order.approved %> <%= 'grey' if order.rejected %>">
+            <td>
+              <%= check_box_tag 'selection[]', order.id, false, :id => "selection-#{order.id}", :class => 'checkbox s-toggle' %>
+            </td>
+            <td><%= link_to order.order_number, employee_order_path(order) %></td>
+            <td><%= date_format(order.order_date) %></td>
+            <td class="center"><%= order.employee_details.count %></td>
+            <td><%= order.order_status.try(:titleize) %></td>
+            <%= "<td>#{order.branch.name}</td>".html_safe unless current_user.role?('sm') %>
+
+            <td class="last right">
+              <%= link_to "Show", employee_order_path(order) %>
+
+              <% if order.no_approval && current_user.role?('sm') %>
+                <%= link_to "Edit", edit_employee_order_path(order) %>
+                <%= link_to "Remove", employee_order_path(order), :method => :delete, confirm: 'Are you sure?' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end unless @orders.blank? %>
+      </table>
+      <% if @orders.blank? %>
+        <div class="no-data">No Data</div>
+      <% end %>
+
+      <div class="actions-bar wat-cf">
+        <div class="pagination">
+          <%= will_paginate @orders %>
+        </div>
+      </div>
+    <% end %>
+
   </div>
 </div>
+
+
+<%= content_for :css do %>
+<style type="text/css">
+.form div.right{ width: auto; }
+.radio-group{ margin-left: 10px; }
+.reject-reason-field{ margin: 10px 0; }
+.form .group.reject-reason-field .text_area{ width: auto; }
+</style>
+<% end %>
+
+<%= content_for :js do %>
+<script type="text/javascript">
+// accept order
+$('label.accept-button').click(function(){
+  $(this).prev('input:radio').attr('checked', 'checked');
+  $(this).closest('form').submit();
+});
+
+// reject order
+r = 0;
+$('label.reject-button').click(function(){
+  r += 1;
+  reason = $('.reject-reason');
+  r_field = $('.reject-reason-field');
+
+  $(this).prev('input:radio').attr('checked', 'checked');
+  if (reason.val() == ''){
+    (r % 2 == 1) ? r_field.slideDown() : r_field.slideUp();
+  }else{
+    $(this).closest('form').submit();
+  }
+});
+
+$('.toggle-form').submit(function(){
+  if ($(this).find('input.s-toggle:checked').length == 0){
+    alert('No rows selected');
+    return false;
+  }
+});
+</script>
+<% end %>

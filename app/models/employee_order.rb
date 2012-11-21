@@ -1,5 +1,5 @@
 class EmployeeOrder < Order
-  has_many :employee_details, foreign_key: 'order_id'
+  has_many :employee_details, foreign_key: 'order_id', dependent: :destroy
   validates :employee_details, presence: true
 
   attr_accessible :employee_details_attributes

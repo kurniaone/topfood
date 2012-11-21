@@ -31,7 +31,7 @@ class PurchaseOrdersController < ApplicationController
       prepare_data
     end
 
-    respond_with @order, location: purchase_orders_path
+    respond_with @order
   end
 
   def edit
@@ -48,6 +48,17 @@ class PurchaseOrdersController < ApplicationController
     respond_with @order
   end
 
+  def approve
+    approval = Approval.find_by_id(params[:id])
+    @order = approval.order
+
+    approval.update_attributes(approved: approved?)
+    @order.send_email_to_approver(purchase_order_url(@order)) if approved?
+    flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
+
+    redirect_to @order
+  end
+
   protected
     def find_object
       @order = PurchaseOrder.find(params[:id])
@@ -57,4 +68,5 @@ class PurchaseOrdersController < ApplicationController
       @order.order_details.build if @order.order_details.blank?
       @unit_options = unit_options
     end
+
 end

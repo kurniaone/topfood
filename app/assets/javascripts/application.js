@@ -78,7 +78,7 @@ function remove_fields(link) {
 }
 
 // add fields
-function add_fields(link, association, content, el_id = '') {
+function add_fields(link, association, content, el_id) {
   if(el_id == '') el_id = association;
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
@@ -92,7 +92,7 @@ function remove_items(link) {
 }
 
 // add items
-function add_items(link, association, content, el_id = '') {
+function add_items(link, association, content, el_id) {
   if(el_id == '') el_id = association;
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")

@@ -15,14 +15,25 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   accepts_nested_attributes_for :user_branches, reject_if: proc{|u| u["branch_id"].blank? }, allow_destroy: true
 
-  # Class Method
+# Class Method
   scope :not_admin, where("su = ?", false)
 
   def self.role?(code)
     includes(:role).where("roles.code = ?", code.try(:upcase)).try(:first)
   end
 
-  # Instance Method
+  def self.find_by_role_code_and_branch_id(code, branch_id)
+    if ['ASM', 'MNG', 'GM'].include?(code.upcase)
+      user = includes(:role).where("roles.code = ?", code.try(:upcase)).try(:first)
+    else
+      user = includes(:role, :user_branches).where("roles.code = ? AND users.id IN
+        (SELECT user_id FROM user_branches WHERE branch_id = ?)", code.try(:upcase), branch_id).try(:first)
+    end
+
+    user
+  end
+
+# Instance Method
 
   def show_captcha?
     u = User.find_by_email(email)

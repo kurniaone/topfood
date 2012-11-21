@@ -1,5 +1,5 @@
 class WorkOrder < Order
-  has_many :order_details, foreign_key: 'order_id'
+  has_many :order_details, foreign_key: 'order_id', dependent: :destroy
   validates :order_details, presence: true
 
   attr_accessible :order_details_attributes

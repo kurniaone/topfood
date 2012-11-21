@@ -21,9 +21,25 @@ Topfood::Application.routes.draw do
   put '/settings/:type/update' => "settings#update", as: 'update_setting'
   resources :settings
 
-  resources :purchase_orders
-  resources :work_orders
-  resources :employee_orders
+  get '/purchase_orders/:id/approve' => "purchase_orders#approve", as: 'approve_purchase_orders'
+  get '/work_orders/:id/approve' => "work_orders#approve", as: 'approve_work_orders'
+  get '/employee_orders/:id/approve' => "employee_orders#approve", as: 'approve_employee_orders'
+
+  resources :purchase_orders do
+    collection do
+      :approve
+    end
+  end
+  resources :work_orders do
+    collection do
+      :approve
+    end
+  end
+  resources :employee_orders do
+    collection do
+      :approve
+    end
+  end
 
   root :to => 'home#index'
 

@@ -1,6 +1,6 @@
 <%= render('shared/orders-tab.html.erb') if current_user.su? %>
 <div class="content">
-  <h2>Purchase Order</h2>
+  <h2>Employee Order</h2>
 
   <div class="inner">
     <p>
@@ -21,22 +21,26 @@
     </p>
 
     <p>
-      <%= label_tag :order_details, 'Detail Orders', class: 'detail-label' %>
+      <%= label_tag :employee_details, 'Detail Orders', class: 'detail-label' %>
       <span>: </span>
     </p>
     <table class="table">
       <tr>
         <th>Description</th>
+        <th>Department</th>
+        <th>Position</th>
         <th class="center">Quantity</th>
-        <th>Unit</th>
+        <th>Gender</th>
         <th>Used date</th>
       </tr>
 
-      <% @order.order_details.each do |detail| %>
+      <% @order.employee_details.each do |detail| %>
         <tr class="<% cycle('odd', 'even') %>">
           <td><%= detail.description %></td>
+          <td><%= detail.department.try(:name) %></td>
+          <td><%= detail.position.try(:name) %></td>
           <td class="center"><%= detail.quantity %></td>
-          <td><%= detail.unit.try(:name) %></td>
+          <td><%= detail.gender %></td>
           <td><%= detail.used_date %></td>
         </tr>
       <% end %>
@@ -62,11 +66,11 @@
     <div class="clear"></div>
 
     <div class="link-button-container">
-      <%= link_to "Back", purchase_orders_path, class: 'link-button' %>
+      <%= link_to "Back", employee_orders_path, class: 'link-button' %>
 
       <% if @order.no_approval && current_user.role?('sm') %>
-        <%= link_to "Edit", edit_purchase_order_path(@order), class: 'link-button' %>
-        <%= link_to "Remove", purchase_order_path(@order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
+        <%= link_to "Edit", edit_employee_order_path(@order), class: 'link-button' %>
+        <%= link_to "Remove", employee_order_path(@order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
       <% end %>
 
       <div class="clear"></div>

@@ -36,9 +36,11 @@ div.no-data{
 .center{ text-align: center; }
 
 .hidden{ display: none; }
-.green, a.green, .green a{ color: green; }
-.red, a.red, .red a{ color: red; }
+.green, a.green, .green a, .approved{ color: green; }
+.red, a.red, .red a, .rejected{ color: red; }
+.grey, .gray, .pending{ color: gray; }
 
+.table.width-auto{ width: auto; }
 .table th.center{ text-align: center; }
 .table th.right, .table td.right{ float: none; text-align: right; }
 .table th.last, .table td.last{ min-width: 50px; width: auto; }
@@ -128,7 +130,15 @@ a.add-approval{
   min-width: 150px;
 }
 
-
 .remove-fields{ margin: 0 0 0 10px; }
 .field_with_errors{ display: inline-block; }
-.field_with_errors input, .field_with_errors select{ border-color: red };
+.field_with_errors input, .field_with_errors select{ border-color: red; }
+
+.approval-status{
+  border: 1px solid #ccc;
+  float: left;
+  margin: 0 0 10px 0;
+  padding: 5px 10px;
+  text-align: center;
+  min-width: 150px;
+}

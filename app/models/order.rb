@@ -7,6 +7,8 @@ class Order < ActiveRecord::Base
   validates :branch_id, :created_by, :order_number, :type, presence: true
   validates :order_number, :uniqueness => true
 
+  after_create :generate_approvals
+
   scope :by_store_manager, lambda{|sm|
     includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", sm.id)
   }
@@ -18,6 +20,24 @@ class Order < ActiveRecord::Base
       (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
   }
 
+# CALLBACK
+
+  def generate_approvals
+    approver_roles.each do |role|
+      user = User.find_by_role_code_and_branch_id(role.code, branch_id)
+      ap = approvals.create(
+        role_id:    role.id,
+        role_name:  role.name,
+        user_id:    user.try(:id),
+        user_name:  user.try(:name)
+      )
+    end
+  end
+
+# CLASS METHOD
+
+# INSTANCE METHOD
+
   # Generate order number
   def generate_order_number
     r = Random.new
@@ -25,25 +45,32 @@ class Order < ActiveRecord::Base
   end
 
   def no_approval
-    approvals.blank?
+    pending_approvals.size == approver_roles.size
+  end
+
+  def pending_approvals
+    approvals.where("approved IS NULL")
+  end
+
+  def next_approver
+    pending_approvals.try(:first).try(:user)
+  end
+
+  def next_approver_role
+    next_approver.role
   end
 
   def order_status
-    status = 'Approved'
-    approver_roles.each do |ar|
-      if approvals.find_by_role_id(ar.id).blank?
-        status = "Waiting \"#{ar.name}\" approval"
-        break
-      end
-    end
+    next_approver ? "Waiting \"#{next_approver.role.name}\" approval" : approvals.last.status
+  end
 
-    status
+  def approval_settings
+    center = branch.center == true
+    ApprovalSetting.includes(:roles).find_by_order_class_and_center(self.class, center)
   end
 
   def approver_roles
-    center = branch.center == true
-    setting = ApprovalSetting.find_by_order_class_and_center(self.class, center)
-    setting.roles
+    approval_settings.roles
   end
 
   def approver_by_role(role_code)
@@ -51,14 +78,20 @@ class Order < ActiveRecord::Base
   end
 
   def approved
-    approver_roles.size == approvals.size
+    next_approver.blank? && approvals.last.approved
   end
 
-  def send_email_to_approver(url)
-    role_code = approver_roles.first.code
-    approver = approver_by_role(role_code)
+  def rejected
+    next_approver.blank? && approvals.last.rejected
+  end
 
-    AppMailer.send_notification_to_approver(self, approver, url).deliver
+
+  def send_email_to_approver(url)
+    AppMailer.send_notification_to_approver(self, next_approver, url).deliver if next_approver
+  end
+
+  def show_link_for(user, approval)
+    next_approver == user && next_approver_role == approval.role && approval.pending
   end
 
 end
