@@ -6,4 +6,5 @@ class OrderDetail < ActiveRecord::Base
 
   validates :description, :quantity, :used_date, presence: true
   validates :unit_id, presence: true, if: proc{|od| od.purchase_order.class == PurchaseOrder }
+  validates :quantity, numericality: { greater_than: 0 }
 end

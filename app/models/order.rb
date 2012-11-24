@@ -52,16 +52,32 @@ class Order < ActiveRecord::Base
     approvals.where("approved IS NULL")
   end
 
+  def next_approval
+    pending_approvals.try(:first)
+  end
+
   def next_approver
-    pending_approvals.try(:first).try(:user)
+    next_approval.try(:user)
   end
 
   def next_approver_role
-    next_approver.role
+    next_approver.try(:role)
+  end
+
+  def last_approval
+    approvals.where("approved IS NOT NULL").try(:last)
+  end
+
+  def last_approver
+    last_approval.try(:user)
+  end
+
+  def last_approver_role
+    last_approver.try(:role)
   end
 
   def order_status
-    next_approver ? "Waiting \"#{next_approver.role.name}\" approval" : approvals.last.status
+    next_approver && !rejected ? "Waiting \"#{next_approver.role.name}\" approval" : "#{last_approval.status} by #{last_approver.role.name}"
   end
 
   def approval_settings
@@ -82,16 +98,15 @@ class Order < ActiveRecord::Base
   end
 
   def rejected
-    next_approver.blank? && approvals.last.rejected
+    !approvals.where("approved = 0").blank?
   end
-
 
   def send_email_to_approver(url)
     AppMailer.send_notification_to_approver(self, next_approver, url).deliver if next_approver
   end
 
   def show_link_for(user, approval)
-    next_approver == user && next_approver_role == approval.role && approval.pending
+    !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
   end
 
 end

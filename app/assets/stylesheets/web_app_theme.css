@@ -38,7 +38,7 @@ div.no-data{
 .hidden{ display: none; }
 .green, a.green, .green a, .approved{ color: green; }
 .red, a.red, .red a, .rejected{ color: red; }
-.grey, .gray, .pending{ color: gray; }
+.grey, a.grey, .grey a, .gray, .pending{ color: gray; }
 
 .table.width-auto{ width: auto; }
 .table th.center{ text-align: center; }

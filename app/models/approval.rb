@@ -15,10 +15,17 @@ class Approval < ActiveRecord::Base
   end
 
 # CLASS METHOD
+  def self.last_status
+    where("approved IS NOT NULL").try(:last).try(:status)
+  end
 
 # INSTANCE METHOD
+  def prev
+    order.approvals.where("id < ?", id).order("id ASC").try(:last)
+  end
+
   def status
-    approved == nil ? 'Pending' : (approved ? 'Approved' : 'Rejected')
+    approved == nil ? (order.next_approval == self && prev.try(:approved) || prev.blank? ? 'Pending' : '') : (approved ? 'Approved' : 'Rejected')
   end
 
   def pending
