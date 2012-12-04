@@ -3,7 +3,14 @@ class Api::WorkOrdersController < ApiController
   before_filter :find_object, :only => [:show, :update, :destroy, :approve]
 
   def index
-    @orders = WorkOrder.where("branch_id IN (?)", current_user.branch_ids).paginate(:page => params[:page])
+    if current_user.role?('sm')
+      @orders = WorkOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
+    elsif current_user.role?('tl')
+      @orders = WorkOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
+    else
+      @orders = WorkOrder.order('created_at DESC').paginate(:page => params[:page])
+    end
+
     respond_with @orders
   end
 
@@ -12,7 +19,7 @@ class Api::WorkOrdersController < ApiController
   end
 
   def create
-    @order = PurchaseOrder.new(
+    @order = WorkOrder.new(
       order_number: params[:order_number],
       order_date: params[:order_date],
       created_by: current_user.try(:id),
@@ -49,21 +56,17 @@ class Api::WorkOrdersController < ApiController
   end
 
   def approve
-    approver = User.find_by_email params[:approver_email]
+    errors = []
+    errors << "Next approver is #{@order.next_approver.role_name}" unless @order.next_approver == current_user
 
-    if @approval = @order.approvals.create(
-          role_id: approver.role_id,
-          role_name: approver.role_name,
-          user_id: approver.id,
-          user_name: approver.name,
-          approved: approved,
-          approved: params[:approved],
-          do_at: Time.now
-        )
+    @approval = @order.next_approval
+    if errors.blank? && @approval && @approval.update_attributes(approved: approved?)
+      @order.send_email_to_approver(purchase_order_url(@order)) if approved?
       # send email to approver
       respond_with @approval
     else
-      render json: {errors: @approval.try(:errors).try(:full_messages)}
+      errors += @approval.try(:errors).try(:full_messages)
+      render json: {errors: errors}
     end
   end
 

@@ -1,3 +1,4 @@
+json.branch_id @order.branch_id
 json.order_number @order.order_number
 json.order_date @order.order_date
 json.status @order.order_status

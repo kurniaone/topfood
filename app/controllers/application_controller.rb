@@ -42,6 +42,6 @@ class ApplicationController < ActionController::Base
     end
 
     def approved?
-      params[:approved] == "1"
+      params[:approved] == "1" || params[:approved] == 1
     end
 end

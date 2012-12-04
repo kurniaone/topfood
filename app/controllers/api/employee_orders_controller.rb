@@ -1,13 +1,14 @@
-class Api::PurchaseOrdersController < ApiController
+class Api::EmployeeOrdersController < ApiController
+  before_filter :get_user
   before_filter :find_object, :only => [:show, :update, :destroy, :approve]
 
   def index
     if current_user.role?('sm')
-      @orders = PurchaseOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
+      @orders = EmployeeOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
     elsif current_user.role?('tl')
-      @orders = PurchaseOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
+      @orders = EmployeeOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
     else
-      @orders = PurchaseOrder.order('created_at DESC').paginate(:page => params[:page])
+      @orders = EmployeeOrder.order('created_at DESC').paginate(:page => params[:page])
     end
     respond_with @orders
   end
@@ -17,13 +18,13 @@ class Api::PurchaseOrdersController < ApiController
   end
 
   def create
-    @order = PurchaseOrder.new(
+    @order = EmployeeOrder.new(
       order_number: params[:order_number],
       order_date: params[:order_date],
       created_by: current_user.try(:id),
       branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
 
-      order_details_attributes: order_details_attributes
+      employee_details_attributes: employee_details_attributes
     )
     if @order.save
       # Send email to approver
@@ -39,7 +40,7 @@ class Api::PurchaseOrdersController < ApiController
         created_by: current_user.try(:id),
         branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
 
-        order_details_attributes: order_details_attributes
+        employee_details_attributes: employee_details_attributes
       )
 
       respondjson @order
@@ -70,20 +71,21 @@ class Api::PurchaseOrdersController < ApiController
 
   protected
     def find_object
-      @order = PurchaseOrder.find_by_order_number(params[:id]) || PurchaseOrder.find_by_order_number(params[:order_number])
+      @order = EmployeeOrder.find_by_order_number(params[:id]) || EmployeeOrder.find_by_order_number(params[:order_number])
     end
 
-    def order_details_attributes
+    def employee_details_attributes
       p = []
-      params[:order_details_attributes].each_with_index do |od, idx|
+      params[:employee_details_attributes].each_with_index do |od, idx|
         od = od[idx] unless od[idx].blank?
-        unit = Unit.find_by_code(od[:unit_code])
 
         p[idx] = {
           id: od[:id],
           description: od[:description],
+          department_id: od[:department_id],
+          position_id: od[:position_id],
           quantity: od[:quantity],
-          unit_id: unit.try(:id),
+          gender: od[:gender],
           used_date: od[:used_date],
           _destroy: od[:_destroy]
         }

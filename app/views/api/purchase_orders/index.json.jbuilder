@@ -1,4 +1,7 @@
+json.partial! :partial => "/layouts/json_paginate.json.jbuilder", :locals => {:objects => @orders}
+
 json.orders @orders do |json, order|
+  json.branch_id order.branch_id
   json.order_number order.order_number
   json.order_date order.order_date
   json.status order.order_status
@@ -15,6 +18,7 @@ json.orders @orders do |json, order|
   end
 
   json.approvals order.approvals do |json, approval|
+    json.approval_id approval.id
     json.role_name approval.role_name
     json.user_name approval.user_name || approval.user.try(:name)
     json.email approval.user.try(:email)
@@ -22,5 +26,3 @@ json.orders @orders do |json, order|
     json.at approval.do_at
   end
 end
-
-json.partial! :partial => "/layouts/json_paginate.json.jbuilder", :locals => {:objects => @orders}

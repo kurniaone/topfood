@@ -40,7 +40,7 @@
             <td class="last right">
               <%= link_to "Show", purchase_order_path(order) %>
 
-              <% if order.no_approval && current_user.role?('sm') %>
+              <% if order.no_approval %>
                 <%= link_to "Edit", edit_purchase_order_path(order) %>
                 <%= link_to "Remove", purchase_order_path(order), :method => :delete, confirm: 'Are you sure?' %>
               <% end %>
