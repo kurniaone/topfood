@@ -553,7 +553,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/purchase_orders/ID.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -781,7 +781,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/work_orders/ID.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -918,6 +918,299 @@
 
   # Approve
   URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  Params:
+    {"approved": "true"|"false"} --> optional value: 1 | 0
+
+  Result:
+  {
+    "user_name": "USER-NAME",
+    "email": "USER-EMAIL",
+    "approved": "true" | "false",
+    "at": "TIME"
+  }
+
+
+
+# EMPLOYEE ORDERS #
+-------------------
+  # Index:
+  URL - GET: http://topfood.kuyainside.com/api/employee_orders.json?key=1234&as=USEREMAIL
+  Params:
+    - page: integer
+
+  Result:
+  {
+    "orders": [
+      "branch_id": 2,
+      "order_number": "EO1353533181",
+      "order_date": "2012-11-22",
+      "status": "Rejected by Team Leader",
+      "created_by": "sm@topfood.com",
+      "created_at": "2012-11-21 21:27:30",
+      "updated_at": "2012-11-21 21:27:30",
+      "items": [{
+        "id": 3,
+        "description": "staff",
+        "department_id": 1,
+        "department_name": "HRD",
+        "position_id": 4,
+        "position_name": "Staff",
+        "quantity": 1,
+        "gender": "F",
+        "used_date": "2012-11-30"
+      }],
+      "approvals": [{
+          "approval_id": 19,
+          "role_name": "Team Leader",
+          "user_name": "Team Leader",
+          "email": "tl@topfood.com",
+          "approved": false,
+          "at": "2012-11-21T21:30:52Z"
+        },{
+          "approval_id": 20,
+          "role_name": "Manager",
+          "user_name": "Manager",
+          "email": "mng@topfood.com",
+          "approved": null,
+          "at": null
+        },{
+          "approval_id": 21,
+          "role_name": "General Manager",
+          "user_name": "General Manager",
+          "email": "gm@topfood.com",
+          "approved": null,
+          "at": null
+        }
+      ]
+    }],
+    "current_page": 1,
+    "per_page": 30,
+    "total_entries": 3
+  }
+
+  # Show:
+  URL - GET: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "branch_id": 2,
+    "order_number": "EO1353533181",
+    "order_date": "2012-11-22",
+    "status": "Rejected by Team Leader",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-11-21 21:27:30",
+    "updated_at": "2012-11-21 21:27:30",
+    "items": [
+      {
+          "id": 3,
+          "description": "staff",
+          "department_id": 1,
+          "department_name": "HRD",
+          "position_id": 4,
+          "position_name": "Staff",
+          "quantity": 1,
+          "gender": "F",
+          "used_date": "2012-11-30"
+      }
+    ],
+    "approvals": [
+      {
+        "user_name": "Team Leader",
+        "email": "tl@topfood.com",
+        "approved": false,
+        "at": "2012-11-21T21:30:52Z"
+      },
+      {
+        "user_name": "Manager",
+        "email": "mng@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "General Manager",
+        "email": "gm@topfood.com",
+        "approved": null,
+        "at": null
+      }
+    ]
+  }
+
+  # Create:
+  URL - POST: http://topfood.kuyainside.com/api/employee_orders.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_number": "XXX",
+      "order_date": "06-11-2012",
+
+      "employee_details_attributes": [
+        {
+          "description": "DESC",
+          "department_id": "1",
+          "position_id": "1",
+          "quantity": "1",
+          "gender": "M", --> M | F
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "branch_id": 2,
+    "order_number": "EO1353533181",
+    "order_date": "2012-11-22",
+    "status": "Rejected by Team Leader",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-11-21 21:27:30",
+    "updated_at": "2012-11-21 21:27:30",
+    "items": [
+      {
+          "id": 3,
+          "description": "staff",
+          "department_id": 1,
+          "department_name": "HRD",
+          "position_id": 4,
+          "position_name": "Staff",
+          "quantity": 1,
+          "gender": "F",
+          "used_date": "2012-11-30"
+      }
+    ],
+    "approvals": [
+      {
+        "user_name": "Team Leader",
+        "email": "tl@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "Manager",
+        "email": "mng@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "General Manager",
+        "email": "gm@topfood.com",
+        "approved": null,
+        "at": null
+      }
+    ]
+  }
+
+  # Update:
+  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Params:
+    {
+      "order_date": "06-11-2012",
+
+      "employee_details_attributes": [
+        {
+          "id": X,
+          "description": "DESC",
+          "department_id": "1",
+          "position_id": "1",
+          "quantity": "1",
+          "gender": "M", --> M | F
+          "used_date": "30-11-2012",
+          "_destroy": "false"
+        }
+      ]
+    }
+
+  Result:
+  {
+    "branch_id": 2,
+    "order_number": "EO1353533181",
+    "order_date": "2012-11-22",
+    "status": "Rejected by Team Leader",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-11-21 21:27:30",
+    "updated_at": "2012-11-21 21:27:30",
+    "items": [
+      {
+          "id": 3,
+          "description": "staff",
+          "department_id": 1,
+          "department_name": "HRD",
+          "position_id": 4,
+          "position_name": "Staff",
+          "quantity": 1,
+          "gender": "F",
+          "used_date": "2012-11-30"
+      }
+    ],
+    "approvals": [
+      {
+        "user_name": "Team Leader",
+        "email": "tl@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "Manager",
+        "email": "mng@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "General Manager",
+        "email": "gm@topfood.com",
+        "approved": null,
+        "at": null
+      }
+    ]
+  }
+
+
+  # Destroy:
+  URL - DELETE: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  Result:
+  {
+    "branch_id": 2,
+    "order_number": "EO1353533181",
+    "order_date": "2012-11-22",
+    "status": "Rejected by Team Leader",
+    "created_by": "sm@topfood.com",
+    "created_at": "2012-11-21 21:27:30",
+    "updated_at": "2012-11-21 21:27:30",
+    "items": [
+      {
+          "id": 3,
+          "description": "staff",
+          "department_id": 1,
+          "department_name": "HRD",
+          "position_id": 4,
+          "position_name": "Staff",
+          "quantity": 1,
+          "gender": "F",
+          "used_date": "2012-11-30"
+      }
+    ],
+    "approvals": [
+      {
+        "user_name": "Team Leader",
+        "email": "tl@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "Manager",
+        "email": "mng@topfood.com",
+        "approved": null,
+        "at": null
+      },
+      {
+        "user_name": "General Manager",
+        "email": "gm@topfood.com",
+        "approved": null,
+        "at": null
+      }
+    ]
+  }
+
+  # Approve
+  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
   Params:
     {"approved": "true"|"false"} --> optional value: 1 | 0
 

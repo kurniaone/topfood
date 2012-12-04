@@ -36,22 +36,60 @@ class Ability
     if user.role?('sm')
       can :create, PurchaseOrder
       can :update, PurchaseOrder, :no_approval => true
+
+      can :create, WorkOrder
+      can :update, WorkOrder, :no_approval => true
+
+      can :create, EmployeeOrder
+      can :update, EmployeeOrder, :no_approval => true
     end
 
     # TEAM LEADER
     if user.role?('tl')
+      can :update, PurchaseOrder
+      can :approve, PurchaseOrder
+
+      can :update, WorkOrder
+      can :approve, WorkOrder
+
+      can :update, EmployeeOrder
+      can :approve, EmployeeOrder
     end
 
     # AST MANAGER
     if user.role?('asm')
+      can :update, PurchaseOrder
+      can :approve, PurchaseOrder
+
+      can :update, WorkOrder
+      can :approve, WorkOrder
+
+      can :update, EmployeeOrder
+      can :approve, EmployeeOrder
     end
 
     # MANAGER
     if user.role?('mng')
+      can :update, PurchaseOrder
+      can :approve, PurchaseOrder
+
+      can :update, WorkOrder
+      can :approve, WorkOrder
+
+      can :update, EmployeeOrder
+      can :approve, EmployeeOrder
     end
 
     # GENERAL MANAGER
     if user.role?('gm')
+      can :update, PurchaseOrder
+      can :approve, PurchaseOrder
+
+      can :update, WorkOrder
+      can :approve, WorkOrder
+
+      can :update, EmployeeOrder
+      can :approve, EmployeeOrder
     end
 
   end

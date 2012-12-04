@@ -6,12 +6,17 @@ class Approval < ActiveRecord::Base
   attr_accessible :order_id, :role_id, :role_name, :user_id, :user_name, :approved, :do_at
   validates :order_id, :role_id, :role_name, :user_id, :user_name, presence: true
   validates :role_id, uniqueness: { scope: :order_id }
+  validate :approving
 
   before_save :set_do_at
 
 # CALLBACK
   def set_do_at
     self.do_at = Time.now if self.do_at.blank? && self.approved_changed?
+  end
+
+  def approving
+    errors.add(:approving, " or Rejecting FAILED. Order is already Rejected") if order.rejected
   end
 
 # CLASS METHOD

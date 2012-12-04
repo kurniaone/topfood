@@ -52,9 +52,12 @@ class EmployeeOrdersController < ApplicationController
     approval = Approval.find_by_id(params[:id])
     @order = approval.order
 
-    approval.update_attributes(approved: approved?)
-    @order.send_email_to_approver(purchase_order_url(@order)) if approved?
-    flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
+    if approval.update_attributes(approved: approved?)
+      @order.send_email_to_approver(purchase_order_url(@order)) if approved?
+      flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
+    else
+      flash[:alert] = approval.errors.try(:full_messages).try(:join, ', ')
+    end
 
     redirect_to @order
   end
