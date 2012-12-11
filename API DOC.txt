@@ -1,7 +1,23 @@
+# USER AUTHENTICATION #
+# Login
+  URL - POST: http://topfood.kuyainside.com/api/users/sign_in.json
+  Params:
+    {"user": {"email": "EMAIL", "password": "PASSWORD"}}
+  Result:
+    {
+      "success": true,
+      "auth_token": TOKEN,
+      "email": EMAIL
+    }
+
+# Logout
+  URL - DELETE: http://topfood.kuyainside.com/api/users/sign_out.json?auth_token=USERTOKEN
+
+
 # UNITS #
 ---------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/units.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/units.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -33,7 +49,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/units/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -43,7 +59,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/units.json?key=1234
+  URL - POST: http://topfood.kuyainside.com/api/units.json?auth_token=USERTOKEN
   Params:
     {"unit": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -55,7 +71,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  URL - PUT: http://topfood.kuyainside.com/api/units/CODE.json?auth_token=USERTOKEN
   Params:
     {"unit": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -68,7 +84,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/units/CODE.json?key=1234
+  URL - DELETE: http://topfood.kuyainside.com/api/units/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -82,7 +98,7 @@
 # DEPARTMENTS #
 ---------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/departments.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/departments.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -113,7 +129,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/departments/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -123,7 +139,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/departments.json?key=1234
+  URL - POST: http://topfood.kuyainside.com/api/departments.json?auth_token=USERTOKEN
   Params:
     {"department": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -135,7 +151,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  URL - PUT: http://topfood.kuyainside.com/api/departments/CODE.json?auth_token=USERTOKEN
   Params:
     {"department": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -148,7 +164,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/departments/CODE.json?key=1234
+  URL - DELETE: http://topfood.kuyainside.com/api/departments/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -161,7 +177,7 @@
 # POSITIONS #
 -------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/positions.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/positions.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -193,7 +209,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/positions/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -203,7 +219,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/positions.json?key=1234
+  URL - POST: http://topfood.kuyainside.com/api/positions.json?auth_token=USERTOKEN
   Params:
     {"position": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -215,7 +231,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  URL - PUT: http://topfood.kuyainside.com/api/positions/CODE.json?auth_token=USERTOKEN
   Params:
     {"position": {"code":"CODE", "name":"NAME"}}
   Result:
@@ -228,7 +244,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/positions/CODE.json?key=1234
+  URL - DELETE: http://topfood.kuyainside.com/api/positions/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -241,7 +257,7 @@
 # ROLES #
 -------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/roles.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/roles.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -276,7 +292,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/roles/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -287,7 +303,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/roles.json?key=1234
+  URL - POST: http://topfood.kuyainside.com/api/roles.json?auth_token=USERTOKEN
   Params:
     {"role": {"code":"CODE", "name":"NAME", "description":"DESCRIPTION"}}
   Result:
@@ -300,7 +316,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  URL - PUT: http://topfood.kuyainside.com/api/roles/CODE.json?auth_token=USERTOKEN
   Params:
     {"role": {"code":"CODE", "name":"NAME", "description":"DESCRIPTION"}}
   Result:
@@ -314,7 +330,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/roles/CODE.json?key=1234
+  URL - DELETE: http://topfood.kuyainside.com/api/roles/CODE.json?auth_token=USERTOKEN
   Result:
   {
     "code": "CODE",
@@ -330,7 +346,7 @@
 # Users #
 -------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/users.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/users.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -353,7 +369,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/users/ID.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/users/ID.json?auth_token=USERTOKEN
   Result:
   {
     "id": 2,
@@ -370,7 +386,7 @@
 # BRANCHES #
 -------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/branches.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/branches.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -413,7 +429,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  URL - GET: http://topfood.kuyainside.com/api/branches/ID.json?auth_token=USERTOKEN
   Result:
   {
     "id": X,
@@ -427,7 +443,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/branches.json?key=1234
+  URL - POST: http://topfood.kuyainside.com/api/branches.json?auth_token=USERTOKEN
   Params:
     {"branch": {"name":"NAME", "phone":"PHONE", "address":"ADDRESS", "profile":"PROFILE"}}
   Result:
@@ -443,7 +459,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  URL - PUT: http://topfood.kuyainside.com/api/branches/ID.json?auth_token=USERTOKEN
   Params:
     {"branch": {"name":"NAME", "phone":"PHONE", "address":"ADDRESS", "profile":"PROFILE"}}
   Result:
@@ -460,7 +476,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/branches/ID.json?key=1234
+  URL - DELETE: http://topfood.kuyainside.com/api/branches/ID.json?auth_token=USERTOKEN
   Result:
   {
     "id": X,
@@ -479,7 +495,7 @@
 # PURCHASE ORDERS #
 -------------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/purchase_orders.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/purchase_orders.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -553,7 +569,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -575,7 +591,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/purchase_orders.json?key=1234&as=USEREMAIL
+  URL - POST: http://topfood.kuyainside.com/api/purchase_orders.json?auth_token=USERTOKEN
   Params:
     {
       "order_number": "XXX",
@@ -620,7 +636,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Params:
     {
       "order_date": "06-11-2012",
@@ -667,7 +683,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - DELETE: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -689,7 +705,7 @@
   }
 
   # Approve
-  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/purchase_orders/ORDERNUMBER/approve.json?auth_token=USERTOKEN
   Params:
     {"approved": "true"|"false"} --> optional value: 1 | 0
 
@@ -707,7 +723,7 @@
 # WORK ORDERS #
 -------------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/work_orders.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/work_orders.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -781,7 +797,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -803,7 +819,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/work_orders.json?key=1234&as=USEREMAIL
+  URL - POST: http://topfood.kuyainside.com/api/work_orders.json?auth_token=USERTOKEN
   Params:
     {
       "order_number": "XXX",
@@ -848,7 +864,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Params:
     {
       "order_date": "06-11-2012",
@@ -895,7 +911,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - DELETE: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "order_number": "ORDERNUMBER",
@@ -917,7 +933,7 @@
   }
 
   # Approve
-  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/work_orders/ORDERNUMBER/approve.json?auth_token=USERTOKEN
   Params:
     {"approved": "true"|"false"} --> optional value: 1 | 0
 
@@ -934,7 +950,7 @@
 # EMPLOYEE ORDERS #
 -------------------
   # Index:
-  URL - GET: http://topfood.kuyainside.com/api/employee_orders.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/employee_orders.json?auth_token=USERTOKEN
   Params:
     - page: integer
 
@@ -989,7 +1005,7 @@
   }
 
   # Show:
-  URL - GET: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - GET: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "branch_id": 2,
@@ -1035,7 +1051,7 @@
   }
 
   # Create:
-  URL - POST: http://topfood.kuyainside.com/api/employee_orders.json?key=1234&as=USEREMAIL
+  URL - POST: http://topfood.kuyainside.com/api/employee_orders.json?auth_token=USERTOKEN
   Params:
     {
       "order_number": "XXX",
@@ -1099,7 +1115,7 @@
   }
 
   # Update:
-  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Params:
     {
       "order_date": "06-11-2012",
@@ -1164,7 +1180,7 @@
 
 
   # Destroy:
-  URL - DELETE: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?key=1234&as=USEREMAIL
+  URL - DELETE: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER.json?auth_token=USERTOKEN
   Result:
   {
     "branch_id": 2,
@@ -1210,7 +1226,7 @@
   }
 
   # Approve
-  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER/approve.json?key=1234&as=USEREMAIL
+  URL - PUT: http://topfood.kuyainside.com/api/employee_orders/ORDERNUMBER/approve.json?auth_token=USERTOKEN
   Params:
     {"approved": "true"|"false"} --> optional value: 1 | 0
 
