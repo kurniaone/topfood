@@ -1,8 +1,8 @@
 class ApiController < ApplicationController
   respond_to :json
   skip_before_filter :verify_authenticity_token
-  before_filter :authenticate_user!
   before_filter :require_token
+  before_filter :authenticate_user!
 
   # helper_method :current_user
 
