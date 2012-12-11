@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable,
     :lockable, maximum_attempts: 1/0.0, lock_strategy: :failed_attempts, unlock_strategy: :none
 
   belongs_to :role
@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   accepts_nested_attributes_for :user_branches, reject_if: proc{|u| u["branch_id"].blank? }, allow_destroy: true
+
+  before_save :ensure_authentication_token
 
 # Class Method
   scope :not_admin, where("su = ?", false)

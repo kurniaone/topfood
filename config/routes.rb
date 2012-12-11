@@ -46,6 +46,8 @@ Topfood::Application.routes.draw do
 
   # API ROUTES
   namespace :api do
+    devise_for :users
+
     put "purchase_orders/:id/approve" => "purchase_orders#approve", as: "approve_api_purchase_orders"
     put "work_orders/:id/approve"     => "work_orders#approve",     as: "approve_api_work_orders"
     put "employee_orders/:id/approve" => "employee_orders#approve", as: "approve_api_employee_orders"
