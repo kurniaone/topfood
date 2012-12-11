@@ -1,5 +1,4 @@
 class Api::WorkOrdersController < ApiController
-  before_filter :get_user
   before_filter :find_object, :only => [:show, :update, :destroy, :approve]
 
   def index

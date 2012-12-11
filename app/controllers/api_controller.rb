@@ -4,8 +4,6 @@ class ApiController < ApplicationController
   before_filter :require_token
   before_filter :authenticate_user!
 
-  # helper_method :current_user
-
   private
     def require_token
       render(text: 'Require auth-token', status: 401) and return if params[:auth_token].blank?
@@ -13,10 +11,6 @@ class ApiController < ApplicationController
 
     def respondjson(obj, template = 'show')
       obj.valid? ? render(template) : respond_with(obj)
-    end
-
-    def get_user
-      render json: { error: "Require params[:as]" } if params[:as].blank?
     end
 
     # def current_user
