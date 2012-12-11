@@ -9,6 +9,15 @@ class ApiController < ApplicationController
       render(text: 'Require auth-token', status: 401) and return if params[:auth_token].blank?
     end
 
+    def authenticate_user!
+      if !params[:auth_token].blank? &&
+        !(User.find_for_database_authentication(authentication_token: params[:auth_token]))
+        render json: { error: "Authentication failed" }
+      else
+        super
+      end
+    end
+
     def respondjson(obj, template = 'show')
       obj.valid? ? render(template) : respond_with(obj)
     end
