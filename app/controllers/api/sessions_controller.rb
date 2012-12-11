@@ -23,9 +23,10 @@ class Api::SessionsController < ApiController
   end
 
   def destroy
-    resource = User.find_for_database_authentication(:authentication_token => params[:auth_token])
+    resource = User.find_for_database_authentication(authentication_token: params[:auth_token])
+    sign_out(:user)
+
     if resource
-      sign_out(:user)
       resource.authentication_token = nil
       render json: { success: resource.save }
     else
