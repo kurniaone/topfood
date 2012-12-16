@@ -12,6 +12,28 @@
 
 # Logout
   URL - DELETE: http://topfood.kuyainside.com/api/users/sign_out.json?auth_token=USERTOKEN
+  Result:
+   {"success": true}
+
+# Forgot Password
+  # Create
+    URL - POST: http://topfood.kuyainside.com/api/users/password.json
+    Params:
+      {"user": {"email": EMAIL}}
+    Result:
+      { "success" : true|false }
+
+  # Update
+    URL - PUT: http://topfood.kuyainside.com/api/users/password.json
+    Params:
+      {"user": {"password": "[FILTERED]", "password_confirmation": "[FILTERED]", "reset_password_token": "[FILTERED]"}
+    Result:
+      {
+        "success" : true,
+        "email" : EMAIL,
+        "auth_token" : USERTOKEN,
+        "message" : "Your password was changed successfully. You are now signed in."
+      }
 
 
 # UNITS #
