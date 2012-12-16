@@ -68,6 +68,11 @@ class Api::EmployeeOrdersController < ApiController
     end
   end
 
+  def sync
+    results = Order.sync(EmployeeOrder, params[:orders], current_user)
+    render json: results
+  end
+
   protected
     def find_object
       @order = EmployeeOrder.find_by_order_number(params[:id]) || EmployeeOrder.find_by_order_number(params[:order_number])

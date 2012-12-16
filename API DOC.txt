@@ -739,6 +739,86 @@
     "at": "TIME"
   }
 
+# SYNC ORDER
+  URL - POST: http://topfood.kuyainside.com/api/purchase_orders/sync.json?auth_token=USERTOKEN
+  Params:
+  {
+    "orders": [
+      {
+        "action": "CREATE",
+        "params": {
+          "branch_id": 2,
+          "order_number": "XXX",
+          "order_date": "2012-12-02",
+          "created_by": 2,
+          "order_details_attributes": {
+            "0": {
+              "description": "DESC",
+              "quantity": 10,
+              "unit_id": 1,
+              "used_date": "2012-12-31"
+            },
+            "1": {
+              "description": "DESC",
+              "quantity": 3,
+              "unit_id": 1,
+              "used_date": "2012-12-31"
+            }
+          }
+        }
+
+      },
+      {
+        "action": "UPDATE",
+        "params": {
+          "order_number": "YYY",
+          "order_date": "2012-12-04",
+          "order_details_attributes": {
+            "0": {
+              "id": X,
+              "description": "DESC",
+              "quantity": 10,
+              "unit_id": 1,
+              "used_date": "2012-12-31",
+              "_destroy": "0"
+            },
+            "1": {
+              "id": X,
+              "description": "DESC",
+              "quantity": 3,
+              "unit_id": 1,
+              "used_date": "2012-12-31",
+              "_destroy": "1"
+            }
+          }
+        }
+
+      },
+
+      ## delete
+      {
+        "action": "DELETE",
+        "params": { "order_number": "XXX" }
+      },
+      {
+        "action": "DELETE",
+        "params": { "order_number": "YYY" }
+      },
+
+      ## Approve
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "XXX", "approved": true }
+      },
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "YYY", "approved": true }
+      }
+
+    ]
+  }
+
+
 
 
 
@@ -966,6 +1046,86 @@
     "approved": "true" | "false",
     "at": "TIME"
   }
+
+# SYNC ORDER
+  URL - POST: http://topfood.kuyainside.com/api/work_orders/sync.json?auth_token=USERTOKEN
+  Params:
+  {
+    "orders": [
+      {
+        "action": "CREATE",
+        "params": {
+          "branch_id": 2,
+          "order_number": "XXX",
+          "order_date": "2012-12-02",
+          "created_by": 2,
+          "order_details_attributes": {
+            "0": {
+              "description": "DESC",
+              "quantity": 10,
+              "unit_id": 1,
+              "used_date": "2012-12-31"
+            },
+            "1": {
+              "description": "DESC",
+              "quantity": 3,
+              "unit_id": 1,
+              "used_date": "2012-12-31"
+            }
+          }
+        }
+
+      },
+      {
+        "action": "UPDATE",
+        "params": {
+          "order_number": "YYY",
+          "order_date": "2012-12-04",
+          "order_details_attributes": {
+            "0": {
+              "id": X,
+              "description": "DESC",
+              "quantity": 10,
+              "unit_id": 1,
+              "used_date": "2012-12-31",
+              "_destroy": "0"
+            },
+            "1": {
+              "id": X,
+              "description": "DESC",
+              "quantity": 3,
+              "unit_id": 1,
+              "used_date": "2012-12-31",
+              "_destroy": "1"
+            }
+          }
+        }
+
+      },
+
+      ## delete
+      {
+        "action": "DELETE",
+        "params": { "order_number": "XXX" }
+      },
+      {
+        "action": "DELETE",
+        "params": { "order_number": "YYY" }
+      },
+
+      ## Approve
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "XXX", "approved": true }
+      },
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "YYY", "approved": true }
+      }
+
+    ]
+  }
+
 
 
 
@@ -1260,5 +1420,92 @@
     "at": "TIME"
   }
 
+
+# SYNC ORDER
+  URL - POST: http://topfood.kuyainside.com/api/employee_orders/sync.json?auth_token=USERTOKEN
+  Params:
+  {
+    "orders": [
+      {
+        "action": "CREATE",
+        "params": {
+          "branch_id": 2,
+          "order_number": "XXX",
+          "order_date": "2012-12-02",
+          "created_by": 2,
+          "employee_details_attributes": {
+            "0": {
+              "description": "DESC",
+              "department_id": 1,
+              "position_id": 1,
+              "quantity": 10,
+              "gender": "M",
+              "used_date": "2012-12-31"
+            },
+            "1": {
+              "description": "DESC",
+              "department_id": 1,
+              "position_id": 1,
+              "quantity": 10,
+              "gender": "M",
+              "used_date": "2012-12-31"
+            }
+          }
+        }
+
+      },
+      {
+        "action": "UPDATE",
+        "params": {
+          "order_number": "YYY",
+          "order_date": "2012-12-04",
+          "employee_details_attributes": {
+            "0": {
+              "id": X,
+              "description": "DESC",
+              "department_id": 1,
+              "position_id": 1,
+              "quantity": 10,
+              "gender": "M",
+              "used_date": "2012-12-31",
+              "_destroy": "0"
+            },
+            "1": {
+              "id": X,
+              "description": "DESC",
+              "department_id": 1,
+              "position_id": 1,
+              "quantity": 10,
+              "gender": "M",
+              "used_date": "2012-12-31",
+              "_destroy": "1"
+            }
+          }
+        }
+
+      },
+
+      ## delete
+      {
+        "action": "DELETE",
+        "params": { "order_number": "XXX" }
+      },
+      {
+        "action": "DELETE",
+        "params": { "order_number": "YYY" }
+      },
+
+      ## Approve
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "XXX", "approved": true }
+      },
+      {
+        "action": "APPROVE",
+        "params": { "order_number": "YYY", "approved": true }
+      }
+
+    ]
+  }
 
 

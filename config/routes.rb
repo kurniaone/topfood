@@ -61,17 +61,17 @@ Topfood::Application.routes.draw do
 
     resources :purchase_orders do
       collection do
-        :approve
+        post :sync
       end
     end
     resources :work_orders do
       collection do
-        :approve
+        post :sync
       end
     end
     resources :employee_orders do
       collection do
-        :approve
+        post :sync
       end
     end
   end

@@ -36,6 +36,70 @@ class Order < ActiveRecord::Base
 
 # CLASS METHOD
 
+  def self.sync(class_name, orders, user)
+    results, errors = [], []
+    orders.each do |o|
+      params = o[:params]
+      order = class_name.find_by_order_number(params[:order_number])
+
+      if o[:action].try(:downcase) == 'create'
+        order = class_name.create(params)
+        results << {
+          action: o[:action],
+          order_number: params[:order_number],
+          success: order.try(:errors).blank?,
+          errors: order.try(:errors).try(:full_messages),
+          object: order,
+          items: order.order_details
+        }
+
+      elsif o[:action].try(:downcase) == 'update'
+        order.update_attributes(params)
+        results << {
+          action: o[:action],
+          order_number: params[:order_number],
+          success: order.try(:errors).blank?,
+          errors: order.try(:errors).try(:full_messages),
+          object: order,
+          items: order.order_details
+        }
+
+      elsif o[:action].try(:downcase) == 'delete'
+        errors << "Order not found" unless order
+        errors << "Order can not be deleted" if order && !order.destroy
+
+        results << {
+          action: o[:action],
+          order_number: params[:order_number],
+          success: errors.blank?,
+          errors: errors,
+          object: order,
+          items: order.order_details
+        }
+
+      elsif o[:action].try(:downcase) == 'approve'
+        errors << "Next approver is #{order.next_approver.role_name}" unless order.next_approver == user
+        approval = order.next_approval
+        approval.update_attributes(approved: params[:approved]) if errors.blank?
+
+        results << {
+          action: o[:action],
+          order_number: params[:order_number],
+          success: errors.blank?,
+          errors: errors,
+          object: approval,
+          items: order.order_details
+        }
+
+      else
+        results << { warning: "some items can not be processed" }
+      end
+
+    end
+
+    results
+  end
+
 # INSTANCE METHOD
 
   # Generate order number

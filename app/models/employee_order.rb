@@ -3,7 +3,11 @@ class EmployeeOrder < Order
   validates :employee_details, presence: true, on: :create
 
   attr_accessible :employee_details_attributes
-  accepts_nested_attributes_for :employee_details, :reject_if => proc{|od|
-    od['description'].blank? || od['quantity'].blank? || od['gender'].blank? || od['used_date'].blank?
-  }, :allow_destroy => true
+  accepts_nested_attributes_for :employee_details, :allow_destroy => true
+  validates :order_number, uniqueness: true
+
+
+  def order_details
+    employee_details
+  end
 end
