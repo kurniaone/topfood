@@ -1,13 +1,17 @@
 class Order < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :user, foreign_key: 'created_by'
   belongs_to :branch
   has_many :approvals
+  has_many :apps_orders
 
-  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date
+  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date, :last_app_id, :updated_by
   validates :branch_id, :created_by, :order_number, :type, presence: true
-  validates :order_number, :uniqueness => true
+  validates :order_number, uniqueness: true
 
-  after_create :generate_approvals
+  after_create :generate_approvals, :generate_apps_orders
+  after_update :update_apps_orders
 
   scope :by_store_manager, lambda{|sm|
     includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", sm.id)
@@ -34,7 +38,41 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def generate_apps_orders
+    attrs, app_ids = [], AppsOrder.app_ids
+
+    app_ids.each do |app_id|
+      t = Time.now
+      app_timestamp = app_id == updated_by ? t : t - 1.day
+
+      attrs << {
+        order_id: id,
+        app_id: app_id,
+        order_timestamp: t,
+        app_timestamp: app_timestamp
+      }
+    end
+
+    AppsOrder.create(attrs)
+  end
+
+  def update_apps_orders
+    t = Time.now
+    if updated_by == 'server'
+      AppsOrder.update_all(["order_timestamp = ?", t], ["order_id = ?", id])
+    else
+      app_order.update_attributes(app_timestamp: t) if app_order = apps_orders.find_by_app_id(updated_by)
+    end
+  end
+
 # CLASS METHOD
+
+  def self.to_sync(app_id)
+    includes(:apps_orders)
+    .where("id IN
+      (SELECT order_id FROM apps_orders WHERE app_id = ? AND
+        (TIMESTAMP(order_timestamp) > TIMESTAMP(app_timestamp)))", app_id)
+  end
 
   def self.sync(class_name, orders, user)
     results, errors = [], []

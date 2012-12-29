@@ -35,61 +35,76 @@ class Ability
     # STORE MANAGER
     if user.role?('sm')
       can :create, PurchaseOrder
-      can :update, PurchaseOrder, :no_approval => true
+      can :update, PurchaseOrder, no_approval: true
+      can :destroy, PurchaseOrder, no_approval: true
 
       can :create, WorkOrder
-      can :update, WorkOrder, :no_approval => true
+      can :update, WorkOrder, no_approval: true
+      can :destroy, WorkOrder, no_approval: true
 
       can :create, EmployeeOrder
-      can :update, EmployeeOrder, :no_approval => true
+      can :update, EmployeeOrder, no_approval: true
+      can :destroy, WorkOrder, no_approval: true
     end
 
     # TEAM LEADER
     if user.role?('tl')
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
+      can :destroy, PurchaseOrder, no_approval: true
 
       can :update, WorkOrder
       can :approve, WorkOrder
+      can :destroy, WorkOrder, no_approval: true
 
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
+      can :destroy, EmployeeOrder, no_approval: true
     end
 
     # AST MANAGER
     if user.role?('asm')
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
+      can :destroy, PurchaseOrder, no_approval: true
 
       can :update, WorkOrder
       can :approve, WorkOrder
+      can :destroy, WorkOrder, no_approval: true
 
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
+      can :destroy, EmployeeOrder, no_approval: true
     end
 
     # MANAGER
     if user.role?('mng')
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
+      can :destroy, PurchaseOrder, no_approval: true
 
       can :update, WorkOrder
       can :approve, WorkOrder
+      can :destroy, WorkOrder, no_approval: true
 
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
+      can :destroy, EmployeeOrder, no_approval: true
     end
 
     # GENERAL MANAGER
     if user.role?('gm')
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
+      can :destroy, PurchaseOrder, no_approval: true
 
       can :update, WorkOrder
       can :approve, WorkOrder
+      can :destroy, WorkOrder, no_approval: true
 
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
+      can :destroy, EmployeeOrder, no_approval: true
     end
 
   end

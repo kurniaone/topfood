@@ -4,13 +4,7 @@ class WorkOrdersController < ApplicationController
   before_filter :prepare_data, :only => [:edit, :update]
 
   def index
-    if current_user.role?('sm')
-      @orders = WorkOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
-    elsif current_user.role?('tl')
-      @orders = WorkOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
-    else
-      @orders = WorkOrder.order('created_at DESC').paginate(:page => params[:page])
-    end
+    @orders = current_user.all_orders(WorkOrder).order('created_at DESC').paginate(:page => params[:page])
     respond_with @orders
   end
 
@@ -23,7 +17,7 @@ class WorkOrdersController < ApplicationController
   end
 
   def create
-    @order = WorkOrder.new(params[:order])
+    @order = WorkOrder.new(params[:order].merge!(updated_by: 'server'))
     if @order.save
       @order.send_email_to_approver(work_order_url(@order))
       flash[:notice] = 'WorkOrder saved'
@@ -39,20 +33,20 @@ class WorkOrdersController < ApplicationController
   end
 
   def update
-    flash[:notice] = 'WorkOrder updated' if @order.update_attributes(params[:order])
-    respond_with @order, location: work_orders_path
+    flash[:notice] = 'WorkOrder updated' if @order.update_attributes(params[:order].merge!(updated_by: 'server'))
+    respond_with @order, location: work_order_path(@order)
   end
 
   def destroy
-    flash[:notice] = @order.destroy ? 'WorkOrder removed' : 'Failed remove order'
-    respond_with @order
+    flash[:notice] = @order.destroy && @order.update_attributes(updated_by: 'server') ? 'WorkOrder removed' : 'Failed remove order'
+    respond_with @order, location: work_orders_path
   end
 
   def approve
     approval = Approval.find_by_id(params[:id])
     @order = approval.order
 
-    if approval.update_attributes(approved: approved?)
+    if approval.update_attributes(approved: approved?) && @order.update_attributes(updated_by: 'server')
       @order.send_email_to_approver(purchase_order_url(@order)) if approved?
       flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
     else

@@ -1,15 +1,9 @@
 class Api::WorkOrdersController < ApiController
+  before_filter :require_app_id
   before_filter :find_object, :only => [:show, :update, :destroy, :approve]
 
   def index
-    if current_user.role?('sm')
-      @orders = WorkOrder.by_store_manager(current_user).order('created_at DESC').paginate(:page => params[:page])
-    elsif current_user.role?('tl')
-      @orders = WorkOrder.by_team_leader(current_user).order('created_at DESC').paginate(:page => params[:page])
-    else
-      @orders = WorkOrder.order('created_at DESC').paginate(:page => params[:page])
-    end
-
+    @orders = current_user.all_orders(WorkOrder).with_deleted.order('created_at DESC').paginate(:page => params[:page])
     respond_with @orders
   end
 
@@ -23,14 +17,15 @@ class Api::WorkOrdersController < ApiController
       order_date: params[:order_date],
       created_by: current_user.try(:id),
       branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
+      updated_by: param[:app_id],
 
       order_details_attributes: order_details_attributes
     )
+
     if @order.save
-      # Send email to approver
       respondjson @order
     else
-      render json: { error: @order.try(:errors).try(:full_messages) }, status: :not_found
+      responderror(@order)
     end
   end
 
@@ -39,13 +34,14 @@ class Api::WorkOrdersController < ApiController
         order_date: params[:order_date],
         created_by: current_user.try(:id),
         branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
+        updated_by: param[:app_id],
 
         order_details_attributes: order_details_attributes
       )
 
       respondjson @order
     else
-      render json: { error: @order.try(:errors).try(:full_messages) }, status: :not_found
+      responderror(@order)
     end
   end
 

@@ -1,4 +1,6 @@
 class Branch < ActiveRecord::Base
+  acts_as_paranoid
+
   has_many :orders
   has_many :user_branches
   has_many :users, through: :user_branches

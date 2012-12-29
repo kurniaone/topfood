@@ -1,4 +1,6 @@
 class EmployeeDetail < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :department
   belongs_to :position
   belongs_to :employee_order, foreign_key: 'order_id'

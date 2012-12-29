@@ -1,4 +1,6 @@
 class ApprovalSetting < ActiveRecord::Base
+  acts_as_paranoid
+
   has_many :approval_roles
   has_many :roles, through: :approval_roles
   attr_accessible :order_class, :center, :approval_roles_attributes

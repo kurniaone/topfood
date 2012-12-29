@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
+  validates_as_paranoid
+
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable,
     :lockable, maximum_attempts: 1/0.0, lock_strategy: :failed_attempts, unlock_strategy: :none
 
@@ -37,6 +40,21 @@ class User < ActiveRecord::Base
 
 # Instance Method
 
+  def all_orders(order_class)
+    if ['SM', 'TL'].include?(role_code)
+      orders = order_class.includes(:user, :branch, :approvals)
+        .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", id)
+
+    elsif role_code == 'MNG'
+      orders = order_class.includes(:user, :branch, :approvals)
+        .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
+              (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
+
+    end
+
+    orders
+  end
+
   def show_captcha?
     u = User.find_by_email(email)
     u && u.failed_attempts >= 3
@@ -49,6 +67,10 @@ class User < ActiveRecord::Base
 
   def role_name
     role.try(:name)
+  end
+
+  def role_code
+    role.try(:code)
   end
 
   def su?

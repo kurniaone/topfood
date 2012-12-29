@@ -29,6 +29,7 @@ gem 'cancan'
 gem 'jbuilder'
 gem 'will_paginate'
 gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'rails3_acts_as_paranoid'
 
 # To use debugger
 gem 'debugger'

@@ -22,5 +22,5 @@ json.approvals @order.approvals do |json, approval|
   json.user_name approval.user_name || approval.user.try(:name)
   json.email approval.user.try(:email)
   json.approved approval.approved
-  json.at approval.do_at
+  json.at date_time_format(approval.do_at, "%Y-%m-%d %H:%M:%S")
 end
