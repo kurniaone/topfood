@@ -74,10 +74,10 @@ class Order < ActiveRecord::Base
         (TIMESTAMP(order_timestamp) > TIMESTAMP(app_timestamp)))", app_id)
   end
 
-  def self.sync(class_name, orders, user)
+  def self.sync(class_name, orders, user, app_id)
     results, errors = [], []
     orders.each do |o|
-      params = o[:params]
+      params = o[:params].merge(updated_by: app_id)
       order = class_name.find_by_order_number(params[:order_number])
 
       if o[:action].try(:downcase) == 'create'
@@ -104,7 +104,7 @@ class Order < ActiveRecord::Base
 
       elsif o[:action].try(:downcase) == 'delete'
         errors << "Order not found" unless order
-        errors << "Order can not be deleted" if order && !order.destroy
+        errors << "Order can not be deleted" if order && !order.destroy && order.update_attributes(updated_by: app_id)
 
         results << {
           action: o[:action],
@@ -118,7 +118,7 @@ class Order < ActiveRecord::Base
       elsif o[:action].try(:downcase) == 'approve'
         errors << "Next approver is #{order.next_approver.role_name}" unless order.next_approver == user
         approval = order.next_approval
-        approval.update_attributes(approved: params[:approved]) if errors.blank?
+        approval.update_attributes(approved: params[:approved]) && order.update_attributes(updated_by: app_id) if errors.blank?
 
         results << {
           action: o[:action],

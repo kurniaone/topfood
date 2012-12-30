@@ -66,7 +66,7 @@ class Api::EmployeeOrdersController < ApiController
   end
 
   def sync
-    results = Order.sync(EmployeeOrder, params[:orders], current_user)
+    results = Order.sync(EmployeeOrder, params[:orders], current_user, app_id)
     render json: results
   end
 

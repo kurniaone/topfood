@@ -66,7 +66,7 @@ class Api::WorkOrdersController < ApiController
   end
 
   def sync
-    results = Order.sync(WorkOrder, params[:orders], current_user)
+    results = Order.sync(WorkOrder, params[:orders], current_user, app_id)
     render json: results
   end
 
