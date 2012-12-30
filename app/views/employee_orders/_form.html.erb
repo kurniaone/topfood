@@ -22,6 +22,13 @@
       <%= f.label current_user.branch.name, :class => 'label' %>
       <%= f.hidden_field :branch_id, :value => current_user.branch.try(:id) %>
     </div>
+  <% else %>
+    <div class="group">
+      <%= f.label :branch_id, 'Branch', :class => 'label' %>
+      <%= f.select :branch_id, options_for_select(branch_options(current_user), f.try(:object).try(:branch_id) || current_user.branch.id), {include_blank: 'Choose here ...'},
+    class: 'selectbox chzn-select user_branch' %>
+      <%= f.hidden_field :branch_id, :value => current_user.branch.try(:id) %>
+    </div>
   <% end %>
 
   <table class="table" id="employee_details">

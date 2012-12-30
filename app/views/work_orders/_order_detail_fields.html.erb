@@ -1,6 +1,6 @@
 <tr class="order-detail-input-fields">
   <td><%= f.text_area :description, :class => 'text_area long', :rows => 2, :cols => 80 %></td>
-  <td class="center"><%= f.number_field :quantity, :class => 'text_field number very-short center' %></td>
+  <td class="center"><%= f.number_field :quantity, min: 1, :class => 'text_field number very-short center' %></td>
   <td><%= f.select :unit_id, options_for_select(unit_options, f.object.unit_id), {include_blank: 'Choose Here ...'}, :class => 'chzn-select' %></td>
   <td class="right">
     <%= f.text_field :used_date, :class => 'text_field datepicker min-now',

@@ -29,8 +29,14 @@ class ApplicationController < ActionController::Base
       Role.all.map{|d| [d.name, d.id] }
     end
 
-    def branch_options
-      Branch.not_center.map{|d| [d.name, d.id] }
+    def branch_options(user = nil)
+      branches = if !user || user.user_branches.blank?
+        Branch.not_center
+      else
+        current_user.branches
+      end
+
+      branches.map{|d| [d.name, d.id] }
     end
 
     def unit_options

@@ -8,7 +8,7 @@
     <%= f.select :position_id, options_for_select(@position_options, f.object.position_id),
       {include_blank: 'Choose Here ...'}, :class => 'chzn-select' %>
   </td>
-  <td class="center"><%= f.number_field :quantity, :class => 'text_field number very-short center' %></td>
+  <td class="center"><%= f.number_field :quantity, min: 1, :class => 'text_field number very-short center' %></td>
   <td>
     <%= f.select :gender, options_for_select(gender_options, f.object.gender), {}, :class => 'chzn-select' %>
   </td>

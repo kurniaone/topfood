@@ -49,14 +49,17 @@ class Ability
 
     # TEAM LEADER
     if user.role?('tl')
+      can :create, PurchaseOrder
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
       can :destroy, PurchaseOrder, no_approval: true
 
+      can :create, WorkOrder
       can :update, WorkOrder
       can :approve, WorkOrder
       can :destroy, WorkOrder, no_approval: true
 
+      can :create, EmployeeOrder
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
       can :destroy, EmployeeOrder, no_approval: true
@@ -64,14 +67,17 @@ class Ability
 
     # AST MANAGER
     if user.role?('asm')
+      can :create, PurchaseOrder
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
       can :destroy, PurchaseOrder, no_approval: true
 
+      can :create, WorkOrder
       can :update, WorkOrder
       can :approve, WorkOrder
       can :destroy, WorkOrder, no_approval: true
 
+      can :create, EmployeeOrder
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
       can :destroy, EmployeeOrder, no_approval: true
@@ -79,14 +85,17 @@ class Ability
 
     # MANAGER
     if user.role?('mng')
+      can :create, PurchaseOrder
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
       can :destroy, PurchaseOrder, no_approval: true
 
+      can :create, WorkOrder
       can :update, WorkOrder
       can :approve, WorkOrder
       can :destroy, WorkOrder, no_approval: true
 
+      can :create, EmployeeOrder
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
       can :destroy, EmployeeOrder, no_approval: true
@@ -94,14 +103,17 @@ class Ability
 
     # GENERAL MANAGER
     if user.role?('gm')
+      can :create, PurchaseOrder
       can :update, PurchaseOrder
       can :approve, PurchaseOrder
       can :destroy, PurchaseOrder, no_approval: true
 
+      can :create, WorkOrder
       can :update, WorkOrder
       can :approve, WorkOrder
       can :destroy, WorkOrder, no_approval: true
 
+      can :create, EmployeeOrder
       can :update, EmployeeOrder
       can :approve, EmployeeOrder
       can :destroy, EmployeeOrder, no_approval: true
