@@ -147,7 +147,7 @@ class Order < ActiveRecord::Base
   end
 
   def no_approval
-    pending_approvals.size == approver_roles.size
+    approvals.select{|a| a.approved }.blank?
   end
 
   def pending_approvals

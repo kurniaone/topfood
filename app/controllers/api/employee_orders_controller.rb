@@ -4,6 +4,8 @@ class Api::EmployeeOrdersController < ApiController
 
   def index
     @orders = current_user.all_orders(EmployeeOrder).with_deleted.order('created_at DESC').paginate(:page => params[:page])
+    AppsOrder.update_app_timestamp(app_id, @orders)
+
     respond_with @orders
   end
 
@@ -68,6 +70,18 @@ class Api::EmployeeOrdersController < ApiController
   def sync
     results = Order.sync(EmployeeOrder, params[:orders], current_user, app_id)
     render json: results
+  end
+
+  def to_sync
+    @orders = EmployeeOrder.to_sync(app_id)
+
+    unless @orders.blank?
+      AppsOrder.update_app_timestamp(app_id, @orders)
+
+      respond_with @orders
+    else
+      render json: { message: "Already up to date." }
+    end
   end
 
   protected

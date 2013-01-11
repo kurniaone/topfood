@@ -3,8 +3,7 @@ class Api::SyncController < ApiController
 
   def index
     apps_orders = AppsOrder.where("app_id = ?", app_id)
-    @orders = apps_orders.blank? ? Order.all : Order.to_sync(app_id)
-    @orders = @orders.paginate(page: params[:page])
+    @orders = (apps_orders.blank? ? Order.all : Order.to_sync(app_id)).paginate(page: params[:page])
 
     unless @orders.blank?
       AppsOrder.update_app_timestamp(app_id, @orders)

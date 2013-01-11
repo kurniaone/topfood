@@ -63,16 +63,19 @@ Topfood::Application.routes.draw do
     resources :purchase_orders do
       collection do
         post :sync
+        get  :to_sync
       end
     end
     resources :work_orders do
       collection do
         post :sync
+        get  :to_sync
       end
     end
     resources :employee_orders do
       collection do
         post :sync
+        get  :to_sync
       end
     end
   end
