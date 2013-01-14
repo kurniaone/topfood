@@ -69,6 +69,8 @@
         <%= link_to "Remove", purchase_order_path(@order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
       <% end %>
 
+      <%= link_to "Download", purchase_order_path(@order, format: :xls), class: 'link-button' %>
+
       <div class="clear"></div>
     </div>
   </div>

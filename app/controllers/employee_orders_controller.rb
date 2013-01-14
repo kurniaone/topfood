@@ -4,8 +4,11 @@ class EmployeeOrdersController < ApplicationController
   before_filter :prepare_data, :only => [:edit, :update]
 
   def index
-    @orders = current_user.all_orders(EmployeeOrder).order('created_at DESC').paginate(:page => params[:page])
-    respond_with @orders
+    @orders = current_user.all_orders(EmployeeOrder, params[:search]).order('created_at DESC').paginate(:page => params[:page])
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 
   def new

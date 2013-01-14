@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Center" />
+      <Borders>
+        <Border ss:Position="Bottom" ss:Weight="1" />
+        <Border ss:Position="Right" ss:Weight="1" />
+      </Borders>
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="Header">
+      <Alignment ss:Vertical="Center" ss:Horizontal="Center" />
+      <Font ss:Bold="1" />
+      <Interior ss:Pattern="Solid" ss:Color="Gray" />
+    </Style>
+    <Style ss:ID="Bold">
+      <Font x:Family="Swiss" ss:Bold="1" />
+    </Style>
+    <Style ss:ID="Currency">
+      <Font x:Family="Swiss" ss:Bold="1" />
+      <NumberFormat ss:Format="Currency" />
+    </Style>
+    <Style ss:ID="Total">
+      <Font x:Family="Swiss" ss:Bold="1" />
+      <NumberFormat ss:Format="Currency" />
+      <Interior ss:Pattern="Solid" ss:Color="Gray" />
+    </Style>
+  </Styles>
+
+  <Worksheet ss:Name="Sheet1">
+    <Table ss:DefaultColumnWidth="120" ss:DefaultRowHeight="20">
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Order Number</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.order_number %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Order Date</Data></Cell>
+        <Cell><Data ss:Type="String"><%= date_format(@order.order_date) %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Created By</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.user.try(:name) %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Branch</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.branch.try(:name) %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Details</Data></Cell>
+        <Cell><Data ss:Type="String">: </Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Description</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Quantity</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Unit</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Used Date</Data></Cell>
+      </Row>
+      <% @order.order_details.each_with_index do |detail, idx| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= detail.description %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= detail.quantity %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= detail.unit.try(:name) %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= date_format(detail.used_date) %></Data></Cell>
+        </Row>
+      <% end unless @order.order_details.blank? %>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">Approvals</Data></Cell>
+        <Cell><Data ss:Type="String">: </Data></Cell>
+      </Row>
+      <% @order.approvals.each_with_index do |app, idx| %>
+        <Row>
+          <Cell><Data ss:Type="String">Approval <%= idx+1 %></Data></Cell>
+          <Cell><Data ss:Type="String">(<%= app.user.name %>) : <%= app.status %> <%= ": #{date_time_format(app.do_at)}" unless app.pending %></Data></Cell>
+        </Row>
+      <% end unless @order.approvals.blank? %>
+    </Table>
+  </Worksheet>
+</Workbook>

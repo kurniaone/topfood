@@ -53,6 +53,45 @@ $(document).ready(function(){
   });
 
 
+  // date picker
+  if($('#search_end_date').length){
+    $('#search_end_date').datepicker({
+      dateFormat: 'dd-mm-yy',
+      // appendText: 'Please fill start date first',
+      beforeShow: function(input, inst){
+        if ($('#search_start_date').val() == ''){
+          $('#search_start_date').focus();
+          alert('Please fill start date first');
+          return false;
+        }
+      }
+    });
+  }
+
+  // toggle search form on transaction index
+  $('.search-toogle').click(function(){
+    if ($(this).hasClass('active')){
+      $(this).removeClass('active');
+      $(this).next('.search-form-container').slideUp();
+    }else{
+      $(this).addClass('active');
+      $(this).next('.search-form-container').slideDown();
+    }
+  });
+
+  // download button
+  $('#download-order').click(function(){
+    // $('form.search-form #format').val('xls');
+    // $('form.search-form').submit();
+
+    action = $('form.search-form').attr('action');
+    if (!(action.indexOf('.xls') >= 0)){
+      $('form.search-form').attr('action', (action + '.xls'));
+    }
+
+    $('form.search-form').submit();
+    $('form.search-form').attr('action', action);
+  });
 });
 
 // enable / disable submit form

@@ -3,7 +3,7 @@ class Api::WorkOrdersController < ApiController
   before_filter :find_object, :only => [:show, :update, :destroy, :approve]
 
   def index
-    @orders = current_user.all_orders(WorkOrder).with_deleted.order('created_at DESC').paginate(:page => params[:page])
+    @orders = current_user.all_orders(WorkOrder, params).with_deleted.order('created_at DESC').paginate(:page => params[:page])
     AppsOrder.update_app_timestamp(app_id, @orders)
 
     respond_with @orders

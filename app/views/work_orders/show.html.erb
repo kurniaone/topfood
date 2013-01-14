@@ -69,6 +69,7 @@
         <%= link_to "Remove", work_order_path(@order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
       <% end %>
 
+      <%= link_to "Download", work_order_path(@order, format: :xls), class: 'link-button' %>
       <div class="clear"></div>
     </div>
   </div>

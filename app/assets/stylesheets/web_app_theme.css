@@ -142,3 +142,34 @@ a.add-approval{
   text-align: center;
   min-width: 150px;
 }
+
+fieldset.order-filter{
+  border-color: #CCC;
+  border-style: solid none none;
+  border-width: 1px 0 0 0;
+  padding: 0 0 5px 0;
+  margin: 0 0 10px;
+  width: 50%;
+}
+fieldset.order-filter legend.search-toogle{
+  background: url(down-arrow.png) no-repeat scroll left center transparent;
+  cursor: pointer;
+  padding: 2px 18px 2px 12px;
+  margin: 0 0 10px 0;
+}
+fieldset.order-filter legend.search-toogle.active{
+  background: url(up-arrow.png) no-repeat scroll left center transparent;
+}
+
+
+fieldset.order-filter .group{ margin-bottom: 2px; }
+fieldset.order-filter .group.button-group{ margin-top: 10px; }
+fieldset.order-filter .group .chzn-container-single{
+  width: 270px !important;
+}
+fieldset.order-filter .group label{
+  display: inline-block;
+  width: 120px;
+}
+
+

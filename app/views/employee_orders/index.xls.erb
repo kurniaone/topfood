@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Center" />
+      <Borders>
+        <Border ss:Position="Bottom" ss:Weight="1" />
+        <Border ss:Position="Right" ss:Weight="1" />
+      </Borders>
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="Header">
+      <Alignment ss:Vertical="Center" ss:Horizontal="Center" />
+      <Font ss:Bold="1" />
+      <Interior ss:Pattern="Solid" ss:Color="Gray" />
+    </Style>
+    <Style ss:ID="Bold">
+      <Font x:Family="Swiss" ss:Bold="1" />
+    </Style>
+    <Style ss:ID="Currency">
+      <Font x:Family="Swiss" ss:Bold="1" />
+      <NumberFormat ss:Format="Currency" />
+    </Style>
+    <Style ss:ID="Total">
+      <Font x:Family="Swiss" ss:Bold="1" />
+      <NumberFormat ss:Format="Currency" />
+      <Interior ss:Pattern="Solid" ss:Color="Gray" />
+    </Style>
+  </Styles>
+
+  <Worksheet ss:Name="Sheet1">
+    <Table ss:DefaultColumnWidth="120" ss:DefaultRowHeight="20">
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Order Number</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Order Date</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Items</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Status</Data></Cell>
+      </Row>
+
+      <% @orders.each_with_index do |order, idx| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= order.order_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= date_format(order.order_date) %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= order.order_details.count %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= order.order_status.try(:titleize) %></Data></Cell>
+        </Row>
+      <% end unless @orders.blank? %>
+    </Table>
+  </Worksheet>
+</Workbook>

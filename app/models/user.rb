@@ -40,19 +40,59 @@ class User < ActiveRecord::Base
 
 # Instance Method
 
-  def all_orders(order_class)
+  def all_orders(order_class, search = {})
+    arr_cond, hash_val = [], {}
+    search = {} if search.blank?
+
     if ['SM', 'TL'].include?(role_code)
-      orders = order_class.includes(:user, :branch, :approvals)
-        .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", id)
-
+      arr_cond << "branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = :user_id)"
+      hash_val[:user_id] = id
     elsif role_code == 'MNG'
-      orders = order_class.includes(:user, :branch, :approvals)
-        .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
-              (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
-
+      arr_cond << "branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
+              (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = :code)))"
+      hash_val[:code] = 'MNG'
     end
 
-    orders
+    unless search[:order_number].blank?
+      arr_cond << "order_number LIKE :order_number"
+      hash_val[:order_number] = "%#{search[:order_number]}%"
+    end
+
+    unless search[:branch_id].blank?
+      arr_cond << "branch_id = :branch_id"
+      hash_val[:branch_id] = search[:branch_id]
+    end
+
+    if !search[:start_date].blank?
+      arr_cond << "(DATE(orders.order_date) BETWEEN DATE(:start_date) AND DATE(:end_date))"
+      hash_val[:start_date] = search[:start_date].to_date.try(:strftime, '%Y-%m-%d')
+      hash_val[:end_date] = search[:start_date].to_date.try(:strftime, '%Y-%m-%d')
+
+      unless search[:end_date].blank?
+        if search[:end_date].to_date > search[:start_date].to_date
+          hash_val[:end_date] = search[:end_date].to_date.try(:strftime, '%Y-%m-%d')
+        else
+          hash_val[:start_date] = search[:end_date].to_date.try(:strftime, '%Y-%m-%d')
+          hash_val[:end_date] = search[:start_date].to_date.try(:strftime, '%Y-%m-%d')
+        end
+      end
+    end
+
+    if search[:status]
+      if search[:status] == 'approved'
+        arr_cond << "((SELECT COUNT(id) FROM approvals WHERE order_id = orders.id) = (SELECT COUNT(id) FROM approvals WHERE order_id = orders.id AND approved = 1))"
+      end
+
+      if search[:status] == 'rejected'
+        arr_cond << "((SELECT COUNT(id) FROM approvals WHERE order_id = orders.id AND approved = 0) > 0)"
+      end
+    end
+
+    unless search.blank?
+      order_class.includes(:user, :branch, :approvals).where(arr_cond.join(" AND "), hash_val)
+    else
+      order_class.includes(:user, :branch, :approvals).scoped
+    end
   end
 
   def show_captcha?

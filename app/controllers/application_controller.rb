@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   helper_method :superadmin, :master_data_controllers,
-    :department_options, :role_options, :branch_options, :unit_options, :gender_options
+    :department_options, :role_options, :branch_options, :unit_options,
+    :gender_options, :status_options
 
 
   protected
@@ -45,6 +46,10 @@ class ApplicationController < ActionController::Base
 
     def gender_options(l = 'en')
       l == 'id' ? [["Laki-laki", "M"], ["Perempuan", "F"]] : [["Male", "M"], ["Female", "F"]]
+    end
+
+    def status_options
+      [['Approved', 'approved'], ['Rejected', 'rejected']]
     end
 
     def approved?
