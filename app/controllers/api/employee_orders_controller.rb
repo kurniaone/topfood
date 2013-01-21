@@ -105,7 +105,7 @@ class Api::EmployeeOrdersController < ApiController
           _destroy: od[:_destroy]
         }
         p[idx]
-      end
+      end unless params[:employee_details_attributes].blank?
 
       p
     end

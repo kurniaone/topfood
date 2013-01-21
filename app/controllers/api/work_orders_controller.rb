@@ -104,7 +104,7 @@ class Api::WorkOrdersController < ApiController
           _destroy: od[:_destroy]
         }
         p[idx]
-      end
+      end unless params[:order_details_attributes].blank?
 
       p
     end
