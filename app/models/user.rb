@@ -47,10 +47,10 @@ class User < ActiveRecord::Base
     if ['SM', 'TL'].include?(role_code)
       arr_cond << "branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = :user_id)"
       hash_val[:user_id] = id
-    elsif role_code == 'MNG'
-      arr_cond << "branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
-              (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = :code)))"
-      hash_val[:code] = 'MNG'
+    # elsif role_code == 'MNG'
+    #   arr_cond << "branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
+    #           (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = :code)))"
+    #   hash_val[:code] = 'MNG'
     end
 
     unless search[:order_number].blank?
