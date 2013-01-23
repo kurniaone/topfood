@@ -15,9 +15,9 @@ json.orders @orders do |json, order|
     json.id item.id
     json.description item.description
     json.department_id item.department_id
-    json.department_name item.department.name
+    json.department_name item.department.try(:name)
     json.position_id item.position_id
-    json.position_name item.position.name
+    json.position_name item.position.try(:name)
     json.quantity item.quantity
     json.gender item.gender
     json.used_date item.used_date
