@@ -1,4 +1,5 @@
 json.departments @departments do |json, department|
+  json.id   department.id
   json.code department.code
   json.name department.name
   json.created_at date_time_format(department.created_at, "%Y-%m-%d %H:%M:%S")

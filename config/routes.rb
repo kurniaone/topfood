@@ -52,6 +52,7 @@ Topfood::Application.routes.draw do
     put "work_orders/:id/approve"     => "work_orders#approve",     as: "approve_api_work_orders"
     put "employee_orders/:id/approve" => "employee_orders#approve", as: "approve_api_employee_orders"
     get "sync"                        => "sync#index",              as: "sync"
+    get "users/:id/branches"          => "users#branches",          as: "user_branches"
 
     resources :units
     resources :users, only: [:index, :show]

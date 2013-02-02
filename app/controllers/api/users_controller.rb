@@ -1,9 +1,16 @@
 class Api::UsersController < ApiController
-  before_filter :find_object, :only => [:show, :update, :destroy]
+  before_filter :find_object, :only => [:show, :update, :destroy, :branches]
 
   def index
     @users = User.not_admin.paginate(:page => params[:page])
     respond_with @users
+  end
+
+  def branches
+    @branches = @user.branches
+    @branches = Branch.all if @branches.blank?
+
+    respond_with @branches
   end
 
   # def create
