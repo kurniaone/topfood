@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228235947) do
+ActiveRecord::Schema.define(:version => 20130203135110) do
 
   create_table "access_settings", :force => true do |t|
     t.string   "order_class"
@@ -106,11 +106,12 @@ ActiveRecord::Schema.define(:version => 20121228235947) do
     t.string   "order_number"
     t.integer  "created_by"
     t.integer  "branch_id"
-    t.date     "order_date",   :null => false
+    t.date     "order_date",       :null => false
     t.datetime "deleted_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "updated_by"
+    t.string   "implement_status"
   end
 
   create_table "positions", :force => true do |t|

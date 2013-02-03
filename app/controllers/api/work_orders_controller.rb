@@ -1,6 +1,6 @@
 class Api::WorkOrdersController < ApiController
   before_filter :require_app_id
-  before_filter :find_object, :only => [:show, :update, :destroy, :approve]
+  before_filter :find_object, :only => [:show, :update, :destroy, :approve, :received, :done]
 
   def index
     @orders = current_user.all_orders(WorkOrder, params).with_deleted.order('created_at DESC').paginate(:page => params[:page])
@@ -81,6 +81,24 @@ class Api::WorkOrdersController < ApiController
       respond_with @orders
     else
       render json: { message: "Already up to date." }
+    end
+  end
+
+  def received
+    authorize! :received, @order
+    if @order.update_attributes(implement_status: 'received')
+      render text: 'received'
+    else
+      render text: @order.errors.try(:full_messages).try(:join, ', ')
+    end
+  end
+
+  def done
+    authorize! :done, @order
+    if @order.update_attributes(implement_status: 'done')
+      render text: 'done'
+    else
+      render text: @order.errors.try(:full_messages).try(:join, ', ')
     end
   end
 

@@ -1,17 +1,29 @@
 class Order < ActiveRecord::Base
   acts_as_paranoid
 
+  module Implementer
+    PURCHASE_ORDER    = 'PCH'
+    WORK_ORDER        = 'MNT'
+    EMPLOYEE_ORDER    = 'HRD'
+
+    def self.all
+      constants.map(&method(:const_get))
+    end
+  end
+
   belongs_to :user, foreign_key: 'created_by'
   belongs_to :branch
   has_many :approvals
   has_many :apps_orders
 
-  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date, :last_app_id, :updated_by
+  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date, :last_app_id, :updated_by, :implement_status
   validates :branch_id, :created_by, :order_number, :type, presence: true
   validates :order_number, uniqueness: true
+  validate  :implement_status_rule, on: :update
 
-  after_create :generate_approvals, :generate_apps_orders
-  after_update :update_apps_orders
+  after_create  :generate_approvals, :generate_apps_orders
+  after_update  :update_apps_orders
+  after_save    :send_email_to_implementer
 
   scope :by_store_manager, lambda{|sm|
     includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", sm.id)
@@ -63,6 +75,10 @@ class Order < ActiveRecord::Base
     else
       app_order.update_attributes(app_timestamp: t) if app_order = apps_orders.find_by_app_id(updated_by)
     end
+  end
+
+  def send_email_to_implementer
+    AppMailer.send_notification_to_implementer(self).deliver if approved && implement_status.blank?
   end
 
 # CLASS METHOD
@@ -147,68 +163,94 @@ class Order < ActiveRecord::Base
   end
 
   def no_approval
-    approvals.select{|a| a.approved }.blank?
+    @no_approval ||= approvals.select{|a| a.approved }.blank?
   end
 
   def pending_approvals
-    approvals.where("approved IS NULL")
+    @pending_approvals ||= approvals.where("approved IS NULL")
   end
 
   def next_approval
-    pending_approvals.try(:first)
+    @next_approval ||= pending_approvals.try(:first)
   end
 
   def next_approver
-    next_approval.try(:user)
+    @next_approver ||= next_approval.try(:user)
   end
 
   def next_approver_role
-    next_approver.try(:role)
+    @next_approver_role ||= next_approver.try(:role)
   end
 
   def last_approval
-    approvals.where("approved IS NOT NULL").try(:last)
+    @last_approval ||= approvals.where("approved IS NOT NULL").try(:last)
   end
 
   def last_approver
-    last_approval.try(:user)
+    @last_approver ||= last_approval.try(:user)
   end
 
   def last_approver_role
-    last_approver.try(:role)
+    @last_approver_role ||= last_approver.try(:role)
   end
 
   def order_status
-    next_approver && !rejected ? "Waiting \"#{next_approver.role.name}\" approval" : "#{last_approval.status} by #{last_approver.role.name}"
+    @order_status ||= next_approver && !rejected ? "Waiting \"#{next_approver.role.name}\" approval" :
+      "#{last_approval.status} by #{last_approver.role.name}"
   end
 
   def approval_settings
     center = branch.center == true
-    ApprovalSetting.includes(:roles).find_by_order_class_and_center(self.class, center)
+    @approval_settings ||= ApprovalSetting.includes(:roles).find_by_order_class_and_center(self.class, center)
   end
 
   def approver_roles
-    approval_settings.roles
+    @approver_roles ||= approval_settings.roles
   end
 
   def approver_by_role(role_code)
-    User.includes(:role, :user_branches).where("roles.code = ? AND user_branches.branch_id = ?", role_code.try(:upcase), branch_id).try(:first)
+    User.includes(:role, :user_branches).where("roles.code = ? AND
+      user_branches.branch_id = ?", role_code.try(:upcase), branch_id).try(:first)
   end
 
   def approved
-    next_approver.blank? && approvals.last.approved
+    @approved ||= next_approver.blank? && approvals.last.approved
   end
+  alias :approved? :approved
 
   def rejected
-    !approvals.where("approved = 0").blank?
+    @rejected ||= !approvals.where("approved = 0").blank?
   end
+  alias :rejected? :rejected
 
   def send_email_to_approver(url)
     AppMailer.send_notification_to_approver(self, next_approver, url).deliver if next_approver
   end
 
   def show_link_for(user, approval)
-    !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
+    @show_link_for ||= !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
+  end
+
+  def implementer?(user)
+    self.class::Implementer.all.include?(user.role_code.upcase)
+  end
+
+  def implement_status_rule
+    if !approved? && implement_status == 'received'
+      errors.add(:base, "You can't click 'Received' while this order is not approved yet.")
+    end
+
+    if implement_status_was != 'received' && implement_status == 'done'
+      errors.add(:base, "Please click 'Received' button before click DONE button.")
+    end
+  end
+
+  def received?
+    'received' == implement_status
+  end
+
+  def done?
+    'done' == implement_status
   end
 
 end

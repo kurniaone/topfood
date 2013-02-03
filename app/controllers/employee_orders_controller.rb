@@ -1,6 +1,6 @@
 class EmployeeOrdersController < ApplicationController
   layout 'top-food'
-  before_filter :find_object, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_object, :only => [:show, :edit, :update, :destroy, :received, :done]
   before_filter :prepare_data, :only => [:edit, :update]
 
   def index
@@ -54,6 +54,28 @@ class EmployeeOrdersController < ApplicationController
       flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
     else
       flash[:alert] = approval.errors.try(:full_messages).try(:join, ', ')
+    end
+
+    redirect_to @order
+  end
+
+  def received
+    authorize! :received, @order
+    if @order.update_attributes(implement_status: 'received')
+      flash[:notice] = "Order is already marked as received"
+    else
+      flash[:notice] = @order.errors.try(:full_messages).try(:join, ', ')
+    end
+
+    redirect_to @order
+  end
+
+  def done
+    authorize! :done, @order
+    if @order.update_attributes(implement_status: 'done')
+      flash[:notice] = "Order is already marked as done"
+    else
+      flash[:notice] = @order.errors.try(:full_messages).try(:join, ', ')
     end
 
     redirect_to @order

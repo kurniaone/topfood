@@ -119,5 +119,23 @@ class Ability
       can :destroy, EmployeeOrder, no_approval: true
     end
 
+    # PURCHASING
+    if user.role?('pch')
+      can :received,  PurchaseOrder
+      can :done,      PurchaseOrder
+    end
+
+    # MAINTENANCE
+    if user.role?('mnt')
+      can :received,  WorkOrder
+      can :done,      WorkOrder
+    end
+
+    # HRD
+    if user.role?('hrd')
+      can :received,  EmployeeOrder
+      can :done,      EmployeeOrder
+    end
+
   end
 end

@@ -39,6 +39,7 @@ div.no-data{
 .green, a.green, .green a, .approved{ color: green; }
 .red, a.red, .red a, .rejected{ color: red; }
 .grey, a.grey, .grey a, .gray, .pending{ color: gray; }
+.yellow, a.yellow, .yellow a{ color: #DBCC23; }
 
 .table.width-auto{ width: auto; }
 .table th.center{ text-align: center; }
@@ -173,3 +174,5 @@ fieldset.order-filter .group label{
 }
 
 
+.implementer-button{ float: right; }
+.implementer-button span{ margin: 0 10px; }

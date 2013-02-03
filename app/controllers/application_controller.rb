@@ -55,4 +55,8 @@ class ApplicationController < ActionController::Base
     def approved?
       params[:approved] == "1" || params[:approved] == 1 || params[:approved] == 'true'
     end
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to root_url, :alert => exception.message
+    end
 end

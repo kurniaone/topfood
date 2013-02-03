@@ -1,8 +1,23 @@
 <%= render('shared/orders-tab.html.erb') if current_user.su? %>
+
 <div class="content">
   <h2>Purchase Order</h2>
 
   <div class="inner">
+    <div class="implementer-button">
+      <% if @order.implement_status.blank? %>
+        <%= link_to "Received", received_purchase_orders_path(@order), class: 'link-button yellow' %>
+      <% end if @order.approved? && can?(:received, @order) %>
+
+      <% if @order.received? %>
+        <%= link_to "DONE", done_purchase_orders_path(@order), class: 'link-button green' %>
+      <% end if can?(:received, @order) %>
+
+      <% if @order.done? %>
+        <span class="green">:-: DONE :-:</span>
+      <% end %>
+    </div>
+
     <p>
       <%= label_tag :order_number, 'Order Number', class: 'detail-label' %>
       <span>: <%= @order.order_number %></span>

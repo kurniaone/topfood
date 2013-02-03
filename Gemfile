@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.11'
 gem 'mysql2', "~> 0.3.10"
 
 group :development do
-  gem 'mongrel', '>= 1.2.0.pre2'
+  gem 'thin'
   gem 'capistrano-unicorn', :require => false
 end
 
