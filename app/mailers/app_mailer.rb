@@ -10,7 +10,7 @@ class AppMailer < ActionMailer::Base
     mail(
       to:       @approver.email,
       cc:       ccers,
-      subject:  "[Topfood] #{@order.type} has been created ##{@order.order_number}"
+      subject:  "[Topfood] #{@order.type} with Order Number ##{@order.order_number} is #{@order.order_status.try(:titleize)}"
     )
   end
 

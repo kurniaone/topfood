@@ -184,3 +184,15 @@ fieldset.order-filter .group label{
 }
 .implementer-button{ float: right; }
 .implementer-button span{ margin: 0 10px; }
+
+.reject-form-container{
+  display: none;
+  float: left;
+  margin: 0 0 0 20px;
+}
+
+.rejected-reason{
+  float: left;
+  margin: 0 0 0 20px;
+}
+.rejected-reason p{ margin-top: 5px; }

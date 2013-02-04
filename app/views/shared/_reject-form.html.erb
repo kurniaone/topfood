@@ -1,0 +1,19 @@
+<% if @order.next_approval %>
+  <div class="reject-form-container">
+    <%= form_for :approved, url: send("approve_#{@order.type.underscore.pluralize}_path", @order.next_approval), html: { class: 'form reject-form' } do |f| %>
+      <%= hidden_field_tag :approved, '0' %>
+      <%= label_tag "Please write sejected reason" %>:<br />
+      <%= text_area_tag :reason, '', cols: 80, rows: 2, placeholder: "Rejected Reason", class: "text_area", required: 'required' %>
+      <br />
+      <%= f.submit 'Save', class: 'link-button' %>
+      <%= link_to "Cancel", "#cancel-rejection", class: 'link-button cancel-rejection' %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @order.rejected? %>
+  <div class="rejected-reason">
+    <b>Rejected Reason:</b>
+    <p><%= @order.rejected_reason %></p>
+  </div>
+<% end %>

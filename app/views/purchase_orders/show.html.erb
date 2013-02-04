@@ -43,25 +43,9 @@
       <% end %>
     </table>
 
-    <h3>Approvals</h3>
-    <% @order.approvals.each_with_index do |app, idx| %>
-      <div class="approval-status">
-        <b>Approval <%= idx+1 %></b><br /><br />
-
-        <span class="<%= app.status.downcase %>"><%= app.status %></span><br />
-        <%= "<span class='grey'>#{date_time_format app.do_at}</span>".html_safe unless app.pending %>
-        <% if @order.show_link_for(current_user, app) %>
-          <%= link_to "Approve", approve_purchase_orders_path(app, approved: 1), :class => 'green' %>
-          <%= link_to "Reject", approve_purchase_orders_path(app, approved: 0), :class => 'red' %>
-        <% end %>
-        <br /><br />
-
-        <b><%= app.user.name %></b><br />
-        <span class="grey">(<%= app.role.name %>)</span>
-      </div>
-    <% end %>
-
+    <%= render "shared/approval" %>
     <%= render "shared/implementer-element" if @order.approved? %>
+    <%= render "shared/reject-form" %>
     <div class="clear"></div>
 
     <div class="link-button-container">

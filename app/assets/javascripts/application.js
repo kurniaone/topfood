@@ -92,6 +92,16 @@ $(document).ready(function(){
     $('form.search-form').submit();
     $('form.search-form').attr('action', action);
   });
+
+  // Reject Button
+  $('a.rejected-button').click(function(){
+    $('.reject-form-container').slideToggle();
+  });
+
+  // Cancel Rejection
+  $('a.cancel-rejection').click(function(){
+    $('.reject-form-container').slideToggle();
+  });
 });
 
 // enable / disable submit form

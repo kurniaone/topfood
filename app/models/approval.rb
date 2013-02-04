@@ -3,7 +3,8 @@ class Approval < ActiveRecord::Base
   belongs_to :user
   belongs_to :role
 
-  attr_accessible :order_id, :role_id, :role_name, :user_id, :user_name, :approved, :do_at
+  attr_accessible :order_id, :role_id, :role_name, :user_id, :user_name,
+    :approved, :do_at, :reason
   validates :order_id, :role_id, :role_name, :user_id, :user_name, presence: true
   validates :role_id, uniqueness: { scope: :order_id }
   validate :approving

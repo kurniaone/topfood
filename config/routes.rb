@@ -21,17 +21,17 @@ Topfood::Application.routes.draw do
   put '/settings/:type/update' => "settings#update", as: 'update_setting'
   resources :settings
 
-  get '/purchase_orders/:id/approve' => "purchase_orders#approve", as: 'approve_purchase_orders'
-  get '/work_orders/:id/approve' => "work_orders#approve", as: 'approve_work_orders'
-  get '/employee_orders/:id/approve' => "employee_orders#approve", as: 'approve_employee_orders'
+  match '/purchase_orders/:id/approve'  => "purchase_orders#approve",   as: 'approve_purchase_orders',  via: [:get, :post]
+  match '/work_orders/:id/approve'      => "work_orders#approve",       as: 'approve_work_orders',      via: [:get, :post]
+  match '/employee_orders/:id/approve'  => "employee_orders#approve",   as: 'approve_employee_orders',  via: [:get, :post]
 
-  get '/purchase_orders/:id/received' => "purchase_orders#received", as: 'received_purchase_orders'
-  get '/work_orders/:id/received' => "work_orders#received", as: 'received_work_orders'
-  get '/employee_orders/:id/received' => "employee_orders#received", as: 'received_employee_orders'
+  get '/purchase_orders/:id/received'   => "purchase_orders#received",  as: 'received_purchase_orders'
+  get '/work_orders/:id/received'       => "work_orders#received",      as: 'received_work_orders'
+  get '/employee_orders/:id/received'   => "employee_orders#received",  as: 'received_employee_orders'
 
-  get '/purchase_orders/:id/done' => "purchase_orders#done", as: 'done_purchase_orders'
-  get '/work_orders/:id/done' => "work_orders#done", as: 'done_work_orders'
-  get '/employee_orders/:id/done' => "employee_orders#done", as: 'done_employee_orders'
+  get '/purchase_orders/:id/done'       => "purchase_orders#done",      as: 'done_purchase_orders'
+  get '/work_orders/:id/done'           => "work_orders#done",          as: 'done_work_orders'
+  get '/employee_orders/:id/done'       => "employee_orders#done",      as: 'done_employee_orders'
 
   resources :purchase_orders do
     collection do

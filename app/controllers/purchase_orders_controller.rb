@@ -50,7 +50,7 @@ class PurchaseOrdersController < ApplicationController
     approval = Approval.find_by_id(params[:id])
     @order = approval.order
 
-    if approval.update_attributes(approved: approved?) && @order.update_attributes(updated_by: 'server')
+    if approval.update_attributes(approved: approved?, reason: params[:reason]) && @order.update_attributes(updated_by: 'server')
       @order.send_email_to_approver(purchase_order_url(@order)) if approved?
       flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
     else

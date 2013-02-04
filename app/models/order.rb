@@ -240,12 +240,18 @@ class Order < ActiveRecord::Base
   end
   alias :rejected? :rejected
 
+  def rejected_reason
+    if rejected?
+      last_approval.reason
+    end
+  end
+
   def send_email_to_approver(url)
     AppMailer.send_notification_to_approver(self, next_approver, url).deliver if next_approver
   end
 
   def show_link_for(user, approval)
-    @show_link_for ||= !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
+    !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
   end
 
   def implementer?(user)
