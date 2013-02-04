@@ -1,4 +1,5 @@
 class EmployeeOrdersController < ApplicationController
+  authorize_resource
   layout 'top-food'
   before_filter :find_object, :only => [:show, :edit, :update, :destroy, :received, :done]
   before_filter :prepare_data, :only => [:edit, :update]

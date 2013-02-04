@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>PT. Top Food Indonesia</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= yield :css %>
 </head>
 <body>
   <div id="container">
-    <%= render :partial => 'layouts/header' %>
+    <%= render 'layouts/header' %>
 
     <div id="wrapper" class="wat-cf">
       <div class="flash">

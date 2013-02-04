@@ -82,6 +82,11 @@ class User < ActiveRecord::Base
       end
     end
 
+    # only approved for implementer
+    if Order::Implementer.all.include?(role_code.upcase)
+      search[:status] = 'approved'
+    end
+
     if search[:status]
       if search[:status] == 'approved'
         arr_cond << "((SELECT COUNT(id) FROM approvals WHERE order_id = orders.id) = (SELECT COUNT(id) FROM approvals WHERE order_id = orders.id AND approved = 1))"
@@ -128,6 +133,10 @@ class User < ActiveRecord::Base
 
   def branch_ids
     branches.map(&:id)
+  end
+
+  def implementer?
+    Order::Implementer.all.include?(role_code.upcase)
   end
 
 end

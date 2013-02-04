@@ -66,6 +66,7 @@
           <th class="center">Items</th>
           <th>Status</th>
           <%= '<th>Branch</th>'.html_safe unless current_user.role?('sm') %>
+          <th>&nbsp;</th>
           <th class="last right">Action</th>
         </tr>
         <% @orders.each do |order| %>
@@ -78,6 +79,7 @@
             <td class="center"><%= order.order_details.count %></td>
             <td><%= order.order_status.try(:titleize) %></td>
             <%= "<td>#{order.branch.name}</td>".html_safe unless current_user.role?('sm') %>
+            <td><%= order.implement_status.try(:titleize) %></td>
 
             <td class="last right">
               <%= link_to "Show", work_order_path(order) %>

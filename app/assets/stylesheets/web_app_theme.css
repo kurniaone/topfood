@@ -135,7 +135,7 @@ a.add-approval{
 .field_with_errors{ display: inline-block; }
 .field_with_errors input, .field_with_errors select{ border-color: red; }
 
-.approval-status{
+.approval-status, .implementer-status{
   border: 1px solid #ccc;
   float: left;
   margin: 0 0 10px 0;
@@ -174,5 +174,13 @@ fieldset.order-filter .group label{
 }
 
 
+.implementer-status-container{
+  float: left;
+  margin: 0 0 0 20px;
+}
+.implementer-status .link-button{
+  float: none;
+  margin-right: 0;
+}
 .implementer-button{ float: right; }
 .implementer-button span{ margin: 0 10px; }

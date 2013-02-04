@@ -16,23 +16,30 @@ class Order < ActiveRecord::Base
   has_many :approvals
   has_many :apps_orders
 
-  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date, :last_app_id, :updated_by, :implement_status
+  attr_accessible :branch_id, :created_by, :order_number, :type, :order_date,
+                  :last_app_id, :updated_by, :implement_status
   validates :branch_id, :created_by, :order_number, :type, presence: true
   validates :order_number, uniqueness: true
   validate  :implement_status_rule, on: :update
 
   after_create  :generate_approvals, :generate_apps_orders
   after_update  :update_apps_orders
+
+  before_save   :set_received_at
+  before_save   :set_done_at
   after_save    :send_email_to_implementer
 
   scope :by_store_manager, lambda{|sm|
-    includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", sm.id)
+    includes(:user, :branch, :approvals)
+    .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", sm.id)
   }
   scope :by_team_leader, lambda{|tl|
-    includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", tl.id)
+    includes(:user, :branch, :approvals)
+    .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id = ? )", tl.id)
   }
   scope :by_manager, lambda{|mng|
-    includes(:user, :branch, :approvals).where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
+    includes(:user, :branch, :approvals)
+    .where("branch_id IN (SELECT branch_id FROM user_branches WHERE user_id IN
       (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
   }
 
@@ -79,6 +86,14 @@ class Order < ActiveRecord::Base
 
   def send_email_to_implementer
     AppMailer.send_notification_to_implementer(self).deliver if approved && implement_status.blank?
+  end
+
+  def set_received_at
+    self.received_at = Time.now if implement_status_changed? && implement_status_was.blank? && received?
+  end
+
+  def set_done_at
+    self.done_at = Time.now if implement_status_changed? && implement_status_was == 'received' && done?
   end
 
 # CLASS METHOD
@@ -236,12 +251,14 @@ class Order < ActiveRecord::Base
   end
 
   def implement_status_rule
-    if !approved? && implement_status == 'received'
-      errors.add(:base, "You can't click 'Received' while this order is not approved yet.")
-    end
+    if implement_status_changed?
+      if !approved? && implement_status == 'received'
+        errors.add(:base, "You can't click 'Received' while this order is not approved yet.")
+      end
 
-    if implement_status_was != 'received' && implement_status == 'done'
-      errors.add(:base, "Please click 'Received' button before click DONE button.")
+      if implement_status_was != 'received' && implement_status == 'done'
+        errors.add(:base, "Please click 'Received' button before click DONE button.")
+      end
     end
   end
 

@@ -1,0 +1,43 @@
+<div class="implementer-status-container">
+  <div class="implementer-status">
+    <b>Received</b><br /><br />
+
+    <% if @order.implement_status.blank? %>
+      <br />
+      <% if can?(:received, @order) %>
+        <%= link_to("Received", send("received_#{@order.type.underscore.pluralize}_path", @order), class: 'yellow') %>
+      <% else %>
+        <span class="grey">Waiting</span>
+      <% end %>
+    <% end %>
+
+    <% if @order.received_at %>
+      <span class="yellow">Received</span><br />
+      <%= "<span class='grey'>#{date_time_format @order.received_at}</span>".html_safe %>
+    <% end %>
+    <br /><br />
+
+    <b>&nbsp;</b><br />
+    <span class="grey">&nbsp;</span>
+  </div>
+
+  <div class="implementer-status">
+    <b>Done</b><br /><br />
+
+    <% if can?(:done, @order) && @order.received? %>
+      <br /><%= link_to "DONE", send("done_#{@order.type.underscore.pluralize}_path", @order), class: 'green' %>
+    <% end %>
+    <% unless @order.done? %>
+      <br /><span class="grey">Waiting</span>
+    <% end %>
+
+    <% if @order.done? %>
+      <span class="green">DONE</span><br />
+      <%= "<span class='grey'>#{date_time_format @order.done_at}</span>".html_safe %>
+    <% end %>
+    <br /><br />
+
+    <b>&nbsp;</b><br />
+    <span class="grey">&nbsp;</span>
+  </div>
+</div>

@@ -38,6 +38,15 @@
   <Worksheet ss:Name="Sheet1">
     <Table ss:DefaultColumnWidth="120" ss:DefaultRowHeight="20">
       <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String">PT TOPFOOD INDONESIA</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="Bold"><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>
+
+      <Row>
         <Cell ss:StyleID="Bold"><Data ss:Type="String">Order Number</Data></Cell>
         <Cell><Data ss:Type="String"><%= @order.order_number %></Data></Cell>
       </Row>
@@ -91,6 +100,21 @@
           <Cell><Data ss:Type="String">(<%= app.user.name %>) : <%= app.status %> <%= ": #{date_time_format(app.do_at)}" unless app.pending %></Data></Cell>
         </Row>
       <% end unless @order.approvals.blank? %>
+
+      <% if @order.approved? %>
+        <Row>
+          <Cell ss:StyleID="Bold"><Data ss:Type="String"></Data></Cell>
+          <Cell><Data ss:Type="String"></Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String">Received At</Data></Cell>
+          <Cell><Data ss:Type="String"><%= date_time_format @order.received_at %></Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String">Done At</Data></Cell>
+          <Cell><Data ss:Type="String"><%= date_time_format @order.done_at %></Data></Cell>
+        </Row>
+      <% end %>
     </Table>
   </Worksheet>
 </Workbook>

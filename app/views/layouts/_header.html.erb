@@ -34,13 +34,13 @@
 
       <% else %>
         <li class="<%= 'active' if controller_name == 'purchase_orders' %>">
-          <%= link_to "Purchase Orders", purchase_orders_path %>
+          <%= link_to("Purchase Orders", purchase_orders_path) if can? :read, PurchaseOrder %>
         </li>
         <li class="<%= 'active' if controller_name == 'work_orders' %>">
-          <%= link_to "Work Orders", work_orders_path %>
+          <%= link_to("Work Orders", work_orders_path) if can? :read, WorkOrder %>
         </li>
         <li class="<%= 'active' if controller_name == 'employee_orders' %>">
-          <%= link_to "Employee Orders", employee_orders_path %>
+          <%= link_to("Employee Orders", employee_orders_path) if can? :read, EmployeeOrder %>
         </li>
       <% end %>
     </ul>

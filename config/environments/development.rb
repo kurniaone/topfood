@@ -36,4 +36,14 @@ Topfood::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :authentication => :plain,
+    :port => '587',
+    :domain => "topfood.kuyainside.com",
+    :user_name => "admin77@kuyainside.com",
+    :password => "kuyainsideadmin77---"
+  }
 end
