@@ -27,7 +27,7 @@
     <% if can?(:done, @order) && @order.received? %>
       <br /><%= link_to "DONE", send("done_#{@order.type.underscore.pluralize}_path", @order), class: 'green' %>
     <% end %>
-    <% if cannot?(:done, @order) && @order.done? %>
+    <% if cannot?(:done, @order) && !@order.done? %>
       <br /><span class="grey">Waiting</span>
     <% end %>
 
