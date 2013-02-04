@@ -80,7 +80,9 @@ class Order < ActiveRecord::Base
     if updated_by == 'server'
       AppsOrder.update_all(["order_timestamp = ?", t], ["order_id = ?", id])
     else
-      app_order.update_attributes(app_timestamp: t) if app_order = apps_orders.find_by_app_id(updated_by)
+      if app_order = apps_orders.find_by_app_id(updated_by)
+        app_order.update_attributes(app_timestamp: t)
+      end
     end
   end
 
