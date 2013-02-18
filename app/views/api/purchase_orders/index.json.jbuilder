@@ -1,4 +1,4 @@
-json.partial! :partial => "/layouts/json_paginate.json.jbuilder", :locals => {:objects => @orders}
+# json.partial! :partial => "/layouts/json_paginate.json.jbuilder", :locals => {:objects => @orders}
 
 json.orders @orders do |json, order|
   json.branch_id order.branch_id

@@ -43,6 +43,12 @@ class Order < ActiveRecord::Base
       (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
   }
 
+  scope :active_for_api, where("(SELECT COUNT(id) FROM approvals
+                                 WHERE order_id = orders.id AND approved IS NULL AND
+                                       (CURRENT_DATE() - DATE(created_at)) < 30)
+                                =
+                                (SELECT COUNT(id) FROM approvals WHERE order_id = orders.id)")
+
 # CALLBACK
 
   def generate_approvals
