@@ -10,10 +10,16 @@ class Approval < ActiveRecord::Base
   validate :approving
 
   before_save :set_do_at
+  after_save  :set_order_status
 
 # CALLBACK
   def set_do_at
     self.do_at = Time.now if self.do_at.blank? && self.approved_changed?
+  end
+
+  def set_order_status
+    order.rejected! if rejected
+    order.approved! if approved && order.next_approval.blank?
   end
 
   def approving

@@ -1,0 +1,84 @@
+<% class_string = order_class.to_s.underscore %>
+<% orders_path  = "#{ class_string.pluralize }_path" %>
+<% order_path   = "#{ class_string }_path" %>
+
+<p>
+  <%= label_tag :order_number, 'Order Number', class: 'detail-label' %>
+  <span>: <%= order.order_number %></span>
+</p>
+<p>
+  <%= label_tag :order_date, 'Order Date', class: 'detail-label' %>
+  <span>: <%= order.order_date %></span>
+</p>
+<p>
+  <%= label_tag :created_by, 'Created By', class: 'detail-label' %>
+  <span>: <%= order.user.try(:name) %></span>
+</p>
+<p>
+  <%= label_tag :branch_id, 'Branch', class: 'detail-label' %>
+  <span>: <%= order.branch.try(:name) %></span>
+</p>
+
+<p>
+  <%= label_tag :order_details, 'Detail Orders', class: 'detail-label' %>
+  <span>: </span>
+</p>
+
+<table class="table">
+<% if order_class == EmployeeOrder %>
+  <tr>
+    <th>Description</th>
+    <th>Department</th>
+    <th>Position</th>
+    <th class="center">Quantity</th>
+    <th>Gender</th>
+    <th>Used date</th>
+  </tr>
+
+  <% order.employee_details.each do |detail| %>
+    <tr class="<% cycle('odd', 'even') %>">
+      <td><%= detail.description %></td>
+      <td><%= detail.department.try(:name) %></td>
+      <td><%= detail.position.try(:name) %></td>
+      <td class="center"><%= detail.quantity %></td>
+      <td><%= detail.gender %></td>
+      <td><%= detail.used_date %></td>
+    </tr>
+  <% end %>
+
+<% else %>
+    <tr>
+      <th>Description</th>
+      <th class="center">Quantity</th>
+      <th>Unit</th>
+      <th>Used date</th>
+    </tr>
+
+    <% order.order_details.each do |detail| %>
+      <tr class="<% cycle('odd', 'even') %>">
+        <td><%= detail.description %></td>
+        <td class="center"><%= detail.quantity %></td>
+        <td><%= detail.unit.try(:name) %></td>
+        <td><%= detail.used_date %></td>
+      </tr>
+    <% end %>
+
+  <% end %>
+</table>
+
+<%= render "shared/approval" %>
+<%= render "shared/implementer-element" if order.approved? %>
+<%= render "shared/reject-form" %>
+<div class="clear"></div>
+
+<div class="link-button-container">
+  <%= link_to "Back", send(orders_path), class: 'link-button' %>
+
+  <% if order.no_approval && current_user.role?('sm') %>
+    <%= link_to "Edit", send("edit_#{ order_path }", order), class: 'link-button' %>
+    <%= link_to "Remove", send(order_path, order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
+  <% end %>
+
+  <%= link_to "Download", send(order_path, order, format: :xls), class: 'link-button' %>
+  <div class="clear"></div>
+</div>

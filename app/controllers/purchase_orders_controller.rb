@@ -1,13 +1,13 @@
-class PurchaseOrdersController < ApplicationController
-  authorize_resource
+class PurchaseOrdersController < OrdersController
   layout 'top-food'
-  before_filter :find_object, :only => [:show, :edit, :update, :destroy, :received, :done]
-  before_filter :prepare_data, :only => [:edit, :update]
+  before_filter :find_object, only: [:show, :edit, :update, :destroy, :received, :done]
+  before_filter :prepare_data, only: [:edit, :update]
+  authorize_resource
 
   def index
     @orders = current_user.all_orders(PurchaseOrder, params[:search])
                           .order('created_at DESC')
-                          .paginate(:page => params[:page])
+                          .paginate(page: params[:page])
 
     respond_to do |format|
       format.html
@@ -49,45 +49,9 @@ class PurchaseOrdersController < ApplicationController
     respond_with @order, location: purchase_orders_path
   end
 
-  def approve
-    approval = Approval.find_by_id(params[:id])
-    @order = approval.order
-
-    if approval.update_attributes(approved: approved?, reason: params[:reason]) && @order.update_attributes(updated_by: 'server')
-      @order.send_email_to_approver(purchase_order_url(@order)) if approved?
-      flash[:notice] = "Order is #{approved? ? 'Approved' : 'Rejected'}"
-    else
-      flash[:alert] = approval.errors.try(:full_messages).try(:join, ', ')
-    end
-
-    redirect_to @order
-  end
-
-  def received
-    authorize! :received, @order
-    if @order.update_attributes(implement_status: 'received')
-      flash[:notice] = "Order is already marked as received"
-    else
-      flash[:notice] = @order.errors.try(:full_messages).try(:join, ', ')
-    end
-
-    redirect_to @order
-  end
-
-  def done
-    authorize! :done, @order
-    if @order.update_attributes(implement_status: 'done')
-      flash[:notice] = "Order is already marked as done"
-    else
-      flash[:notice] = @order.errors.try(:full_messages).try(:join, ', ')
-    end
-
-    redirect_to @order
-  end
-
   protected
     def find_object
-      @order = PurchaseOrder.find(params[:id])
+      @purchase_order = @order = PurchaseOrder.find(params[:id])
     end
 
     def prepare_data

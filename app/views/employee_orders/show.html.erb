@@ -3,65 +3,6 @@
   <h2>Employee Order</h2>
 
   <div class="inner">
-    <p>
-      <%= label_tag :order_number, 'Order Number', class: 'detail-label' %>
-      <span>: <%= @order.order_number %></span>
-    </p>
-    <p>
-      <%= label_tag :order_date, 'Order Date', class: 'detail-label' %>
-      <span>: <%= @order.order_date %></span>
-    </p>
-    <p>
-      <%= label_tag :created_by, 'Created By', class: 'detail-label' %>
-      <span>: <%= @order.user.try(:name) %></span>
-    </p>
-    <p>
-      <%= label_tag :branch_id, 'Branch', class: 'detail-label' %>
-      <span>: <%= @order.branch.try(:name) %></span>
-    </p>
-
-    <p>
-      <%= label_tag :employee_details, 'Detail Orders', class: 'detail-label' %>
-      <span>: </span>
-    </p>
-    <table class="table">
-      <tr>
-        <th>Description</th>
-        <th>Department</th>
-        <th>Position</th>
-        <th class="center">Quantity</th>
-        <th>Gender</th>
-        <th>Used date</th>
-      </tr>
-
-      <% @order.employee_details.each do |detail| %>
-        <tr class="<% cycle('odd', 'even') %>">
-          <td><%= detail.description %></td>
-          <td><%= detail.department.try(:name) %></td>
-          <td><%= detail.position.try(:name) %></td>
-          <td class="center"><%= detail.quantity %></td>
-          <td><%= detail.gender %></td>
-          <td><%= detail.used_date %></td>
-        </tr>
-      <% end %>
-    </table>
-
-
-    <%= render "shared/approval" %>
-    <%= render "shared/implementer-element" if @order.approved? %>
-    <%= render "shared/reject-form" %>
-    <div class="clear"></div>
-
-    <div class="link-button-container">
-      <%= link_to "Back", employee_orders_path, class: 'link-button' %>
-
-      <% if @order.no_approval && current_user.role?('sm') %>
-        <%= link_to "Edit", edit_employee_order_path(@order), class: 'link-button' %>
-        <%= link_to "Remove", employee_order_path(@order), :method => :delete, class: 'link-button', confirm: 'Are you sure?' %>
-      <% end %>
-
-      <%= link_to "Download", employee_order_path(@order, format: :xls), class: 'link-button' %>
-      <div class="clear"></div>
-    </div>
+    <%= render '/orders/show', order_class: EmployeeOrder, order: @order %>
   </div>
 </div>

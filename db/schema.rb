@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204152206) do
+ActiveRecord::Schema.define(:version => 20130224150644) do
 
   create_table "access_settings", :force => true do |t|
     t.string   "order_class"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20130204152206) do
     t.string   "implement_status"
     t.datetime "received_at"
     t.datetime "done_at"
+    t.string   "status"
   end
 
   create_table "positions", :force => true do |t|

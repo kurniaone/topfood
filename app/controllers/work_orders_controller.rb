@@ -1,11 +1,14 @@
-class WorkOrdersController < ApplicationController
-  authorize_resource
+class WorkOrdersController < OrdersController
   layout 'top-food'
-  before_filter :find_object, :only => [:show, :edit, :update, :destroy, :received, :done]
-  before_filter :prepare_data, :only => [:edit, :update]
+  before_filter :find_object, only: [:show, :edit, :update, :destroy, :received, :done]
+  before_filter :prepare_data, only: [:edit, :update]
+  authorize_resource
 
   def index
-    @orders = current_user.all_orders(WorkOrder, params[:search]).order('created_at DESC').paginate(:page => params[:page])
+    @orders = current_user.all_orders(WorkOrder, params[:search])
+                          .order('created_at DESC')
+                          .paginate(page: params[:page])
+
     respond_to do |format|
       format.html
       format.xls
@@ -84,7 +87,7 @@ class WorkOrdersController < ApplicationController
 
   protected
     def find_object
-      @order = WorkOrder.find(params[:id])
+      @work_order = @order = WorkOrder.find(params[:id])
     end
 
     def prepare_data

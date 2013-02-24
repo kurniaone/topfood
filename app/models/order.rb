@@ -11,10 +11,13 @@ class Order < ActiveRecord::Base
     end
   end
 
+  STATUS = ['onprocess', 'approved', 'rejected']
+  IMPLEMENT_STATUS = ['received', 'done']
+
   belongs_to :user, foreign_key: 'created_by'
   belongs_to :branch
-  has_many :approvals
-  has_many :apps_orders
+  has_many   :approvals
+  has_many   :apps_orders
 
   attr_accessible :branch_id, :created_by, :order_number, :type, :order_date,
                   :last_app_id, :updated_by, :implement_status
@@ -43,11 +46,31 @@ class Order < ActiveRecord::Base
       (SELECT id FROM users WHERE role_id = (SELECT id FROM roles WHERE code = ?)))", 'MNG')
   }
 
-  scope :active_for_api, where("(SELECT COUNT(id) FROM approvals
-                                 WHERE order_id = orders.id AND approved IS NULL AND
-                                       (CURRENT_DATE() - DATE(created_at)) < 30)
-                                =
-                                (SELECT COUNT(id) FROM approvals WHERE order_id = orders.id)")
+  scope :active_for_api, where("(status IN ('approved', 'rejected') AND (CURRENT_DATE() - DATE(created_at)) < 30) OR status = 'onprocess'")
+
+  STATUS.each do |value|
+    define_method("#{value}?") do
+      status === value
+    end
+
+    define_method("#{value}!") do
+      update_attribute(:status, value)
+    end
+  end
+
+  alias :approved :approved?
+  alias :rejected :rejected?
+
+  IMPLEMENT_STATUS.each do |value|
+    define_method("#{value}?") do
+      implement_status === value
+    end
+
+    define_method("#{value}!") do
+      update_attribute(:implement_status, value)
+    end
+  end
+
 
 # CALLBACK
 
@@ -97,11 +120,15 @@ class Order < ActiveRecord::Base
   end
 
   def set_received_at
-    self.received_at = Time.now if implement_status_changed? && implement_status_was.blank? && received?
+    self.received_at = Time.now if implement_status_changed? &&
+                                   implement_status_was.blank? &&
+                                   received?
   end
 
   def set_done_at
-    self.done_at = Time.now if implement_status_changed? && implement_status_was == 'received' && done?
+    self.done_at = Time.now if implement_status_changed? &&
+                               implement_status_was == 'received' &&
+                               done?
   end
 
 # CLASS METHOD
@@ -186,7 +213,7 @@ class Order < ActiveRecord::Base
   end
 
   def no_approval
-    @no_approval ||= approvals.select{|a| a.approved }.blank?
+    approvals.select{|a| a.approved }.blank?
   end
 
   def pending_approvals
@@ -218,7 +245,7 @@ class Order < ActiveRecord::Base
   end
 
   def order_status
-    @order_status ||= next_approver && !rejected ? "Waiting \"#{next_approver.role.name}\" approval" :
+    @order_status ||= onprocess? ? "Waiting \"#{next_approver.role.name}\" approval" :
       "#{last_approval.status} by #{last_approver.role.name}"
   end
 
@@ -236,32 +263,20 @@ class Order < ActiveRecord::Base
       user_branches.branch_id = ?", role_code.try(:upcase), branch_id).try(:first)
   end
 
-  def approved
-    @approved ||= next_approver.blank? && approvals.last.approved
-  end
-  alias :approved? :approved
-
-  def rejected
-    @rejected ||= !approvals.where("approved = 0").blank?
-  end
-  alias :rejected? :rejected
-
   def rejected_reason
-    if rejected?
-      last_approval.reason
-    end
+    last_approval.reason if rejected?
   end
 
-  def send_email_to_approver(url)
+  def send_email_to_approver url
     AppMailer.send_notification_to_approver(self, next_approver, url).deliver if next_approver
   end
 
-  def show_link_for(user, approval)
-    !rejected && next_approver == user && next_approver_role == approval.role && approval.pending
+  def show_link_for user, approval
+    !rejected? && next_approver == user && next_approver_role == approval.role && approval.pending
   end
 
   def implementer?(user)
-    self.class::Implementer.all.include?(user.role_code.upcase)
+    self.class::Implementer.all.include? user.try(:role_code).try(:upcase)
   end
 
   def implement_status_rule
@@ -274,14 +289,6 @@ class Order < ActiveRecord::Base
         errors.add(:base, "Please click 'Received' button before click DONE button.")
       end
     end
-  end
-
-  def received?
-    'received' == implement_status
-  end
-
-  def done?
-    'done' == implement_status
   end
 
 end

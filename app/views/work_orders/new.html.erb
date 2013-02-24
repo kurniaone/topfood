@@ -3,6 +3,6 @@
   <h2>New Work Order</h2>
 
   <div class="inner">
-    <%= render 'form' %>
+    <%= render '/orders/form', order_class: WorkOrder, order: @order %>
   </div>
 </div>

@@ -1,8 +1,11 @@
 <%= render('shared/orders-tab.html.erb') if current_user.su? %>
+
 <div class="content">
   <h2>New Purchase Order</h2>
 
   <div class="inner">
-    <%= render 'form' %>
+
+    <%= render '/orders/form', order_class: PurchaseOrder, order: @order %>
+
   </div>
 </div>
