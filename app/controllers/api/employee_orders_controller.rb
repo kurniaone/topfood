@@ -22,7 +22,7 @@ class Api::EmployeeOrdersController < ApiController
       order_number: params[:order_number],
       order_date: params[:order_date],
       created_by: current_user.try(:id),
-      branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
+      branch_id: user_branch_id(params[:branch_id]),
       updated_by: params[:app_id],
 
       employee_details_attributes: employee_details_attributes
@@ -39,7 +39,7 @@ class Api::EmployeeOrdersController < ApiController
     if @order.update_attributes(
         order_date: params[:order_date],
         created_by: current_user.try(:id),
-        branch_id: current_user.try(:branch).try(:id) || params[:branch_id],
+        branch_id: user_branch_id(params[:branch_id]),
         updated_by: params[:app_id],
 
         employee_details_attributes: employee_details_attributes

@@ -37,6 +37,10 @@ class ApiController < ApplicationController
       @app_id ||= params[:app_id]
     end
 
+    def user_branch_id branch_id
+      current_user.branches.map(:id).include?(branch_id) ? branch_id : current_user.try(:branch).try(:id)
+    end
+
   rescue_from ActiveRecord::RecordNotFound, ActiveRecord::ActiveRecordError, Exception do |error|
     render json: { error: error.message }, status: :not_found
   end
