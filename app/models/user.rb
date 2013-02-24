@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
     end
 
     # only approved for implementer
-    if Order::Implementer.all.include?(role_code.upcase)
+    if Order::Implementer.all.include?(role_code.try(:upcase))
       search[:status] = 'approved'
     end
 
@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def implementer?
-    Order::Implementer.all.include?(role_code.upcase)
+    Order::Implementer.all.include?(role_code.try(:upcase))
   end
 
 end
