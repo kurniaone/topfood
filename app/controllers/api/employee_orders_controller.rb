@@ -61,7 +61,7 @@ class Api::EmployeeOrdersController < ApiController
     errors << "Next approver is #{@order.next_approver.role_name}" unless @order.next_approver == current_user
 
     @approval = @order.next_approval
-    if errors.blank? && @approval && @approval.update_attributes(approved: approved?)
+    if errors.blank? && @approval && @approval.update_attributes(approved: approved?, reason: params[:reason])
       @order.send_email_to_approver(purchase_order_url(@order)) if approved?
       # send email to approver
       respond_with @approval
