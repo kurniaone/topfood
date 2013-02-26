@@ -11,7 +11,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  STATUS = ['onprocess', 'approved', 'rejected']
+  STATUS           = ['onprocess', 'approved', 'rejected']
+  DEFAULT_STATUS   = 'onprocess'
   IMPLEMENT_STATUS = ['received', 'done']
 
   belongs_to :user, foreign_key: 'created_by'
@@ -28,6 +29,7 @@ class Order < ActiveRecord::Base
   after_create  :generate_approvals, :generate_apps_orders
   after_update  :update_apps_orders
 
+  before_create :set_status
   before_save   :set_received_at
   before_save   :set_done_at
   after_save    :send_email_to_implementer
@@ -129,6 +131,10 @@ class Order < ActiveRecord::Base
     self.done_at = Time.now if implement_status_changed? &&
                                implement_status_was == 'received' &&
                                done?
+  end
+
+  def set_status
+    self.status = DEFAULT_STATUS if status.blank?
   end
 
 # CLASS METHOD
