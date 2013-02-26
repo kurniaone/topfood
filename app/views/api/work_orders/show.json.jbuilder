@@ -2,6 +2,8 @@ json.branch_id @order.branch_id
 json.order_number @order.order_number
 json.order_date @order.order_date
 json.status @order.order_status
+json.reason @order.rejected? ? @order.rejected_reason : ''
+
 json.created_by @order.user.try(:email)
 json.created_at date_time_format(@order.created_at, "%Y-%m-%d %H:%M:%S")
 json.updated_at date_time_format(@order.updated_at, "%Y-%m-%d %H:%M:%S")
