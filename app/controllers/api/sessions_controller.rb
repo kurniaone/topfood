@@ -4,7 +4,7 @@ class Api::SessionsController < ApiController
   before_filter :ensure_params_exist, only: [:create]
 
   def create
-    resource = User.find_for_database_authentication(:email => params[:user][:email])
+    resource = User.find_for_database_authentication(email: params[:user][:email])
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
@@ -27,10 +27,9 @@ class Api::SessionsController < ApiController
     sign_out(:user)
 
     if resource
-      resource.authentication_token = nil
-      render json: { success: resource.save }
+      render json: { success: true }
     else
-      render json: { success: false }
+      render json: { success: true }
     end
   end
 

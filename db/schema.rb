@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224150644) do
+ActiveRecord::Schema.define(:version => 20130302064151) do
 
   create_table "access_settings", :force => true do |t|
     t.string   "order_class"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(:version => 20130224150644) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.datetime "token_expired"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

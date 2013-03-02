@@ -139,4 +139,24 @@ class User < ActiveRecord::Base
     Order::Implementer.all.include?(role_code.try(:upcase))
   end
 
+  def ensure_authentication_token!
+    reset_authentication_token  if authentication_token.blank?
+    set_token_expired           if token_expired?
+    save(validate: false)
+  end
+
+  def set_token_expired
+    self.token_expired = 1.day.from_now
+  end
+
+  def set_token_expired!
+    set_token_expired
+    save(validate: false)
+  end
+
+  def token_expired?
+    return true if token_expired.blank?
+    token_expired < Time.now
+  end
+
 end
